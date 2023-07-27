@@ -26,11 +26,16 @@ const app = initializeApp(firebaseConfig);
 console.log(app);
 
 //!databasedeki quizleri çektim
-document.querySelector(".getQuiz").addEventListener("click", function () {
+// document.querySelector(".getQuiz").addEventListener("click", function () {
+
+// });
+
+const getQuizs = () => {
   const db = getDatabase();
   const countRef = ref(db, "sinavlar/");
   onValue(countRef, (snapshot) => {
     let data = snapshot.val();
+
     const questionsArray = Object.keys(data).map((key, index) => {
       return {
         id: index,
@@ -38,5 +43,18 @@ document.querySelector(".getQuiz").addEventListener("click", function () {
       };
     });
     console.log(questionsArray);
+
+    const questionsArrayHTML = questionsArray.map((value) => {
+      return `
+        <div class="col-3">
+          <div class="quizCard">
+            <h2>${value.name}</h2>
+          </div>
+        </div>
+      `;
+    });
+    document.querySelector(".quizsContent").innerHTML = questionsArrayHTML.join("")
   });
-});
+};
+
+document.addEventListener("DOMContentLoaded", getQuizs());

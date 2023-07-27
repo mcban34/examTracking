@@ -80,7 +80,7 @@ document.querySelector(".createQuizTitle").addEventListener("click",function(){
     let quizTitle = document.querySelector(".quizTitle").value
     const db = getDatabase();
     set(ref(db, 'sinavlar/' + quizTitle) , {
-        active:true
+        name:quizTitle
     })
     location.reload();
     // .then(() => {
