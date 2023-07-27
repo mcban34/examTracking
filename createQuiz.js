@@ -5,6 +5,8 @@ import {
   ref,
   set,
   onValue,
+  child,
+  get
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -33,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const countRef = ref(db, "sinavlar/");
   onValue(countRef, (snapshot) => {
     let data = Object.keys(snapshot.val());
+    console.log(data.length);
     for (const i of data) {
         filterQuizs.innerHTML += `
             <option>${i}</option>
@@ -43,19 +46,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //!yeni bir quiz yaratılıyor
 document.querySelector(".createQuizBtn").addEventListener("click", function () {
-  let soru = document.querySelector(".soru").value;
-  let cevap1 = document.querySelector(".cevap1").value;
-  let cevap2 = document.querySelector(".cevap2").value;
-  let cevap3 = document.querySelector(".cevap3").value;
-  let cevap4 = document.querySelector(".cevap4").value;
-  let filterQuizs = document.querySelector(".filterQuizs").value
+    let soru = document.querySelector(".soru").value;
+    let cevap1 = document.querySelector(".cevap1").value;
+    let cevap2 = document.querySelector(".cevap2").value;
+    let cevap3 = document.querySelector(".cevap3").value;
+    let cevap4 = document.querySelector(".cevap4").value;
+    let filterQuizs = document.querySelector(".filterQuizs").value
+    const db = getDatabase();
+  
+    const queryRef = ref(db, `sinavlar/${filterQuizs}`);
+    get(queryRef)
+      .then((snapshot) => {
+        //*burada her eklenen quizin başlığını alarak ona göre düğüm oluşuturuyoruz
+        const soruSayisi = (snapshot.val() && Object.keys(snapshot.val()).length ) || 0;
+        const newQuestionKey = 'soru' + (soruSayisi + 1);
+        // console.log(newQuestionKey);
+        set(ref(db, `sinavlar/${filterQuizs}/${newQuestionKey}`), {
+          soru: soru,
+          cevap1: cevap1,
+          cevap2: cevap2,
+          cevap3: cevap3,
+          cevap4: cevap4
+        });
+      })
+    //   .catch((error) => {
+    //     console.error("Soru sayısı alınırken hata oluştu:", error);
+    //   });
+  });
 
-  const db = getDatabase();
-  set(ref(db, `sinavlar/${filterQuizs}/${soru}`), {
-      soru:soru,
-      cevap1:cevap1,
-      cevap2:cevap2,
-      cevap3:cevap3,
-      cevap4:cevap4
-  })
-});
+
+//!yeni bir quiz başlığı yaratıyoruz
+document.querySelector(".createQuizTitle").addEventListener("click",function(){
+    let quizTitle = document.querySelector(".quizTitle").value
+    const db = getDatabase();
+    set(ref(db, 'sinavlar/' + quizTitle) , {
+        active:true
+    })
+    location.reload();
+    // .then(() => {
+    //   console.log("Yeni quiz başlığı başarıyla oluşturuldu.");
+    // })
+    // .catch((error) => {
+    //   console.error("Quiz başlığı oluşturulurken hata oluştu:", error);
+    // });
+})
+  

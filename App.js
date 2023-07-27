@@ -28,7 +28,7 @@ console.log(app);
 //!databasedeki quizleri çektim
 document.querySelector(".getQuiz").addEventListener("click", function () {
   const db = getDatabase();
-  const countRef = ref(db, "sinavlar/quiz1");
+  const countRef = ref(db, "sinavlar/");
   onValue(countRef, (snapshot) => {
     let data = snapshot.val();
     const questionsArray = Object.keys(data).map((key, index) => {
