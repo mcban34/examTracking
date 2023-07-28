@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
 import {
   getDatabase,
@@ -7,10 +6,6 @@ import {
   onValue,
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAmwJkuxoy2JEUbHzSAL7SQnuGOjWQ71FQ",
   authDomain: "sinavtakip-24a93.firebaseapp.com",
@@ -21,14 +16,8 @@ const firebaseConfig = {
   appId: "1:640235953301:web:a727fa13351c1460914f9c",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 console.log(app);
-
-//!databasedeki quizleri çektim
-// document.querySelector(".getQuiz").addEventListener("click", function () {
-
-// });
 
 const getQuizs = () => {
   const db = getDatabase();
