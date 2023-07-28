@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
 import {
   getDatabase,
@@ -9,10 +8,6 @@ import {
   get,
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAmwJkuxoy2JEUbHzSAL7SQnuGOjWQ71FQ",
   authDomain: "sinavtakip-24a93.firebaseapp.com",
@@ -23,12 +18,10 @@ const firebaseConfig = {
   appId: "1:640235953301:web:a727fa13351c1460914f9c",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 console.log(app);
 
 //!dom başlarken select options içerisine quizlerin başlıklarını getirdim
-//*quiz1,quiz2
 document.addEventListener("DOMContentLoaded", function () {
   let filterQuizs = document.querySelector(".filterQuizs");
   const db = getDatabase();
@@ -56,25 +49,21 @@ document.querySelector(".createQuizBtn").addEventListener("click", function () {
 
   const queryRef = ref(db, `sinavlar/${filterQuizs}`);
   get(queryRef).then((snapshot) => {
-
     //?her quizin bir birinden farklı olması için 8 karakterli id ürettim
-    let quizId = ""
-    for(let i=0;i<8;i++){
-      let rstQuizId = Math.floor(Math.random() * 10)
-      quizId += rstQuizId 
+    let quizId = "";
+    for (let i = 0; i < 8; i++) {
+      let rstQuizId = Math.floor(Math.random() * 10);
+      quizId += rstQuizId;
     }
 
     set(ref(db, `sinavlar/${filterQuizs}/sorular/${quizId}`), {
-        soru: soru,
-        cevap1: cevap1,
-        cevap2: cevap2,
-        cevap3: cevap3,
-        cevap4: cevap4,
+      soru: soru,
+      cevap1: cevap1,
+      cevap2: cevap2,
+      cevap3: cevap3,
+      cevap4: cevap4,
     });
   });
-  //   .catch((error) => {
-  //     console.error("Soru sayısı alınırken hata oluştu:", error);
-  //   });
 });
 
 //!yeni bir quiz başlığı yaratıyoruz
@@ -95,11 +84,4 @@ document
       },
     });
     location.reload();
-
-    // .then(() => {
-    //   console.log("Yeni quiz başlığı başarıyla oluşturuldu.");
-    // })
-    // .catch((error) => {
-    //   console.error("Quiz başlığı oluşturulurken hata oluştu:", error);
-    // });
   });
