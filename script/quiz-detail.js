@@ -48,14 +48,33 @@ onValue(countRef, (snapshot) => {
 });
 
 
+
+const rstGetQuiz = () => {
+  let rstQuizIndex  = Math.floor(Math.random() * quizs.length)
+  let rstQuiz = quizs[rstQuizIndex]
+  quizs.splice(rstQuizIndex,1)
+  if(quizs.length!=0){
+    return rstQuiz
+  }
+  else{
+    return console.log("quizler bitti");
+  }
+}
+
+
 document.querySelector(".quizStartBtn").addEventListener("click",function(){
     let quizName = document.querySelector(".quizName").value
     let quizStartNameSurName = document.querySelector(".quizStartNameSurName").value
 
-    document.querySelector(".quizStart").style.display="none"
+    let x = rstGetQuiz()
 
-
+    // document.querySelector(".quizStart").style.display="none"
+    
     //!öğrenciden bilgileri aldım şuanda kayıt yapılıyor
+    //*yapmam gereken tam olarak şu şuanda doğrudan öğrenci adı ve quizname yüklemek yanlış
+    //*çünkü öğrencinin aldığı puanıda eklemem gerekiyor dbye (üzerinde güncelleme yapabiliyorsak olabilir)
+    //*ilk olarak yapılması gerek "quizs" değişkeni içerisinde sorular mevcut ve rstgele sorular çekmek istiyorum
+     
     // const db = getDatabase();
     // set(ref(db, 'ogrenciler/' + quizStartNameSurName + " " +  quizName) , {
     //     quizName : quizName,
