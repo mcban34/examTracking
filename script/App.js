@@ -36,7 +36,7 @@ const getQuizs = () => {
     const questionsArrayHTML = questionsArray.map((value) => {
       return `
         <div class="col-3">
-          <a href="#">
+          <a href="quiz-detail.html?id=${value.id}">
             <div class="quizCard">
               <h2>${value.quizBilgi.name}</h2>
               <p>${value.quizBilgi.quizContentBody}</p>
