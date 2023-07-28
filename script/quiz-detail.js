@@ -17,12 +17,12 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-console.log(app);
+
+let quizs
 
 //!tıklanılan quizin adını aldım
 const urlParams = new URLSearchParams(window.location.search);
 const quizId = urlParams.get("id");
-console.log(quizId);
 
 const db = getDatabase();
 const countRef = ref(db, "sinavlar/");
@@ -43,8 +43,7 @@ onValue(countRef, (snapshot) => {
   document.querySelector(".quizName").value = quizDetail.quizBilgi.name
 
   //*quiz detayında gelen o quize ait bütün soruları obje haline çevirdim
-  let quizs = Object.values(quizDetail.sorular)
-  console.log(quizs);
+  quizs = Object.values(quizDetail.sorular)
 
 });
 
@@ -52,10 +51,14 @@ onValue(countRef, (snapshot) => {
 document.querySelector(".quizStartBtn").addEventListener("click",function(){
     let quizName = document.querySelector(".quizName").value
     let quizStartNameSurName = document.querySelector(".quizStartNameSurName").value
-    
-    const db = getDatabase();
-    set(ref(db, 'ogrenciler/' + quizStartNameSurName + quizName) , {
-        quizName : quizName,
-        quizStartNameSurName : quizStartNameSurName
-    })
+
+    document.querySelector(".quizStart").style.display="none"
+
+
+    //!öğrenciden bilgileri aldım şuanda kayıt yapılıyor
+    // const db = getDatabase();
+    // set(ref(db, 'ogrenciler/' + quizStartNameSurName + " " +  quizName) , {
+    //     quizName : quizName,
+    //     quizStartNameSurName : quizStartNameSurName
+    // })
 })
