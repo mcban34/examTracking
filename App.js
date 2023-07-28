@@ -50,4 +50,7 @@ const getQuizs = () => {
   });
 };
 
+document.addEventListener("DOMContentLoaded", function(){
+  
+});
 document.addEventListener("DOMContentLoaded", getQuizs());

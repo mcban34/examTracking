@@ -1,13 +1,17 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
-import { getStorage, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-storage.js";
 import {
   getDatabase,
   set,
   ref,
   onValue,
-  child,
   get,
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAmwJkuxoy2JEUbHzSAL7SQnuGOjWQ71FQ",
@@ -20,7 +24,15 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-console.log(app);
+const auth = getAuth();
+
+//!kullanıcı girişli değilse admin sayfasına geri dönecektir
+onAuthStateChanged(auth, (user) => {
+  console.log(user);
+  if (!user) {
+    window.location.href = "admin.html";
+  }
+});
 
 //!dom başlarken select options içerisine quizlerin başlıklarını getirdim
 document.addEventListener("DOMContentLoaded", function () {
@@ -87,3 +99,14 @@ document
     });
     location.reload();
   });
+
+//!çıkış
+document.querySelector(".quit").addEventListener("click", function () {
+  signOut(auth)
+    .then(() => {
+      console.log("çıkış yapıldı");
+    })
+    .catch(() => {
+      console.log("çıkış yapılamadı!");
+    });
+});
