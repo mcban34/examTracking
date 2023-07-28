@@ -1,8 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+import { getStorage, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-storage.js";
 import {
   getDatabase,
-  ref,
   set,
+  ref,
   onValue,
   child,
   get,
@@ -48,7 +49,7 @@ document.querySelector(".createQuizBtn").addEventListener("click", function () {
   const db = getDatabase();
 
   const queryRef = ref(db, `sinavlar/${filterQuizs}`);
-  get(queryRef).then((snapshot) => {
+  get(queryRef).then(() => {
     //?her quizin bir birinden farklı olması için 8 karakterli id ürettim
     let quizId = "";
     for (let i = 0; i < 8; i++) {
@@ -64,6 +65,7 @@ document.querySelector(".createQuizBtn").addEventListener("click", function () {
       cevap4: cevap4,
     });
   });
+  location.reload();
 });
 
 //!yeni bir quiz başlığı yaratıyoruz
