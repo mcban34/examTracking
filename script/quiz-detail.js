@@ -18,7 +18,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-let quizs
+let quizs;
 
 //!tıklanılan quizin adını aldım
 const urlParams = new URLSearchParams(window.location.search);
@@ -35,49 +35,64 @@ onValue(countRef, (snapshot) => {
       ...data[key],
     };
   });
-    
+
   //*hangi quizin geleceği filtreledim
-  const quizDetail = questionsArray.find(value => value.id==quizId)
-  
-  //*öğrenciye hangi quizi çözdüğünü disabled olarak inputda gösterdim 
-  document.querySelector(".quizName").value = quizDetail.quizBilgi.name
+  const quizDetail = questionsArray.find((value) => value.id == quizId);
+
+  //*öğrenciye hangi quizi çözdüğünü disabled olarak inputda gösterdim
+  document.querySelector(".quizName").value = quizDetail.quizBilgi.name;
 
   //*quiz detayında gelen o quize ait bütün soruları obje haline çevirdim
-  quizs = Object.values(quizDetail.sorular)
-
+  quizs = Object.values(quizDetail.sorular);
+  console.log(quizs);
 });
 
-
-
 const rstGetQuiz = () => {
-  let rstQuizIndex  = Math.floor(Math.random() * quizs.length)
-  let rstQuiz = quizs[rstQuizIndex]
-  quizs.splice(rstQuizIndex,1)
-  if(quizs.length!=0){
-    return rstQuiz
-  }
-  else{
+  let rstQuizIndex = Math.floor(Math.random() * quizs.length);
+  let rstQuiz = quizs[rstQuizIndex];
+  quizs.splice(rstQuizIndex, 1);
+  if (quizs.length != 0) {
+    return rstQuiz;
+  } else {
     return console.log("quizler bitti");
   }
-}
+};
 
+let ogrenciBilgileri = {};
 
-document.querySelector(".quizStartBtn").addEventListener("click",function(){
-    let quizName = document.querySelector(".quizName").value
-    let quizStartNameSurName = document.querySelector(".quizStartNameSurName").value
+//!sınava başla butonu 
+document.querySelector(".quizNext").addEventListener("click", function () {
+  let quizName = document.querySelector(".quizName").value;
+  let quizStartNameSurName = document.querySelector(
+    ".quizStartNameSurName"
+  ).value;
 
-    let x = rstGetQuiz()
+  ogrenciBilgileri["ogrenciIsimSoyisim"] = quizStartNameSurName;
+  ogrenciBilgileri["quizName"] = quizName;
 
-    // document.querySelector(".quizStart").style.display="none"
-    
-    //!öğrenciden bilgileri aldım şuanda kayıt yapılıyor
-    //*yapmam gereken tam olarak şu şuanda doğrudan öğrenci adı ve quizname yüklemek yanlış
-    //*çünkü öğrencinin aldığı puanıda eklemem gerekiyor dbye (üzerinde güncelleme yapabiliyorsak olabilir)
-    //*ilk olarak yapılması gerek "quizs" değişkeni içerisinde sorular mevcut ve rstgele sorular çekmek istiyorum
-     
-    // const db = getDatabase();
-    // set(ref(db, 'ogrenciler/' + quizStartNameSurName + " " +  quizName) , {
-    //     quizName : quizName,
-    //     quizStartNameSurName : quizStartNameSurName
-    // })
-})
+  document.querySelector(".quizStart").style.display = "none";
+  document.querySelector(".quiz").style.display = "block";
+
+  const quizContent = document.querySelector(".quizContent");
+  document.querySelector(".quizTitle").innerHTML = quizs[0].soru
+  Object.entries(quizs[0]).forEach(([anahtar, deger]) => {
+    if (anahtar.includes("cevap")) {
+      const button = document.createElement("button");
+      button.className = "cevap";
+      button.textContent = deger;
+      quizContent.append(button);
+    }
+  });
+
+  let cevaplar = document.querySelectorAll(".cevap")
+  for (const i of cevaplar) {
+      i.addEventListener("click",() => {
+        console.log(i.innerHTML);
+      })
+  }
+
+  //!öğrenciden bilgileri aldım şuanda kayıt yapılıyor
+  //*yapmam gereken tam olarak şu şuanda doğrudan öğrenci adı ve quizname yüklemek yanlış
+  //*çünkü öğrencinin aldığı puanıda eklemem gerekiyor dbye (üzerinde güncelleme yapabiliyorsak olabilir)
+  //*ilk olarak yapılması gerek "quizs" değişkeni içerisinde sorular mevcut ve rstgele sorular çekmek istiyorum
+});
