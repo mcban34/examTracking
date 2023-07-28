@@ -47,13 +47,17 @@ const getQuizs = () => {
     const questionsArrayHTML = questionsArray.map((value) => {
       return `
         <div class="col-3">
-          <div class="quizCard">
-            <h2>${value.name}</h2>
-          </div>
+          <a href="#">
+            <div class="quizCard">
+              <h2>${value.quizBilgi.name}</h2>
+              <p>${value.quizBilgi.quizContentBody}</p>
+            </div>
+          </a>
         </div>
       `;
     });
-    document.querySelector(".quizsContent").innerHTML = questionsArrayHTML.join("")
+    document.querySelector(".quizsContent").innerHTML =
+      questionsArrayHTML.join("");
   });
 };
 
