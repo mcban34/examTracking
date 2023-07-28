@@ -2,6 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebas
 import {
   getAuth,
   signInWithEmailAndPassword,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -16,6 +17,15 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+
+//!girişi olan kullanıcı admine giremez, createQuiz sayfasına yönlendirildi
+onAuthStateChanged(auth, (user) => {
+  console.log(user);
+  if (user) {
+    window.location.href = "createQuiz.html";
+  }
+});
+
 
 //!kullanıcın bilgilerine göre giriş işlemini gerçekleştirir
 document.querySelector(".login").addEventListener("click", function () {
