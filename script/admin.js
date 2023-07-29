@@ -1,8 +1,16 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
 import {
+  getDatabase,
+  set,
+  ref,
+  onValue,
+  get,
+} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+
+import {
   getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut,
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -16,29 +24,140 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const auth = getAuth();
 
-//!girişi olan kullanıcı admine giremez, createQuiz sayfasına yönlendirildi
+//!kullanıcı girişli değilse admin sayfasına geri dönecektir
 onAuthStateChanged(auth, (user) => {
-  console.log(user);
-  if (user) {
-    window.location.href = "createQuiz.html";
+  // console.log(user);
+  if (!user) {
+    window.location.href = "login.html";
   }
 });
 
+//!dom başlarken select options içerisine quizlerin başlıklarını getirdim
+document.addEventListener("DOMContentLoaded", function () {
+  let filterQuizs = document.querySelector(".filterQuizs");
+  const db = getDatabase();
+  const countRef = ref(db, "sinavlar/");
+  onValue(countRef, (snapshot) => {
+    let data = Object.keys(snapshot.val());
+    for (const i of data) {
+      filterQuizs.innerHTML += `
+            <option>${i}</option>
+        `;
+    }
+  });
+});
 
-//!kullanıcın bilgilerine göre giriş işlemini gerçekleştirir
-document.querySelector(".login").addEventListener("click", function () {
-  let email = document.querySelector(".loginEmail").value;
-  let password = document.querySelector(".loginPass").value;
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      console.log(user);
-      window.location.href = "createQuiz.html";
+//!öğrenci notlarını çektim
+const ogrenciNotlariAsync = async () => {
+  const ogrenciSonuclari = [];
+  try {
+
+    const db = getDatabase();
+    const countRef = ref(db, "ogrenciler/");
+    const snapshot = await get(countRef);
+    let data = snapshot.val();
+
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        const veri = data[key];
+        ogrenciSonuclari.push(veri);
+      }
+    }
+    //!çekilen öğrenci notlarını tadatable şekilde olan fonksiyonuma parametre olarak gönderdim
+    datatableVerileriGoster(ogrenciSonuclari);
+  } catch (error) {
+    console.error("Veriler alınırken bir hata oluştu:", error);
+  }
+};
+
+ogrenciNotlariAsync();
+
+//!sınava giren öğrencilerin bilgilerini panele yazdırdım
+function datatableVerileriGoster(veriListesi) {
+  const tbody = document.getElementById("dataTableBody");
+  tbody.innerHTML = "";
+
+  veriListesi.forEach((veri) => {
+    const row = document.createElement("tr");
+
+    const nameCell = document.createElement("td");
+    nameCell.textContent = veri.quizName;
+    row.appendChild(nameCell);
+
+    const quizStartNameSurNameCell = document.createElement("td");
+    quizStartNameSurNameCell.textContent = veri.quizStartNameSurName;
+    row.appendChild(quizStartNameSurNameCell);
+
+    const sinavSonucCell = document.createElement("td");
+    sinavSonucCell.textContent = veri.sinavSonuc;
+    row.appendChild(sinavSonucCell);
+
+    tbody.appendChild(row);
+  });
+  $('#dataTable').DataTable({
+    pageLength:5
+  });
+}
+
+
+//!yeni bir quiz yaratılıyor
+document.querySelector(".createQuizBtn").addEventListener("click", function () {
+  let soru = document.querySelector(".soru").value;
+  let cevap1 = document.querySelector(".cevap1").value;
+  let cevap2 = document.querySelector(".cevap2").value;
+  let cevap3 = document.querySelector(".cevap3").value;
+  let cevap4 = document.querySelector(".cevap4").value;
+  let dogruCevap = +document.querySelector(".dogruCevap").value;
+  let filterQuizs = document.querySelector(".filterQuizs").value;
+  const db = getDatabase();
+
+  const queryRef = ref(db, `sinavlar/${filterQuizs}`);
+  get(queryRef).then(() => {
+    //?her quizin bir birinden farklı olması için 8 karakterli id ürettim
+    let quizId = "";
+    for (let i = 0; i < 8; i++) {
+      let rstQuizId = Math.floor(Math.random() * 10);
+      quizId += rstQuizId;
+    }
+
+    set(ref(db, `sinavlar/${filterQuizs}/sorular/${quizId}`), {
+      soru: soru,
+      dogruCevap: dogruCevap,
+      cevaplar: [cevap1, cevap2, cevap3, cevap4],
+    });
+  });
+  location.reload();
+});
+
+//!yeni bir quiz başlığı yaratıyoruz
+document
+  .querySelector(".createQuizTitle")
+  .addEventListener("click", function () {
+    let quizTitle = document.querySelector(".quizTitle").value;
+    let quizContentBody = document.querySelector(".quizContentBody").value;
+    let quizEtiket = document.querySelector(".quizEtiket").value;
+    quizEtiket = quizEtiket.split(",");
+
+    const db = getDatabase();
+    set(ref(db, "sinavlar/" + quizTitle), {
+      quizBilgi: {
+        name: quizTitle,
+        quizContentBody: quizContentBody,
+        quizEtiket: quizEtiket,
+      },
+    });
+    location.reload();
+  });
+
+//!çıkış
+document.querySelector(".quit").addEventListener("click", function () {
+  signOut(auth)
+    .then(() => {
+      console.log("çıkış yapıldı");
     })
-    .catch((error) => {
-      console.error(error);
-      console.log("giriş başarısız");
+    .catch(() => {
+      console.log("çıkış yapılamadı!");
     });
 });
