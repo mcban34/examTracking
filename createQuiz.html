@@ -34,7 +34,7 @@
 
     <h2>Öğrenci Notları</h2>
     <div class="ogrenciNotlari">
-        <table border="1">
+        <table border="1" id="dataTable">
             <thead>
               <tr>
                 <th>Quiz</th>
@@ -51,7 +51,11 @@
     <br><br><br>
     <button class="quit">Çıkış</button>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+<!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script type="module" src="script/createQuiz.js"></script>
 </body>
 </html>
