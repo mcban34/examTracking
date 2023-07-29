@@ -28,7 +28,7 @@ const auth = getAuth();
 
 //!kullanıcı girişli değilse admin sayfasına geri dönecektir
 onAuthStateChanged(auth, (user) => {
-  console.log(user);
+  // console.log(user);
   if (!user) {
     window.location.href = "admin.html";
   }
@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const countRef = ref(db, "sinavlar/");
   onValue(countRef, (snapshot) => {
     let data = Object.keys(snapshot.val());
-    console.log(data.length);
     for (const i of data) {
       filterQuizs.innerHTML += `
             <option>${i}</option>
@@ -49,6 +48,56 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+//!öğrenci notlarını çektim
+const ogrenciNotlariAsync = async () => {
+  const ogrenciSonuclari = [];
+  try {
+
+    const db = getDatabase();
+    const countRef = ref(db, "ogrenciler/");
+    const snapshot = await get(countRef);
+    let data = snapshot.val();
+
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        const veri = data[key];
+        ogrenciSonuclari.push(veri);
+      }
+    }
+    //!çekilen öğrenci notlarını tadatable şekilde olan fonksiyonuma parametre olarak gönderdim
+    datatableVerileriGoster(ogrenciSonuclari);
+  } catch (error) {
+    console.error("Veriler alınırken bir hata oluştu:", error);
+  }
+};
+
+ogrenciNotlariAsync();
+
+//!sınava giren öğrencilerin bilgilerini panele yazdırdım
+function datatableVerileriGoster(veriListesi) {
+  const tbody = document.getElementById("dataTableBody");
+  tbody.innerHTML = "";
+
+  veriListesi.forEach((veri) => {
+    const row = document.createElement("tr");
+
+    const nameCell = document.createElement("td");
+    nameCell.textContent = veri.quizName;
+    row.appendChild(nameCell);
+
+    const quizStartNameSurNameCell = document.createElement("td");
+    quizStartNameSurNameCell.textContent = veri.quizStartNameSurName;
+    row.appendChild(quizStartNameSurNameCell);
+
+    const sinavSonucCell = document.createElement("td");
+    sinavSonucCell.textContent = veri.sinavSonuc;
+    row.appendChild(sinavSonucCell);
+
+    tbody.appendChild(row);
+  });
+}
+
 
 //!yeni bir quiz yaratılıyor
 document.querySelector(".createQuizBtn").addEventListener("click", function () {
@@ -72,8 +121,8 @@ document.querySelector(".createQuizBtn").addEventListener("click", function () {
 
     set(ref(db, `sinavlar/${filterQuizs}/sorular/${quizId}`), {
       soru: soru,
-      dogruCevap : dogruCevap,
-      cevaplar : [cevap1,cevap2,cevap3,cevap4]
+      dogruCevap: dogruCevap,
+      cevaplar: [cevap1, cevap2, cevap3, cevap4],
     });
   });
   location.reload();

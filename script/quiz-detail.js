@@ -158,11 +158,14 @@ document.querySelector(".quizNext").addEventListener("click", function () {
   //*ilk olarak yapılması gerek "quizs" değişkeni içerisinde sorular mevcut ve rstgele sorular çekmek istiyorum
 });
 
+
+//!öğrencilerin sınav sonuçlarını kayıt ettim
 function sinavSonucKayitEt() {
   const db = getDatabase();
   set(ref(db, 'ogrenciler/' + ogrenciBilgileri.ogrenciIsimSoyisim + " " +  ogrenciBilgileri.quizName) , {
-      quizName : ogrenciBilgileri.ogrenciIsimSoyisim,
-      quizStartNameSurName : ogrenciBilgileri.quizName,
+      quizName : ogrenciBilgileri.quizName,
+      quizStartNameSurName : ogrenciBilgileri.ogrenciIsimSoyisim,
       sinavSonuc : ogrenciBilgileri.sinavPuan
   })
 }
+
