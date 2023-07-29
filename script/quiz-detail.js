@@ -44,23 +44,21 @@ onValue(countRef, (snapshot) => {
 
   //*quiz detayında gelen o quize ait bütün soruları obje haline çevirdim
   quizs = Object.values(quizDetail.sorular);
-  console.log(quizs);
 });
 
 const rstGetQuiz = () => {
   let rstQuizIndex = Math.floor(Math.random() * quizs.length);
   let rstQuiz = quizs[rstQuizIndex];
   quizs.splice(rstQuizIndex, 1);
-  if (quizs.length != 0) {
-    return rstQuiz;
-  } else {
-    return console.log("quizler bitti");
-  }
+  return rstQuiz;
+  // if (quizs.length != 0) {
+  //   return rstQuiz;
+  // }
 };
 
 let ogrenciBilgileri = {};
 
-//!sınava başla butonu 
+//!sınava başla butonu
 document.querySelector(".quizNext").addEventListener("click", function () {
   let quizName = document.querySelector(".quizName").value;
   let quizStartNameSurName = document.querySelector(
@@ -73,23 +71,66 @@ document.querySelector(".quizNext").addEventListener("click", function () {
   document.querySelector(".quizStart").style.display = "none";
   document.querySelector(".quiz").style.display = "block";
 
-  const quizContent = document.querySelector(".quizContent");
-  document.querySelector(".quizTitle").innerHTML = quizs[0].soru
-  Object.entries(quizs[0]).forEach(([anahtar, deger]) => {
-    if (anahtar.includes("cevap")) {
-      const button = document.createElement("button");
-      button.className = "cevap";
-      button.textContent = deger;
-      quizContent.append(button);
+  let gelenSoru
+  function yeniSoru() {
+    gelenSoru = rstGetQuiz();
+    console.log(gelenSoru);
+    document.querySelector(".soru").innerHTML = gelenSoru.soru;
+
+    let cevapButtons = document.querySelectorAll(".cevapButton");
+
+    for (let i = 0; i < cevapButtons.length; i++) {
+      cevapButtons[i].innerHTML = gelenSoru.cevaplar[i];
     }
+    console.log(cevapButtons);
+  }
+  yeniSoru();
+
+  const cevapButtons = document.querySelectorAll(".cevapButton");
+  cevapButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const cevapIndex = parseInt(button.dataset.cevap, 10);
+      cevapla(cevapIndex);
+    });
   });
 
-  let cevaplar = document.querySelectorAll(".cevap")
-  for (const i of cevaplar) {
-      i.addEventListener("click",() => {
-        console.log(i.innerHTML);
-      })
+  let dogruSayi = 0;
+  function cevapla(cevapIndex) {
+    // const suankiSoru = sorular[suankiSoruIndex];
+    if (cevapIndex === gelenSoru.dogruCevap) {
+      // Doğru cevap verildi, kullanıcıya geri bildirim verilebilir
+      dogruSayi++;
+      console.log("dogru bildin!", dogruSayi);
+    } else {
+      // Yanlış cevap verildi, kullanıcıya geri bildirim verilebilir
+    }
+
+    // Sonraki soruya geç
+    // suankiSoruIndex++;
+    yeniSoru();
   }
+
+  // const quizHTML = () => {
+  //   let gelenQuiz = rstGetQuiz()
+  //   const quizContent = document.querySelector(".quizContent");
+  //   document.querySelector(".quizTitle").innerHTML = gelenQuiz.soru;
+  //   Object.entries(gelenQuiz).forEach(([anahtar, deger]) => {
+  //     if (anahtar.includes("cevap")) {
+  //       const button = document.createElement("button");
+  //       button.className = "cevap";
+  //       button.textContent = deger;
+  //       quizContent.append(button);
+  //     }
+  //   });
+  // };
+  // quizHTML()
+
+  // let cevaplar = document.querySelectorAll(".cevap");
+  // for (const i of cevaplar) {
+  //   i.addEventListener("click", () => {
+  //     quizHTML()
+  //   });
+  // }
 
   //!öğrenciden bilgileri aldım şuanda kayıt yapılıyor
   //*yapmam gereken tam olarak şu şuanda doğrudan öğrenci adı ve quizname yüklemek yanlış

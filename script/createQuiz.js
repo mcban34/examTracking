@@ -57,6 +57,7 @@ document.querySelector(".createQuizBtn").addEventListener("click", function () {
   let cevap2 = document.querySelector(".cevap2").value;
   let cevap3 = document.querySelector(".cevap3").value;
   let cevap4 = document.querySelector(".cevap4").value;
+  let dogruCevap = +document.querySelector(".dogruCevap").value;
   let filterQuizs = document.querySelector(".filterQuizs").value;
   const db = getDatabase();
 
@@ -71,10 +72,8 @@ document.querySelector(".createQuizBtn").addEventListener("click", function () {
 
     set(ref(db, `sinavlar/${filterQuizs}/sorular/${quizId}`), {
       soru: soru,
-      cevap1: cevap1,
-      cevap2: cevap2,
-      cevap3: cevap3,
-      cevap4: cevap4,
+      dogruCevap : dogruCevap,
+      cevaplar : [cevap1,cevap2,cevap3,cevap4]
     });
   });
   location.reload();
