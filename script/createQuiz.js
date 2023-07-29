@@ -96,7 +96,9 @@ function datatableVerileriGoster(veriListesi) {
 
     tbody.appendChild(row);
   });
-  $('#dataTable').DataTable();
+  $('#dataTable').DataTable({
+    pageLength:5
+  });
 }
 
 
