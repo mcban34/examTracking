@@ -78,7 +78,7 @@ document.querySelector(".quizNext").addEventListener("click", function () {
     if(quizs.length==0){
       document.querySelector(".quizContent").style.display="none"
       ogrenciBilgileri["sinavPuan"] = dogruSayi
-      console.log(ogrenciBilgileri);
+      document.querySelector(".quizEndPoint").innerHTML=`Sınavın Bitti ${quizStartNameSurName}! Toplam Puanın : ${dogruSayi*10}`
       return
     }
     gelenSoru = rstGetQuiz();
