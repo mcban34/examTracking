@@ -56,7 +56,7 @@ const rstGetQuiz = () => {
 
 let ogrenciBilgileri = {};
 let dogruSayi = 0;
-let myinterval
+let myinterval;
 
 //!zamanlayıcı
 function quizTimer() {
@@ -67,9 +67,12 @@ function quizTimer() {
   myinterval = setInterval(() => {
     if (dakika === 0 && saniye === 0) {
       clearInterval(myinterval);
-      timerDiv.textContent = "Süre doldu!";
-      document.querySelector(".quizContent").style.display="none"
-      document.querySelector(".quizEndPoint").innerHTML=`Süren Bitti ${ogrenciBilgileri.ogrenciIsimSoyisim}! Toplam Puanın : ${dogruSayi*10}`
+      sinavSonucKayitEt()
+      console.log(ogrenciBilgileri);
+      document.querySelector(".quizContent").style.display = "none";
+      document.querySelector(".quizEndPoint").innerHTML = `Süren Bitti ${
+        ogrenciBilgileri.ogrenciIsimSoyisim
+      }! Toplam Puanın : ${dogruSayi * 10}`;
     } else {
       if (saniye === 0) {
         dakika--;
@@ -89,9 +92,10 @@ document.querySelector(".quizNext").addEventListener("click", function () {
   let quizName = document.querySelector(".quizName").value;
   let quizStartNameSurName = document.querySelector(
     ".quizStartNameSurName"
-    ).value;
-    quizTimer()
-  
+  ).value;
+  //*sınav başladığında zamanlayıcı başladı
+  quizTimer();
+
   //*objeye verileri atadım
   ogrenciBilgileri["ogrenciIsimSoyisim"] = quizStartNameSurName;
   ogrenciBilgileri["quizName"] = quizName;
@@ -99,16 +103,21 @@ document.querySelector(".quizNext").addEventListener("click", function () {
   document.querySelector(".quizStart").style.display = "none";
   document.querySelector(".quiz").style.display = "block";
 
-  let gelenSoru
+  let gelenSoru;
   //!yeni soru üretmesi için fonksiyon yazdım
   function yeniSoru() {
     //*rastgele sorular bittiğinde
-    if(quizs.length==0){
-      document.querySelector(".quizContent").style.display="none"
-      ogrenciBilgileri["sinavPuan"] = dogruSayi
-      document.querySelector(".quizEndPoint").innerHTML=`Sınavın Bitti ${ogrenciBilgileri.ogrenciIsimSoyisim}! Toplam Puanın : ${dogruSayi*10}`
-      clearInterval(myinterval)
-      return
+    if (quizs.length == 0) {
+      document.querySelector(".quizContent").style.display = "none";
+      ogrenciBilgileri["sinavPuan"] = dogruSayi*10;
+      document.querySelector(".quizEndPoint").innerHTML = `Sınavın Bitti ${
+        ogrenciBilgileri.ogrenciIsimSoyisim
+      }! Toplam Puanın : ${dogruSayi * 10}`;
+      //*bütün soruları zaman dolmadan çözerse time durduruldu!
+      clearInterval(myinterval);
+      sinavSonucKayitEt()
+      console.log(ogrenciBilgileri);
+      return;
     }
     gelenSoru = rstGetQuiz();
     console.log(gelenSoru);
@@ -139,8 +148,7 @@ document.querySelector(".quizNext").addEventListener("click", function () {
   function cevapla(cevapIndex) {
     if (cevapIndex === gelenSoru.dogruCevap) {
       dogruSayi++;
-
-    } 
+    }
     yeniSoru();
   }
 
@@ -149,3 +157,12 @@ document.querySelector(".quizNext").addEventListener("click", function () {
   //*çünkü öğrencinin aldığı puanıda eklemem gerekiyor dbye (üzerinde güncelleme yapabiliyorsak olabilir)
   //*ilk olarak yapılması gerek "quizs" değişkeni içerisinde sorular mevcut ve rstgele sorular çekmek istiyorum
 });
+
+function sinavSonucKayitEt() {
+  const db = getDatabase();
+  set(ref(db, 'ogrenciler/' + ogrenciBilgileri.ogrenciIsimSoyisim + " " +  ogrenciBilgileri.quizName) , {
+      quizName : ogrenciBilgileri.ogrenciIsimSoyisim,
+      quizStartNameSurName : ogrenciBilgileri.quizName,
+      sinavSonuc : ogrenciBilgileri.sinavPuan
+  })
+}
