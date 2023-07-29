@@ -46,6 +46,7 @@ onValue(countRef, (snapshot) => {
   quizs = Object.values(quizDetail.sorular);
 });
 
+//!fonksiyon rastgele bir soru fırlatır
 const rstGetQuiz = () => {
   let rstQuizIndex = Math.floor(Math.random() * quizs.length);
   let rstQuiz = quizs[rstQuizIndex];
@@ -54,6 +55,7 @@ const rstGetQuiz = () => {
 };
 
 let ogrenciBilgileri = {};
+let dogruSayi = 0;
 
 //!sınava başla butonu
 document.querySelector(".quizNext").addEventListener("click", function () {
@@ -61,7 +63,8 @@ document.querySelector(".quizNext").addEventListener("click", function () {
   let quizStartNameSurName = document.querySelector(
     ".quizStartNameSurName"
   ).value;
-
+  
+  //*objeye verileri atadım
   ogrenciBilgileri["ogrenciIsimSoyisim"] = quizStartNameSurName;
   ogrenciBilgileri["quizName"] = quizName;
 
@@ -69,24 +72,32 @@ document.querySelector(".quizNext").addEventListener("click", function () {
   document.querySelector(".quiz").style.display = "block";
 
   let gelenSoru
+  //!yeni soru üretmesi için fonksiyon yazdım
   function yeniSoru() {
-    gelenSoru = rstGetQuiz();
-    console.log(quizs);
+    //*rastgele sorular bittiğinde
     if(quizs.length==0){
       document.querySelector(".quizContent").style.display="none"
-      console.log("sorular bitti!");
+      ogrenciBilgileri["sinavPuan"] = dogruSayi
+      console.log(ogrenciBilgileri);
       return
     }
+    gelenSoru = rstGetQuiz();
+    console.log(gelenSoru);
+    console.log(quizs);
+
+    //*soru başlığını oluşturdum
     document.querySelector(".soru").innerHTML = gelenSoru.soru;
 
+    //*her butonun içerisine veri tabanından gelen şıkları yerleştirdim
     let cevapButtons = document.querySelectorAll(".cevapButton");
-
     for (let i = 0; i < cevapButtons.length; i++) {
       cevapButtons[i].innerHTML = gelenSoru.cevaplar[i];
     }
   }
   yeniSoru();
 
+  //!bütün cevap butonlarını aldım, tıklanılan butonun data-cevabını cevaplaya parametre olarak gönderdim
+  //*burada öğrencinin bastığı butonun data-indexine göre doğru cevap karşılatırılmasını yaptım
   const cevapButtons = document.querySelectorAll(".cevapButton");
   cevapButtons.forEach((button) => {
     button.addEventListener("click", function () {
@@ -95,7 +106,7 @@ document.querySelector(".quizNext").addEventListener("click", function () {
     });
   });
 
-  let dogruSayi = 0;
+  //!öğrenci cevap verdiğinde tıkladığı butonun data-cevap verisini alıp karşılaştırdım
   function cevapla(cevapIndex) {
     if (cevapIndex === gelenSoru.dogruCevap) {
       dogruSayi++;
