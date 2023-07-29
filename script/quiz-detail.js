@@ -51,9 +51,6 @@ const rstGetQuiz = () => {
   let rstQuiz = quizs[rstQuizIndex];
   quizs.splice(rstQuizIndex, 1);
   return rstQuiz;
-  // if (quizs.length != 0) {
-  //   return rstQuiz;
-  // }
 };
 
 let ogrenciBilgileri = {};
@@ -74,7 +71,12 @@ document.querySelector(".quizNext").addEventListener("click", function () {
   let gelenSoru
   function yeniSoru() {
     gelenSoru = rstGetQuiz();
-    console.log(gelenSoru);
+    console.log(quizs);
+    if(quizs.length==0){
+      document.querySelector(".quizContent").style.display="none"
+      console.log("sorular bitti!");
+      return
+    }
     document.querySelector(".soru").innerHTML = gelenSoru.soru;
 
     let cevapButtons = document.querySelectorAll(".cevapButton");
@@ -82,7 +84,6 @@ document.querySelector(".quizNext").addEventListener("click", function () {
     for (let i = 0; i < cevapButtons.length; i++) {
       cevapButtons[i].innerHTML = gelenSoru.cevaplar[i];
     }
-    console.log(cevapButtons);
   }
   yeniSoru();
 
@@ -96,41 +97,12 @@ document.querySelector(".quizNext").addEventListener("click", function () {
 
   let dogruSayi = 0;
   function cevapla(cevapIndex) {
-    // const suankiSoru = sorular[suankiSoruIndex];
     if (cevapIndex === gelenSoru.dogruCevap) {
-      // Doğru cevap verildi, kullanıcıya geri bildirim verilebilir
       dogruSayi++;
-      console.log("dogru bildin!", dogruSayi);
-    } else {
-      // Yanlış cevap verildi, kullanıcıya geri bildirim verilebilir
-    }
 
-    // Sonraki soruya geç
-    // suankiSoruIndex++;
+    } 
     yeniSoru();
   }
-
-  // const quizHTML = () => {
-  //   let gelenQuiz = rstGetQuiz()
-  //   const quizContent = document.querySelector(".quizContent");
-  //   document.querySelector(".quizTitle").innerHTML = gelenQuiz.soru;
-  //   Object.entries(gelenQuiz).forEach(([anahtar, deger]) => {
-  //     if (anahtar.includes("cevap")) {
-  //       const button = document.createElement("button");
-  //       button.className = "cevap";
-  //       button.textContent = deger;
-  //       quizContent.append(button);
-  //     }
-  //   });
-  // };
-  // quizHTML()
-
-  // let cevaplar = document.querySelectorAll(".cevap");
-  // for (const i of cevaplar) {
-  //   i.addEventListener("click", () => {
-  //     quizHTML()
-  //   });
-  // }
 
   //!öğrenciden bilgileri aldım şuanda kayıt yapılıyor
   //*yapmam gereken tam olarak şu şuanda doğrudan öğrenci adı ve quizname yüklemek yanlış
