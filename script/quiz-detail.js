@@ -56,13 +56,41 @@ const rstGetQuiz = () => {
 
 let ogrenciBilgileri = {};
 let dogruSayi = 0;
+let myinterval
+
+//!zamanlayıcı
+function quizTimer() {
+  const timerDiv = document.getElementById("timer");
+  let dakika = 20;
+  let saniye = 0;
+
+  myinterval = setInterval(() => {
+    if (dakika === 0 && saniye === 0) {
+      clearInterval(myinterval);
+      timerDiv.textContent = "Süre doldu!";
+      document.querySelector(".quizContent").style.display="none"
+      document.querySelector(".quizEndPoint").innerHTML=`Süren Bitti ${ogrenciBilgileri.ogrenciIsimSoyisim}! Toplam Puanın : ${dogruSayi*10}`
+    } else {
+      if (saniye === 0) {
+        dakika--;
+        saniye = 59;
+      } else {
+        saniye--;
+      }
+      const dakikaStr = dakika < 10 ? "0" + dakika : dakika;
+      const saniyeStr = saniye < 10 ? "0" + saniye : saniye;
+      timerDiv.textContent = dakikaStr + ":" + saniyeStr;
+    }
+  }, 10);
+}
 
 //!sınava başla butonu
 document.querySelector(".quizNext").addEventListener("click", function () {
   let quizName = document.querySelector(".quizName").value;
   let quizStartNameSurName = document.querySelector(
     ".quizStartNameSurName"
-  ).value;
+    ).value;
+    quizTimer()
   
   //*objeye verileri atadım
   ogrenciBilgileri["ogrenciIsimSoyisim"] = quizStartNameSurName;
@@ -78,7 +106,8 @@ document.querySelector(".quizNext").addEventListener("click", function () {
     if(quizs.length==0){
       document.querySelector(".quizContent").style.display="none"
       ogrenciBilgileri["sinavPuan"] = dogruSayi
-      document.querySelector(".quizEndPoint").innerHTML=`Sınavın Bitti ${quizStartNameSurName}! Toplam Puanın : ${dogruSayi*10}`
+      document.querySelector(".quizEndPoint").innerHTML=`Sınavın Bitti ${ogrenciBilgileri.ogrenciIsimSoyisim}! Toplam Puanın : ${dogruSayi*10}`
+      clearInterval(myinterval)
       return
     }
     gelenSoru = rstGetQuiz();
