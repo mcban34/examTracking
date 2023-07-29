@@ -70,9 +70,8 @@ function quizTimer() {
       sinavSonucKayitEt()
       console.log(ogrenciBilgileri);
       document.querySelector(".quizContent").style.display = "none";
-      document.querySelector(".quizEndPoint").innerHTML = `Süren Bitti ${
-        ogrenciBilgileri.ogrenciIsimSoyisim
-      }! Toplam Puanın : ${dogruSayi * 10}`;
+      document.querySelector(".quizEndPoint").innerHTML = `Süren Bitti ${ogrenciBilgileri.ogrenciIsimSoyisim
+        }! Toplam Puanın : ${dogruSayi * 10}`;
     } else {
       if (saniye === 0) {
         dakika--;
@@ -109,10 +108,9 @@ document.querySelector(".quizNext").addEventListener("click", function () {
     //*rastgele sorular bittiğinde
     if (quizs.length == 0) {
       document.querySelector(".quizContent").style.display = "none";
-      ogrenciBilgileri["sinavPuan"] = dogruSayi*10;
-      document.querySelector(".quizEndPoint").innerHTML = `Sınavın Bitti ${
-        ogrenciBilgileri.ogrenciIsimSoyisim
-      }! Toplam Puanın : ${dogruSayi * 10}`;
+      ogrenciBilgileri["sinavPuan"] = dogruSayi * 10;
+      document.querySelector(".quizEndPoint").innerHTML = `Sınavın Bitti ${ogrenciBilgileri.ogrenciIsimSoyisim
+        }! Toplam Puanın : ${dogruSayi * 10}`;
       //*bütün soruları zaman dolmadan çözerse time durduruldu!
       clearInterval(myinterval);
       sinavSonucKayitEt()
@@ -162,10 +160,16 @@ document.querySelector(".quizNext").addEventListener("click", function () {
 //!öğrencilerin sınav sonuçlarını kayıt ettim
 function sinavSonucKayitEt() {
   const db = getDatabase();
-  set(ref(db, 'ogrenciler/' + ogrenciBilgileri.ogrenciIsimSoyisim + " " +  ogrenciBilgileri.quizName) , {
-      quizName : ogrenciBilgileri.quizName,
-      quizStartNameSurName : ogrenciBilgileri.ogrenciIsimSoyisim,
-      sinavSonuc : ogrenciBilgileri.sinavPuan
+  set(ref(db, 'ogrenciler/' + ogrenciBilgileri.ogrenciIsimSoyisim + " " + ogrenciBilgileri.quizName), {
+    quizName: ogrenciBilgileri.quizName,
+    quizStartNameSurName: ogrenciBilgileri.ogrenciIsimSoyisim,
+    sinavSonuc: ogrenciBilgileri.sinavPuan
   })
 }
 
+
+//!sayfa yenilendiğinde soru soruyorum!
+//*sayfanın yenilenme durumunda herhangi bir kayıt olmuyor, yenilenme iptal edildiğinde sınav kaldığı yerden devam ediyor
+window.onbeforeunload = function () {
+  return "Sayfayı yenilemek istediğinizden emin misiniz?";
+}
