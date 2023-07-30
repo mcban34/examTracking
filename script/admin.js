@@ -161,6 +161,7 @@ document
   });
 
 
+//!grup yaratıldı
 document.querySelector(".createGroup").addEventListener("click", function () {
   let grupName = document.querySelector(".grupName").value
   const db = getDatabase();

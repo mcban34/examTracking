@@ -20,6 +20,7 @@ const app = initializeApp(firebaseConfig);
 
 let quizs;
 
+//!quiz girişinde grup adını select yapısını yazdırdım
 document.addEventListener("DOMContentLoaded", function () {
   let filterGrup = document.querySelector(".filterGrup");
   const db = getDatabase();
@@ -116,7 +117,6 @@ document.querySelector(".quizNext").addEventListener("click", function () {
   ogrenciBilgileri["quizName"] = quizName;
   ogrenciBilgileri["grupName"] = filterGrup;
 
-
   document.querySelector(".quizStart").style.display = "none";
   document.querySelector(".quiz").style.display = "block";
 
@@ -167,11 +167,6 @@ document.querySelector(".quizNext").addEventListener("click", function () {
     }
     yeniSoru();
   }
-
-  //!öğrenciden bilgileri aldım şuanda kayıt yapılıyor
-  //*yapmam gereken tam olarak şu şuanda doğrudan öğrenci adı ve quizname yüklemek yanlış
-  //*çünkü öğrencinin aldığı puanıda eklemem gerekiyor dbye (üzerinde güncelleme yapabiliyorsak olabilir)
-  //*ilk olarak yapılması gerek "quizs" değişkeni içerisinde sorular mevcut ve rstgele sorular çekmek istiyorum
 });
 
 
@@ -183,7 +178,7 @@ function sinavSonucKayitEt() {
     quizName: ogrenciBilgileri.quizName,
     quizStartNameSurName: ogrenciBilgileri.ogrenciIsimSoyisim,
     sinavSonuc: ogrenciBilgileri.sinavPuan,
-    grupName:ogrenciBilgileri.grupName
+    grupName: ogrenciBilgileri.grupName
   })
 }
 

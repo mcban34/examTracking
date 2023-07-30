@@ -1,6 +1,25 @@
+img{
+    max-width: 100%;
+}
+
+
 .quiz{
     display: none;
 }
+
+.quizs{
+    a{
+        text-decoration: none;
+        .quizCard{
+            background-color: white;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+        .quizCardBody{
+            padding: 1rem;
+        }
+    }
+}
+
 
 .ogrenciNotlari{
     width: 100%;

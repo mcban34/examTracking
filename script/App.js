@@ -24,7 +24,7 @@ const getQuizs = () => {
   const countRef = ref(db, "sinavlar/");
   onValue(countRef, (snapshot) => {
     let data = snapshot.val();
-
+    console.log(data);
     const questionsArray = Object.keys(data).map((key, index) => {
       return {
         id: index,
@@ -35,11 +35,14 @@ const getQuizs = () => {
 
     const questionsArrayHTML = questionsArray.map((value) => {
       return `
-        <div class="col-3">
+        <div class="col-md-4">
           <a href="quiz-detail.html?id=${value.id}">
             <div class="quizCard">
-              <h2>${value.quizBilgi.name}</h2>
-              <p>${value.quizBilgi.quizContentBody}</p>
+              <img src="img/3d-speech-bubbles-with-question-marks.jpg">
+              <div class="quizCardBody">
+                <h4>${value.quizBilgi.name}</h4>
+                <p>${value.quizBilgi.quizContentBody}</p>
+              </div>
             </div>
           </a>
         </div>
