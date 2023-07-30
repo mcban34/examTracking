@@ -20,6 +20,20 @@ const app = initializeApp(firebaseConfig);
 
 let quizs;
 
+document.addEventListener("DOMContentLoaded", function () {
+  let filterGrup = document.querySelector(".filterGrup");
+  const db = getDatabase();
+  const countRef = ref(db, "gruplar/");
+  onValue(countRef, (snapshot) => {
+    let data = Object.keys(snapshot.val());
+    for (const i of data) {
+      filterGrup.innerHTML += `
+            <option>${i}</option>
+        `;
+    }
+  });
+});
+
 //!tıklanılan quizin adını aldım
 const urlParams = new URLSearchParams(window.location.search);
 const quizId = urlParams.get("id");
@@ -67,6 +81,7 @@ function quizTimer() {
   myinterval = setInterval(() => {
     if (dakika === 0 && saniye === 0) {
       clearInterval(myinterval);
+      ogrenciBilgileri["sinavPuan"] = dogruSayi * 10;
       sinavSonucKayitEt()
       console.log(ogrenciBilgileri);
       document.querySelector(".quizContent").style.display = "none";
@@ -92,12 +107,15 @@ document.querySelector(".quizNext").addEventListener("click", function () {
   let quizStartNameSurName = document.querySelector(
     ".quizStartNameSurName"
   ).value;
+  let filterGrup = document.querySelector(".filterGrup").value
   //*sınav başladığında zamanlayıcı başladı
   quizTimer();
 
   //*objeye verileri atadım
   ogrenciBilgileri["ogrenciIsimSoyisim"] = quizStartNameSurName;
   ogrenciBilgileri["quizName"] = quizName;
+  ogrenciBilgileri["grupName"] = filterGrup;
+
 
   document.querySelector(".quizStart").style.display = "none";
   document.querySelector(".quiz").style.display = "block";
@@ -159,11 +177,13 @@ document.querySelector(".quizNext").addEventListener("click", function () {
 
 //!öğrencilerin sınav sonuçlarını kayıt ettim
 function sinavSonucKayitEt() {
+  console.log(ogrenciBilgileri);
   const db = getDatabase();
   set(ref(db, 'ogrenciler/' + ogrenciBilgileri.ogrenciIsimSoyisim + " " + ogrenciBilgileri.quizName), {
     quizName: ogrenciBilgileri.quizName,
     quizStartNameSurName: ogrenciBilgileri.ogrenciIsimSoyisim,
-    sinavSonuc: ogrenciBilgileri.sinavPuan
+    sinavSonuc: ogrenciBilgileri.sinavPuan,
+    grupName:ogrenciBilgileri.grupName
   })
 }
 

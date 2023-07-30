@@ -49,22 +49,27 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+//!dom başlarken select options içerisine grupların başlıklarını getirdim
+
+
+
 //!öğrenci notlarını çektim
 const ogrenciNotlariAsync = async () => {
   const ogrenciSonuclari = [];
   try {
-
+    
     const db = getDatabase();
     const countRef = ref(db, "ogrenciler/");
     const snapshot = await get(countRef);
     let data = snapshot.val();
-
+    
     for (const key in data) {
       if (data.hasOwnProperty(key)) {
         const veri = data[key];
         ogrenciSonuclari.push(veri);
       }
     }
+    console.log(ogrenciSonuclari);
     //!çekilen öğrenci notlarını tadatable şekilde olan fonksiyonuma parametre olarak gönderdim
     datatableVerileriGoster(ogrenciSonuclari);
   } catch (error) {
@@ -94,10 +99,14 @@ function datatableVerileriGoster(veriListesi) {
     sinavSonucCell.textContent = veri.sinavSonuc;
     row.appendChild(sinavSonucCell);
 
+    const grupName = document.createElement("td");
+    grupName.textContent = veri.grupName;
+    row.appendChild(grupName);
+
     tbody.appendChild(row);
   });
   $('#dataTable').DataTable({
-    pageLength:5
+    pageLength: 5
   });
 }
 
@@ -150,6 +159,20 @@ document
     });
     location.reload();
   });
+
+
+document.querySelector(".createGroup").addEventListener("click", function () {
+  let grupName = document.querySelector(".grupName").value
+  const db = getDatabase();
+  set(ref(db, "gruplar/" + grupName), {
+    grup: {
+      Grupname: grupName,
+    },
+  });
+
+})
+
+
 
 //!çıkış
 document.querySelector(".quit").addEventListener("click", function () {
