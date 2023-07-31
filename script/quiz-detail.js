@@ -151,7 +151,7 @@ document.querySelector(".quizNext").addEventListener("click", function () {
   yeniSoru();
 
 
-
+  //!sıradaki soruyu aldım
   document.querySelector(".nextQuestion").addEventListener("click", function () {
     yeniSoru();
   })

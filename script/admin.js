@@ -57,12 +57,12 @@ document.addEventListener("DOMContentLoaded", function () {
 const ogrenciNotlariAsync = async () => {
   const ogrenciSonuclari = [];
   try {
-    
+
     const db = getDatabase();
     const countRef = ref(db, "ogrenciler/");
     const snapshot = await get(countRef);
     let data = snapshot.val();
-    
+
     for (const key in data) {
       if (data.hasOwnProperty(key)) {
         const veri = data[key];
@@ -185,3 +185,52 @@ document.querySelector(".quit").addEventListener("click", function () {
       console.log("çıkış yapılamadı!");
     });
 });
+
+
+document.querySelector(".downloadTable").addEventListener("click", function () {
+  function exportToExcel() {
+    const table = document.getElementById("dataTable");
+    const rows = table.getElementsByTagName("tr");
+    const data = [];
+
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      const cells = row.getElementsByTagName("td");
+      const rowData = [];
+
+      for (let j = 0; j < cells.length; j++) {
+        rowData.push(cells[j].innerText);
+      }
+
+      data.push(rowData);
+    }
+
+    const worksheet = XLSX.utils.aoa_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    // Dosya adını ve türünü belirleyin
+    const fileName = "myData.xlsx";
+    const fileType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+    // Dosyayı indirme bağlantısını oluşturun ve tıklayın
+    const blob = new Blob([s2ab(XLSX.write(workbook, { bookType: "xlsx", type: "binary" }))], {
+      type: fileType,
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+  exportToExcel()
+  // Yardımcı fonksiyon: string to array buffer
+  function s2ab(s) {
+    const buf = new ArrayBuffer(s.length);
+    const view = new Uint8Array(buf);
+    for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xff;
+    return buf;
+  }
+
+})
