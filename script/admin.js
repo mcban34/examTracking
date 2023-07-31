@@ -111,6 +111,18 @@ function datatableVerileriGoster(veriListesi) {
 }
 
 
+//!data tableyi butonlara göre filtreledim mesela gruplara göre
+document.querySelector('.filterByGroup').addEventListener('click', function() {
+  const group = this.getAttribute('data-group');
+  filterTableByGroup(group);
+});
+
+function filterTableByGroup(group) {
+  const table = $('#dataTable').DataTable();
+  table.search(group).draw();
+}
+
+
 //!yeni bir quiz yaratılıyor
 document.querySelector(".createQuizBtn").addEventListener("click", function () {
   let soru = document.querySelector(".soru").value;
@@ -187,6 +199,7 @@ document.querySelector(".quit").addEventListener("click", function () {
 });
 
 
+//!datatableyi xlsx formatında indirme fonksiyonu
 document.querySelector(".downloadTable").addEventListener("click", function () {
   function exportToExcel() {
     const table = document.getElementById("dataTable");
@@ -232,5 +245,4 @@ document.querySelector(".downloadTable").addEventListener("click", function () {
     for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xff;
     return buf;
   }
-
 })
