@@ -34,8 +34,9 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-//!dom başlarken select options içerisine quizlerin başlıklarını getirdim
 document.addEventListener("DOMContentLoaded", function () {
+  
+  //!dom başlarken select options içerisine quizlerin başlıklarını getirdim
   let filterQuizs = document.querySelector(".filterQuizs");
   const db = getDatabase();
   const countRef = ref(db, "sinavlar/");
@@ -47,9 +48,79 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
     }
   });
+
+
+  // <!-- <button class="filterByGroup"  data-group="5 Haziran">5 haziran</button> -->
+
+  // let filterGroupButton = document.querySelector(".filterGroupButton")
+  // const countRefGroupBtn = ref(db, "gruplar/");
+  // onValue(countRefGroupBtn, (snapshot) => {
+  //   let data = Object.keys(snapshot.val());
+  //   for (const i of data) {
+  //     filterGroupButton.innerHTML += `
+  //           <button class="filterByGroup" data-group="${i}">${i}</button>
+  //       `;
+  //   }
+  // });
+
+
+  // //!data tableyi butonlara göre filtreledim mesela gruplara göre
+  // document.querySelector('.filterByGroup').addEventListener('click', function() {
+  //   const group = this.getAttribute('data-group');
+  //   filterTableByGroup(group);
+  // });
+  
+  // function filterTableByGroup(group) {
+  //   const table = $('#dataTable').DataTable();
+  //   table.search(group).draw();
+  // }
+
 });
 
-//!dom başlarken select options içerisine grupların başlıklarını getirdim
+
+async function fetchFirebaseData() {
+  try {
+    const db = getDatabase();
+    const countRef = ref(db, "gruplar/");
+
+    return new Promise((resolve, reject) => {
+      onValue(countRef, (snapshot) => {
+       let data = resolve(snapshot.val());
+       return data
+      }, (error) => {
+        console.error("Firebase veri alımı başarısız:", error);
+        reject([]);
+      });
+    });
+  } catch (error) {
+    console.error("Firebase veri alımı başarısız:", error);
+    return [];
+  }
+}
+
+async function createButtonsWithData() {
+  try {
+    await waitForDOMContentLoaded();
+    const data = await fetchFirebaseData();
+    console.log(data);
+    const buttonsContainer = document.querySelector(".filterGroupButton");
+  } catch (error) {
+    console.error("Firebase veri alımı başarısız:", error);
+  }
+}
+
+function waitForDOMContentLoaded() {
+  return new Promise((resolve) => {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", resolve);
+    } else {
+      resolve();
+    }
+  });
+}
+
+createButtonsWithData();
+
 
 
 
@@ -111,16 +182,7 @@ function datatableVerileriGoster(veriListesi) {
 }
 
 
-//!data tableyi butonlara göre filtreledim mesela gruplara göre
-document.querySelector('.filterByGroup').addEventListener('click', function() {
-  const group = this.getAttribute('data-group');
-  filterTableByGroup(group);
-});
 
-function filterTableByGroup(group) {
-  const table = $('#dataTable').DataTable();
-  table.search(group).draw();
-}
 
 
 //!yeni bir quiz yaratılıyor
