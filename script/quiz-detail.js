@@ -150,6 +150,12 @@ document.querySelector(".quizNext").addEventListener("click", function () {
   }
   yeniSoru();
 
+
+
+  document.querySelector(".nextQuestion").addEventListener("click", function () {
+    yeniSoru();
+  })
+
   //!bütün cevap butonlarını aldım, tıklanılan butonun data-cevabını cevaplaya parametre olarak gönderdim
   //*burada öğrencinin bastığı butonun data-indexine göre doğru cevap karşılatırılmasını yaptım
   const cevapButtons = document.querySelectorAll(".cevapButton");
@@ -188,3 +194,4 @@ function sinavSonucKayitEt() {
 window.onbeforeunload = function () {
   return "Sayfayı yenilemek istediğinizden emin misiniz?";
 }
+
