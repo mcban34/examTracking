@@ -106,7 +106,7 @@ function datatableVerileriGoster(veriListesi) {
     tbody.appendChild(row);
   });
   $('#dataTable').DataTable({
-    pageLength: 5
+    pageLength: 20
   });
 }
 
