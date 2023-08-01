@@ -68,13 +68,35 @@ const getFilterGrupButtons = async () => {
       filterGroupBtn.addEventListener("click",function(){
         const group = this.innerHTML;
         filterTableByGroup(group);
+
+
+        //!filtreleme butonuna tıklandığında grubun genel ortalamasını alıyoruz
+        let ogrenciNotlari = []
+        let ogreciNotu = document.querySelectorAll(".ogreciNotu")
+        for (const i of ogreciNotu) {
+          ogrenciNotlari.push(+i.innerHTML)
+        }
+
+        let grupOrtalaması = 0
+        for (const i of ogrenciNotlari) {
+            grupOrtalaması += i
+        }
+        
+        document.querySelector(".grupNotOrtalama").innerHTML=`Grup Not Ortalaması : ${(grupOrtalaması / ogrenciNotlari.length).toFixed(2)}`
       })
+
       //!burada filtreleme işlemlerini gerçekleştirdim
       function filterTableByGroup(group) {
         const table = $('#dataTable').DataTable();
         table.search(group).draw();
       }
-      filterGroupButtons.append(filterGroupBtn)
+      filterGroupButtons.prepend(filterGroupBtn)
+
+      document.querySelector(".clearGroupFilter").addEventListener("click",function(){
+        const table = $('#dataTable').DataTable();
+        table.search("").draw()
+        document.querySelector(".grupNotOrtalama").innerHTML=""
+      })
       
     }
   } catch (error) {
@@ -131,6 +153,7 @@ function datatableVerileriGoster(veriListesi) {
 
     const sinavSonucCell = document.createElement("td");
     sinavSonucCell.textContent = veri.sinavSonuc;
+    sinavSonucCell.className="ogreciNotu"
     row.appendChild(sinavSonucCell);
 
     const grupName = document.createElement("td");
