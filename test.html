@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="grupFilter">Grup:</label>
+<select id="grupFilter" onchange="filterByGroup()">
+  <option value="all">Tüm Gruplar</option>
+  <option value="5 haziran">5 Haziran</option>
+  <option value="4 nisan">4 Nisan</option>
+</select>
+
+<label for="ogrenciFilter">Öğrenci:</label>
+<select id="ogrenciFilter">
+  <!-- İkinci select seçenekleri, JavaScript tarafında oluşturulacak -->
+</select>
+
+<table id="studentsTable">
+  <thead>
+    <tr>
+      <th>İsim Soyisim</th>
+      <th>Not</th>
+      <th>Grup</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Tablo içeriği JavaScript tarafında oluşturulacak -->
+  </tbody>
+</table>
+
+<script>
+  const data = [
+    {
+      isim: "mehmet coban",
+      not: "50",
+      grup: "5 haziran",
+    },
+    {
+      isim: "semra erdogan",
+      not: "70",
+      grup: "4 nisan",
+    },
+    {
+      isim: "burak yalçın",
+      not: "20",
+      grup: "5 haziran",
+    },
+    {
+      isim: "bayram ünlü",
+      not: "70",
+      grup: "4 nisan",
+    },
+  ];
+
+  // Grupları alıp birinci select'i doldur
+  function populateGrupSelect() {
+    const grupFilter = document.getElementById("grupFilter");
+    const gruplar = [...new Set(data.map((item) => item.grup))];
+    gruplar.forEach((grup) => {
+      const option = document.createElement("option");
+      option.value = grup;
+      option.textContent = grup;
+      grupFilter.appendChild(option);
+    });
+  }
+
+  // İkinci select'i doldur
+  function populateOgrenciSelect(filteredData) {
+    const ogrenciFilter = document.getElementById("ogrenciFilter");
+    ogrenciFilter.innerHTML = ""; // Önceki seçenekleri temizle
+
+    filteredData.forEach((item) => {
+      const option = document.createElement("option");
+      option.value = item.isim;
+      option.textContent = item.isim;
+      ogrenciFilter.appendChild(option);
+    });
+  }
+
+  // Grup seçeneğine göre verileri filtrele
+  function filterByGroup() {
+    const selectedGroup = document.getElementById("grupFilter").value;
+    let filteredData = data;
+
+    if (selectedGroup !== "all") {
+      filteredData = data.filter((item) => item.grup === selectedGroup);
+    }
+
+    populateOgrenciSelect(filteredData);
+    createTable(filteredData);
+  }
+
+  // Tabloyu oluşturan işlev
+  function createTable(data) {
+    const studentsTable = document.getElementById("studentsTable");
+    const tbody = studentsTable.querySelector("tbody");
+    tbody.innerHTML = ""; // Tabloyu temizle
+
+    data.forEach((item) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${item.isim}</td>
+                        <td>${item.not}</td>
+                        <td>${item.grup}</td>`;
+      tbody.appendChild(row);
+    });
+  }
+
+  // Sayfa yüklendiğinde başlangıç işlemleri yap
+  document.addEventListener("DOMContentLoaded", () => {
+    populateGrupSelect();
+    filterByGroup();
+  });
+</script>
+
+</body>
+</html>

@@ -62,10 +62,10 @@ const getFilterGrupButtons = async () => {
     let data = Object.values(snapshot.val());
 
     for (const i of data) {
-      console.log(i.grup.Grupname);
+      // console.log(i.grup.Grupname);
       let filterGroupBtn = document.createElement("button")
-      filterGroupBtn.textContent=i.grup.Grupname
-      filterGroupBtn.addEventListener("click",function(){
+      filterGroupBtn.textContent = i.grup.Grupname
+      filterGroupBtn.addEventListener("click", function () {
         const group = this.innerHTML;
         filterTableByGroup(group);
 
@@ -79,10 +79,11 @@ const getFilterGrupButtons = async () => {
 
         let grupOrtalaması = 0
         for (const i of ogrenciNotlari) {
-            grupOrtalaması += i
+          grupOrtalaması += i
         }
-        
-        document.querySelector(".grupNotOrtalama").innerHTML=`Grup Not Ortalaması : ${(grupOrtalaması / ogrenciNotlari.length).toFixed(2)}`
+
+        document.querySelector(".grupNotOrtalama").innerHTML = `Grup Not Ortalaması : ${(grupOrtalaması / ogrenciNotlari.length).toFixed(2)}`
+
       })
 
       //!burada filtreleme işlemlerini gerçekleştirdim
@@ -92,12 +93,11 @@ const getFilterGrupButtons = async () => {
       }
       filterGroupButtons.prepend(filterGroupBtn)
 
-      document.querySelector(".clearGroupFilter").addEventListener("click",function(){
+      document.querySelector(".clearGroupFilter").addEventListener("click", function () {
         const table = $('#dataTable').DataTable();
         table.search("").draw()
-        document.querySelector(".grupNotOrtalama").innerHTML=""
+        document.querySelector(".grupNotOrtalama").innerHTML = ""
       })
-      
     }
   } catch (error) {
     console.error("Veriler alınırken bir hata oluştu:", error);
@@ -106,7 +106,73 @@ const getFilterGrupButtons = async () => {
 getFilterGrupButtons()
 
 
+//!select options ile öğrencileri filtreleme
+//*ilk select dolduruldu
+const filterByGroup = async () => {
+  const db = getDatabase();
+  const countRef = ref(db, "gruplar/");
+  const snapshot = await get(countRef);
+  let data = Object.values(snapshot.val())
+  let selectGrup = document.querySelector(".selectGrup")
+  for (const i of data) {
+    let newSelect = document.createElement("option")
+    newSelect.innerHTML = i.grup.Grupname
+    selectGrup.prepend(newSelect)
+  }
+};
+filterByGroup()
 
+//*ilk selectin verisine göre öğrenci isimleri filtrelendi
+document.querySelector(".selectGrup").addEventListener("change", async function () {
+  document.querySelector(".selectOgreci").innerHTML = ""
+  let selectGrup = document.querySelector(".selectGrup").value
+  const db = getDatabase();
+  const countRef = ref(db, "ogrenciler/");
+  const snapshot = await get(countRef);
+  let ogrenciler = Object.values(snapshot.val())
+
+  let ogrenciİsimSoyisim = []
+  let filtrlenilenOgrenciler = ogrenciler.filter(item => item.grupName == selectGrup)
+
+  for (const i of filtrlenilenOgrenciler) {
+    ogrenciİsimSoyisim.push(i.quizStartNameSurName)
+  }
+  ogrenciİsimSoyisim = [...new Set(ogrenciİsimSoyisim)];
+
+  let selectOgreci = document.querySelector(".selectOgreci")
+  for (const i of ogrenciİsimSoyisim) {
+    let newSelect = document.createElement("option")
+    newSelect.innerHTML = i
+    selectOgreci.prepend(newSelect)
+  }
+})
+
+//*2. selectreki öğrenci ismini göre filtreleme butonuna tıklandığında datatablede öğrenciler filtrelendi
+document.querySelector(".filterOgrenci").addEventListener("click", function () {
+  let selectOgreci = document.querySelector(".selectOgreci")
+  const table = $('#dataTable').DataTable();
+  table.search(selectOgreci.value).draw()
+
+  let ogrenciNotlari = []
+  let ogreciNotu = document.querySelectorAll(".ogreciNotu")
+  for (const i of ogreciNotu) {
+    ogrenciNotlari.push(+i.innerHTML)
+  }
+
+  let grupOrtalaması = 0
+  for (const i of ogrenciNotlari) {
+    grupOrtalaması += i
+  }
+
+  document.querySelector(".ogrenciOrtalama").innerHTML = `Grup Not Ortalaması : ${(grupOrtalaması / ogrenciNotlari.length).toFixed(2)}`
+})
+
+//*öğrenci filtrelemesi sıfırlandı
+document.querySelector(".clearOgrenciFilter").addEventListener("click", function () {
+  const table = $('#dataTable').DataTable();
+  table.search("").draw()
+  document.querySelector(".ogrenciOrtalama").innerHTML=""
+})
 
 
 //!öğrenci notlarını çektim
@@ -125,7 +191,7 @@ const ogrenciNotlariAsync = async () => {
         ogrenciSonuclari.push(veri);
       }
     }
-    console.log(ogrenciSonuclari);
+    // console.log(ogrenciSonuclari);
     //!çekilen öğrenci notlarını tadatable şekilde olan fonksiyonuma parametre olarak gönderdim
     datatableVerileriGoster(ogrenciSonuclari);
   } catch (error) {
@@ -153,7 +219,7 @@ function datatableVerileriGoster(veriListesi) {
 
     const sinavSonucCell = document.createElement("td");
     sinavSonucCell.textContent = veri.sinavSonuc;
-    sinavSonucCell.className="ogreciNotu"
+    sinavSonucCell.className = "ogreciNotu"
     row.appendChild(sinavSonucCell);
 
     const grupName = document.createElement("td");
@@ -166,8 +232,8 @@ function datatableVerileriGoster(veriListesi) {
     language: {
       "url": "https://cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
     },
-    pageLength: 20, 
-    lengthMenu: [5, 10, 25, 50 , 100],
+    pageLength: 20,
+    lengthMenu: [5, 10, 25, 50, 100],
   });
 }
 
