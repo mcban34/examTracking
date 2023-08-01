@@ -164,7 +164,7 @@ document.querySelector(".filterOgrenci").addEventListener("click", function () {
     grupOrtalaması += i
   }
 
-  document.querySelector(".ogrenciOrtalama").innerHTML = `Grup Not Ortalaması : ${(grupOrtalaması / ogrenciNotlari.length).toFixed(2)}`
+  document.querySelector(".ogrenciOrtalama").innerHTML = `Öğrenci Not Ortalaması : ${(grupOrtalaması / ogrenciNotlari.length).toFixed(2)}`
 })
 
 //*öğrenci filtrelemesi sıfırlandı
