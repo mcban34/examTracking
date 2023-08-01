@@ -92,18 +92,24 @@ const getFilterGrupButtons = async () => {
         table.search(group).draw();
       }
       filterGroupButtons.prepend(filterGroupBtn)
-
-      document.querySelector(".clearGroupFilter").addEventListener("click", function () {
-        const table = $('#dataTable').DataTable();
-        table.search("").draw()
-        document.querySelector(".grupNotOrtalama").innerHTML = ""
-      })
     }
   } catch (error) {
     console.error("Veriler alınırken bir hata oluştu:", error);
   }
 };
 getFilterGrupButtons()
+
+//!gruplara göre filtrelenen veriyi sildim
+document.querySelector(".clearGroupFilter").addEventListener("click", function () {
+  clearDataTable()
+  document.querySelector(".grupNotOrtalama").innerHTML = ""
+})
+
+//!datatable clear eden fonksiyon
+const clearDataTable = () => {
+  let table = $('#dataTable').DataTable();
+  table.search("").draw()
+}
 
 
 //!select options ile öğrencileri filtreleme
@@ -169,9 +175,8 @@ document.querySelector(".filterOgrenci").addEventListener("click", function () {
 
 //*öğrenci filtrelemesi sıfırlandı
 document.querySelector(".clearOgrenciFilter").addEventListener("click", function () {
-  const table = $('#dataTable').DataTable();
-  table.search("").draw()
-  document.querySelector(".ogrenciOrtalama").innerHTML=""
+  clearDataTable()
+  document.querySelector(".ogrenciOrtalama").innerHTML = ""
 })
 
 
