@@ -38,7 +38,6 @@ const getQuizs = () => {
         <div class="col-md-4">
           <a href="quiz-detail.html?id=${value.id}">
             <div class="quizCard">
-              <img src="img/3d-speech-bubbles-with-question-marks.jpg">
               <div class="quizCardBody">
                 <h4>${value.quizBilgi.name}</h4>
                 <p>${value.quizBilgi.quizContentBody}</p>
