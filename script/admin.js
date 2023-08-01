@@ -34,8 +34,9 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
+
+//!dom başlarken select options içerisine quizlerin başlıklarını getirdim
 document.addEventListener("DOMContentLoaded", function () {
-  //!dom başlarken select options içerisine quizlerin başlıklarını getirdim
   let filterQuizs = document.querySelector(".filterQuizs");
   const db = getDatabase();
   const countRef = ref(db, "sinavlar/");
@@ -139,7 +140,10 @@ function datatableVerileriGoster(veriListesi) {
     tbody.appendChild(row);
   });
   $('#dataTable').DataTable({
-    pageLength: 20
+    language: {
+      "url": "https://cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
+    },
+    pageLength: 20, 
   });
 }
 
