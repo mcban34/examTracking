@@ -35,7 +35,6 @@ onAuthStateChanged(auth, (user) => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  
   //!dom başlarken select options içerisine quizlerin başlıklarını getirdim
   let filterQuizs = document.querySelector(".filterQuizs");
   const db = getDatabase();
@@ -48,78 +47,41 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
     }
   });
-
-
-  // <!-- <button class="filterByGroup"  data-group="5 Haziran">5 haziran</button> -->
-
-  // let filterGroupButton = document.querySelector(".filterGroupButton")
-  // const countRefGroupBtn = ref(db, "gruplar/");
-  // onValue(countRefGroupBtn, (snapshot) => {
-  //   let data = Object.keys(snapshot.val());
-  //   for (const i of data) {
-  //     filterGroupButton.innerHTML += `
-  //           <button class="filterByGroup" data-group="${i}">${i}</button>
-  //       `;
-  //   }
-  // });
-
-
-  // //!data tableyi butonlara göre filtreledim mesela gruplara göre
-  // document.querySelector('.filterByGroup').addEventListener('click', function() {
-  //   const group = this.getAttribute('data-group');
-  //   filterTableByGroup(group);
-  // });
-  
-  // function filterTableByGroup(group) {
-  //   const table = $('#dataTable').DataTable();
-  //   table.search(group).draw();
-  // }
-
 });
 
 
-async function fetchFirebaseData() {
+//!datatableyi gruplara göre filtrelemek için fonksiyon yarattım
+let filterGroupButtons = document.querySelector(".filterGroupButton")
+const getFilterGrupButtons = async () => {
   try {
+
     const db = getDatabase();
     const countRef = ref(db, "gruplar/");
+    const snapshot = await get(countRef);
+    let data = Object.values(snapshot.val());
 
-    return new Promise((resolve, reject) => {
-      onValue(countRef, (snapshot) => {
-       let data = resolve(snapshot.val());
-       return data
-      }, (error) => {
-        console.error("Firebase veri alımı başarısız:", error);
-        reject([]);
-      });
-    });
-  } catch (error) {
-    console.error("Firebase veri alımı başarısız:", error);
-    return [];
-  }
-}
-
-async function createButtonsWithData() {
-  try {
-    await waitForDOMContentLoaded();
-    const data = await fetchFirebaseData();
-    console.log(data);
-    const buttonsContainer = document.querySelector(".filterGroupButton");
-  } catch (error) {
-    console.error("Firebase veri alımı başarısız:", error);
-  }
-}
-
-function waitForDOMContentLoaded() {
-  return new Promise((resolve) => {
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", resolve);
-    } else {
-      resolve();
+    for (const i of data) {
+      console.log(i.grup.Grupname);
+      let filterGroupBtn = document.createElement("button")
+      filterGroupBtn.textContent=i.grup.Grupname
+      filterGroupBtn.addEventListener("click",function(){
+        const group = this.innerHTML;
+        filterTableByGroup(group);
+      })
+      //!burada filtreleme işlemlerini gerçekleştirdim
+      function filterTableByGroup(group) {
+        const table = $('#dataTable').DataTable();
+        table.search(group).draw();
+      }
+      filterGroupButtons.append(filterGroupBtn)
+      
     }
-  });
-}
+  } catch (error) {
+    console.error("Veriler alınırken bir hata oluştu:", error);
+  }
+};
+getFilterGrupButtons()
 
-createButtonsWithData();
 
 
 
