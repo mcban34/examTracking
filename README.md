@@ -5,7 +5,7 @@
 Uygulamanın ana sayfasına ulaşmak için => https://mcban34.github.io/neosQuizApp <br>
 Uygulamanın eğitmen sayfasına ulaşmak için => https://mcban34.github.io/neosQuizApp/login.html <br>
 <br><br>
-Panel Kullanıcı Adı : test@test.com
+Panel Kullanıcı Adı : test@test.com <br>
 Panel Şifre : 123456
 <br>
 ## Önemli Not
