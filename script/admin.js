@@ -82,7 +82,7 @@ const getFilterGrupButtons = async () => {
           grupOrtalaması += i
         }
 
-        document.querySelector(".grupNotOrtalama").innerHTML = `Grup Not Ortalaması : ${(grupOrtalaması / ogrenciNotlari.length).toFixed(2)}`
+        document.querySelector(".grupNotOrtalama").innerHTML = `${group} Grubunun Not Ortalaması : ${(grupOrtalaması / ogrenciNotlari.length).toFixed(2)}`
 
       })
 
@@ -170,7 +170,7 @@ document.querySelector(".filterOgrenci").addEventListener("click", function () {
     grupOrtalaması += i
   }
 
-  document.querySelector(".ogrenciOrtalama").innerHTML = `Öğrenci Not Ortalaması : ${(grupOrtalaması / ogrenciNotlari.length).toFixed(2)}`
+  document.querySelector(".ogrenciOrtalama").innerHTML = `${selectOgreci.value} Not Ortalaması : ${(grupOrtalaması / ogrenciNotlari.length).toFixed(2)}`
 })
 
 //*öğrenci filtrelemesi sıfırlandı
