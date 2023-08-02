@@ -41,6 +41,23 @@ header .headerContent {
 .quizs {
   padding: 2rem 0;
 }
+.quizs .quizsFilterButtons .quizsFilterButton {
+  background: transparent;
+  border: none;
+  color: #1C2E35;
+  font-weight: bold;
+  margin: 0 1rem;
+  opacity: 0.5;
+}
+@media screen and (max-width: 768px) {
+  .quizs .quizsFilterButtons .quizsFilterButton {
+    margin: 0;
+  }
+}
+.quizs .quizsFilterButtons .activeQuizFilterButton {
+  border-bottom: 2px solid #1C2E35;
+  opacity: 1;
+}
 .quizs a {
   text-decoration: none;
 }

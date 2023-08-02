@@ -51,6 +51,23 @@ header{
 
 .quizs {
     padding: 2rem 0;
+    .quizsFilterButtons{
+        .quizsFilterButton{
+            background: transparent;
+            border: none;
+            color: $dark;
+            font-weight: bold;
+            margin: 0 1rem;
+            opacity: .5;
+            @media screen and (max-width:768px) {
+                margin: 0;
+            }
+        }
+        .activeQuizFilterButton{
+            border-bottom: 2px solid $dark;
+            opacity: 1;
+        }
+    }
     a {
         text-decoration: none;
 

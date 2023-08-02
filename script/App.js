@@ -30,10 +30,6 @@ const getQuizs = () => {
       };
     });
 
-    console.log(questionsArray);
-
-
-
     const questionsArrayHTML = questionsArray.map((value) => {
       return `
         <div class="col-lg-3 mt-4">
@@ -73,6 +69,7 @@ const getQuizs = () => {
 
     //!ana sayfadaki quiz filtreleme butonları
     let quizsFilterButton = document.querySelectorAll(".quizsFilterButton")
+    quizsFilterButton[0].classList.add("activeQuizFilterButton")
     for (const i of quizsFilterButton) {
       i.addEventListener("click", function () {
         var filteredQuizzes = [];
@@ -86,15 +83,19 @@ const getQuizs = () => {
             return quiz.quizBilgi.quizCategory.includes(i.innerHTML);
           });
         }
+        // seçilene active class ekle
+        for (var j = 0; j < quizsFilterButton.length; j++) {
+          quizsFilterButton[j].classList.remove("activeQuizFilterButton");
+        }
+        i.classList.add("activeQuizFilterButton")
         displayQuizzes(filteredQuizzes);
       })
     }
 
-
-
+    //*seçilen quiz btn göre ekrana yazdırma işlemi
     function displayQuizzes(quizzes) {
       var outputDiv = document.querySelector(".quizsContent");
-      outputDiv.innerHTML = ""; // Önceki içeriği temizle
+      outputDiv.innerHTML = "";
 
       if (quizzes.length === 0) {
         outputDiv.textContent = "Bu kategoriye ait sınav bulunamadı.";
@@ -134,7 +135,4 @@ const getQuizs = () => {
   });
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-
-});
 document.addEventListener("DOMContentLoaded", getQuizs());
