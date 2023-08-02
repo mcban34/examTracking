@@ -1,40 +1,62 @@
 $dark : #1C2E35;
-$lightGreen :  #D5F8E5;
+$lightGreen : #D5F8E5;
 $darkGreen : #53E5A6;
 
-img{
+img {
     max-width: 100%;
 }
 
 
 
-.quiz{
+.quiz {
     display: none;
 }
 
-.quizs{
-    a{
+.quizs {
+    margin-top: 3rem;
+    a {
         text-decoration: none;
-        .quizCard{
+
+        .quizCard {
             background-color: white;
             box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.1) 0px 50px 100px -20px, rgba(0, 0, 0, 0.1) 0px 30px 60px -30px;
-            padding: 1rem;
             border-radius: 1rem;
-            h5{
-                color: $dark;
+
+            h5 {
+                color: white;
+                padding: 1rem;
+                background-color: $dark;
+                border-top-left-radius: 1rem;
+                border-top-right-radius: 1rem;
             }
-            .quizCardEtiket{
-                padding: .5rem 0;
-                display: flex;
-                flex-wrap: wrap;
-                .quizCardEtiketSpan{
-                    background-color: $lightGreen;
-                    color: $dark;
-                    margin-top: .5rem;
-                    margin-right: .5rem;
-                    padding: .3rem .7rem;
-                    font-size: .8rem;
-                    border-radius: .5rem;
+
+            .quizCardBody {
+                padding: 1rem;
+                .quizCardImg{
+                    text-align: center;
+                    img{
+                        width: 80%;
+                    }
+                }
+                .quizCardEtiket {
+                    padding: .5rem 0;
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .quizCardEtiketSpan {
+                        background-color: $lightGreen;
+                        color: $dark;
+                        margin-top: .5rem;
+                        margin-right: .5rem;
+                        padding: .3rem .7rem;
+                        font-size: .8rem;
+                        border-radius: .5rem;
+                        transition: .35s;
+                        &:hover{
+                            background-color: $dark;
+                            color: $lightGreen;
+                        }
+                    }
                 }
             }
         }
@@ -42,7 +64,7 @@ img{
 }
 
 
-.ogrenciNotlari{
+.ogrenciNotlari {
     width: 100%;
     overflow: auto;
 }

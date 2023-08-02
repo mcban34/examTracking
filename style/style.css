@@ -6,24 +6,39 @@ img {
   display: none;
 }
 
+.quizs {
+  margin-top: 3rem;
+}
 .quizs a {
   text-decoration: none;
 }
 .quizs a .quizCard {
   background-color: white;
   box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.1) 0px 50px 100px -20px, rgba(0, 0, 0, 0.1) 0px 30px 60px -30px;
-  padding: 1rem;
   border-radius: 1rem;
 }
 .quizs a .quizCard h5 {
-  color: #1C2E35;
+  color: white;
+  padding: 1rem;
+  background-color: #1C2E35;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
-.quizs a .quizCard .quizCardEtiket {
+.quizs a .quizCard .quizCardBody {
+  padding: 1rem;
+}
+.quizs a .quizCard .quizCardBody .quizCardImg {
+  text-align: center;
+}
+.quizs a .quizCard .quizCardBody .quizCardImg img {
+  width: 80%;
+}
+.quizs a .quizCard .quizCardBody .quizCardEtiket {
   padding: 0.5rem 0;
   display: flex;
   flex-wrap: wrap;
 }
-.quizs a .quizCard .quizCardEtiket .quizCardEtiketSpan {
+.quizs a .quizCard .quizCardBody .quizCardEtiket .quizCardEtiketSpan {
   background-color: #D5F8E5;
   color: #1C2E35;
   margin-top: 0.5rem;
@@ -31,6 +46,11 @@ img {
   padding: 0.3rem 0.7rem;
   font-size: 0.8rem;
   border-radius: 0.5rem;
+  transition: 0.35s;
+}
+.quizs a .quizCard .quizCardBody .quizCardEtiket .quizCardEtiketSpan:hover {
+  background-color: #1C2E35;
+  color: #D5F8E5;
 }
 
 .ogrenciNotlari {

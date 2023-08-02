@@ -41,9 +41,11 @@ const getQuizs = () => {
         <div class="col-lg-3">
           <a href="quiz-detail.html?id=${value.id}">
             <div class="quizCard">
+              <h5>${value.quizBilgi.name}</h5>
               <div class="quizCardBody">
-                <h5>${value.quizBilgi.name}</h5>
-                <img src="img/quizCard.jpg">
+                <div class="quizCardImg">
+                  <img src="img/quizCard.jpg">
+                </div>
                 <div class="quizCardEtiket">
                 
                 </div>
