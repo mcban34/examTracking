@@ -1,6 +1,11 @@
+$dark : #1C2E35;
+$lightGreen :  #D5F8E5;
+$darkGreen : #53E5A6;
+
 img{
     max-width: 100%;
 }
+
 
 
 .quiz{
@@ -12,10 +17,26 @@ img{
         text-decoration: none;
         .quizCard{
             background-color: white;
-            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-        }
-        .quizCardBody{
+            box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.1) 0px 50px 100px -20px, rgba(0, 0, 0, 0.1) 0px 30px 60px -30px;
             padding: 1rem;
+            border-radius: 1rem;
+            h5{
+                color: $dark;
+            }
+            .quizCardEtiket{
+                padding: .5rem 0;
+                display: flex;
+                flex-wrap: wrap;
+                .quizCardEtiketSpan{
+                    background-color: $lightGreen;
+                    color: $dark;
+                    margin-top: .5rem;
+                    margin-right: .5rem;
+                    padding: .3rem .7rem;
+                    font-size: .8rem;
+                    border-radius: .5rem;
+                }
+            }
         }
     }
 }

@@ -31,16 +31,22 @@ const getQuizs = () => {
         ...data[key],
       };
     });
+
+    
+
     console.log(questionsArray);
 
     const questionsArrayHTML = questionsArray.map((value) => {
       return `
-        <div class="col-md-4">
+        <div class="col-lg-3">
           <a href="quiz-detail.html?id=${value.id}">
             <div class="quizCard">
               <div class="quizCardBody">
-                <h4>${value.quizBilgi.name}</h4>
-                <p>${value.quizBilgi.quizContentBody}</p>
+                <h5>${value.quizBilgi.name}</h5>
+                <img src="img/quizCard.jpg">
+                <div class="quizCardEtiket">
+                
+                </div>
               </div>
             </div>
           </a>
@@ -49,7 +55,23 @@ const getQuizs = () => {
     });
     document.querySelector(".quizsContent").innerHTML =
       questionsArrayHTML.join("");
+
+    //!ana sayfadaki quizlerin etiketleri getirildi
+    let quizCardEtiket = document.querySelectorAll(".quizCardEtiket")
+    for(let i=0;i<questionsArray.length;i++){
+      for(let j=0;j<questionsArray[i].quizBilgi.quizEtiket.length;j++){
+        let quizCardEtiketSpan = document.createElement("span")
+        quizCardEtiketSpan.className="quizCardEtiketSpan"
+        quizCardEtiketSpan.textContent=questionsArray[i].quizBilgi.quizEtiket[j]
+        quizCardEtiket[i].append(quizCardEtiketSpan)
+      }
+      console.log(questionsArray[i].quizBilgi.quizEtiket);
+    }
   });
+
+
+
+
 };
 
 document.addEventListener("DOMContentLoaded", function(){

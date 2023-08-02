@@ -11,10 +11,26 @@ img {
 }
 .quizs a .quizCard {
   background-color: white;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-.quizs a .quizCardBody {
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.1) 0px 50px 100px -20px, rgba(0, 0, 0, 0.1) 0px 30px 60px -30px;
   padding: 1rem;
+  border-radius: 1rem;
+}
+.quizs a .quizCard h5 {
+  color: #1C2E35;
+}
+.quizs a .quizCard .quizCardEtiket {
+  padding: 0.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.quizs a .quizCard .quizCardEtiket .quizCardEtiketSpan {
+  background-color: #D5F8E5;
+  color: #1C2E35;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  border-radius: 0.5rem;
 }
 
 .ogrenciNotlari {
