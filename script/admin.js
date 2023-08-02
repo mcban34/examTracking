@@ -285,6 +285,7 @@ document
     let quizTitle = document.querySelector(".quizTitle").value;
     let quizContentBody = document.querySelector(".quizContentBody").value;
     let quizEtiket = document.querySelector(".quizEtiket").value;
+    let quizGenelKategori = document.querySelector(".quizGenelKategori").value
     quizEtiket = quizEtiket.split(",");
 
     const db = getDatabase();
@@ -293,6 +294,7 @@ document
         name: quizTitle,
         quizContentBody: quizContentBody,
         quizEtiket: quizEtiket,
+        quizCategory:quizGenelKategori
       },
     });
     location.reload();
