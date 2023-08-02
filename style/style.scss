@@ -2,13 +2,15 @@ $dark : #1C2E35;
 $lightGreen : #D5F8E5;
 $darkGreen : #53E5A6;
 $darkRed : #E85555;
+@import url(https://db.onlinewebfonts.com/c/da2945dd7266b6f5bf8a16aae48e5a3b?family=Display+Uncanny+W90+Regular);
+
 
 img {
     max-width: 100%;
 }
 
 // body{
-//     background-color: $dark;
+//     font-family: "Display Uncanny W90 Regular";
 // }
 
 .quiz {
@@ -19,6 +21,32 @@ img {
 header{
     background:linear-gradient(-45deg, $darkGreen,$dark);
     color: white;
+    p{
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+    .hemenBasla{
+        background-color: $dark;
+        color: white;
+        text-decoration: none;
+        padding: 1rem 3rem;
+        border-radius: 2rem;
+    }
+    .navbar-brand{
+        font-size: 2.5rem;
+        font-family: "Display Uncanny W90 Regular";
+        color: white;
+    }
+    .login{
+        background-color: $darkRed;
+        color: white;
+        font-weight: bold;
+        padding: 1rem 2rem !important;
+        border-radius: 2rem;
+    }
+    .headerContent{
+        padding: 1rem 0 4rem 0;
+    }
 }
 
 .quizs {
