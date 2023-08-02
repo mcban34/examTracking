@@ -1,6 +1,7 @@
 $dark : #1C2E35;
 $lightGreen : #D5F8E5;
 $darkGreen : #53E5A6;
+$darkRed : #E85555;
 
 img {
     max-width: 100%;
@@ -14,9 +15,14 @@ img {
     display: none;
 }
 
+
+header{
+    background:linear-gradient(-45deg, $darkGreen,$dark);
+    color: white;
+}
+
 .quizs {
-    background-color: $dark;
-    padding: 3rem 0;
+    padding: 2rem 0;
     a {
         text-decoration: none;
 

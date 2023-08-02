@@ -6,9 +6,13 @@ img {
   display: none;
 }
 
+header {
+  background: linear-gradient(-45deg, #53E5A6, #1C2E35);
+  color: white;
+}
+
 .quizs {
-  background-color: #1C2E35;
-  padding: 3rem 0;
+  padding: 2rem 0;
 }
 .quizs a {
   text-decoration: none;
