@@ -183,6 +183,7 @@ document.querySelector(".quizNext").addEventListener("click", function () {
 });
 
 
+//!öğrencilerin sınav sonuçlarını kayıt ettim
 function sinavSonucKayitEt(){
   console.log("quiz bilgileri : ",questionsArray);
   onAuthStateChanged(auth, (user) => {
@@ -191,17 +192,17 @@ function sinavSonucKayitEt(){
     const db = getDatabase();
     set(ref(db, 'ogrenciler/' + user.uid +  "/sinavlar/" + quizId + "/quizBilgi/"), {
       cozulduMu:true,
-      name:questionsArray[0].quizBilgi.name,
+      name:questionsArray[quizId].quizBilgi.name,
       puan:ogrenciBilgileri.sinavPuan,
-      quizContentBody:questionsArray[0].quizBilgi.quizContentBody,
-      quizEtiket:questionsArray[0].quizBilgi.quizEtiket,
-      quizCategory:questionsArray[0].quizBilgi.quizCategory
+      quizContentBody:questionsArray[quizId].quizBilgi.quizContentBody,
+      quizEtiket:questionsArray[quizId].quizBilgi.quizEtiket,
+      quizCategory:questionsArray[quizId].quizBilgi.quizCategory
     })
   });
 }
 
 
-//!öğrencilerin sınav sonuçlarını kayıt ettim
+
 // function sinavSonucKayitEt() {
 
 //   console.log(ogrenciBilgileri);

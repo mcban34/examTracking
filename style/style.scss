@@ -9,6 +9,14 @@ img {
     max-width: 100%;
 }
 
+.disabledCard {
+    pointer-events: none;
+    /* İsteğe bağlı olarak tıklanamaz durumu görsel olarak belirtmek için bir stil de ekleyebilirsiniz */
+    opacity: 0.5; /* Opaklığı düşürerek kartı soluk gösterebilirsiniz */
+    /* veya */
+    filter: grayscale(100%); /* Kartı gri tonlarında yapabilirsiniz */
+}
+
 // body{
 //     font-family: "Display Uncanny W90 Regular";
 // }

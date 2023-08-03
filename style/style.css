@@ -1,6 +1,15 @@
+@charset "UTF-8";
 @import url(https://db.onlinewebfonts.com/c/da2945dd7266b6f5bf8a16aae48e5a3b?family=Display+Uncanny+W90+Regular);
 img {
   max-width: 100%;
+}
+
+.disabledCard {
+  pointer-events: none;
+  /* İsteğe bağlı olarak tıklanamaz durumu görsel olarak belirtmek için bir stil de ekleyebilirsiniz */
+  opacity: 0.5; /* Opaklığı düşürerek kartı soluk gösterebilirsiniz */
+  /* veya */
+  filter: grayscale(100%); /* Kartı gri tonlarında yapabilirsiniz */
 }
 
 .quiz {

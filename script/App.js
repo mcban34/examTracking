@@ -45,11 +45,11 @@ const getQuizs = () => {
             ...data[key],
           };
         });
-        console.log(questionsArray);
+        console.log("quisteion",questionsArray);
       const questionsArrayHTML = questionsArray.map((value) => {
       return `
         <div class="col-lg-3 mt-4">
-          <a href="quiz-detail.html?id=${value.id}">
+          <a href="quiz-detail.html?id=${value.id}" class="${value.quizBilgi.cozulduMu==true ? "disabledCard" : "" }">
             <div class="quizCard">
               <h5>${value.quizBilgi.name}</h5>
               <div class="quizCardBody">

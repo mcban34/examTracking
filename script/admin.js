@@ -219,7 +219,7 @@ const ogrenciNotlariAsync = async () => {
               }
           }
       }
-      console.log(cozulenSinavlar);
+      // console.log(cozulenSinavlar);
       
       datatableVerileriGoster(cozulenSinavlar);
 
@@ -270,9 +270,10 @@ function datatableVerileriGoster(veriListesi) {
     for (const i of veri.sinavSonuclar) {
       if(i.quizBilgi.cozulduMu==true){
         const row = document.createElement("tr");
-  
+        
         const quizNameCell = document.createElement("td");
         quizNameCell.textContent = i.quizBilgi.name;
+        // console.log(i.quizBilgi);
         row.appendChild(quizNameCell);
   
         const nameSurnameCell = document.createElement("td");
