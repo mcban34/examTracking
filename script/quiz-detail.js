@@ -4,6 +4,7 @@ import {
   ref,
   set,
   onValue,
+  get
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
 import {
   getAuth,
@@ -43,24 +44,7 @@ let quizs;
 // });
 
 const db = getDatabase();
-onAuthStateChanged(auth, (user) => {
-  // console.log(user.uid);
-  const urlParams = new URLSearchParams(window.location.search);
-  const quizId = +urlParams.get("id");
-  const db = getDatabase();
-  const countRef = ref(db, "ogrenciler/" + user.uid + "/sinavlar/");
-  onValue(countRef, (snapshot) => {
-    let data = snapshot.val();
-    console.log(data,quizId);
-    if(data[quizId].quizBilgi.cozulduMu==true){
-      document.body.innerHTML= `
 
-        <h2>Çözülmüş Quiz!</h2>
-        <a href="index.html">Ana Sayfa</a>
-      `
-    }
-  });
-})
 
 
 
@@ -264,4 +248,34 @@ function sinavSonucKayitEt(){
 window.onbeforeunload = function () {
   return "Sayfayı yenilemek istediğinizden emin misiniz?";
 }
+
+
+//!öğrencinin daha önceden sınava girip girmediğini baktım
+//*öğrenci sınava girmişse ana sayfaya yönlendirme yaptım
+document.addEventListener("DOMContentLoaded", function () {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Kullanıcı oturum açmışsa devam edin
+      const urlParams = new URLSearchParams(window.location.search);
+      const quizId = +urlParams.get("id");
+      const db = getDatabase();
+      const countRef = ref(db, "ogrenciler/" + user.uid + "/sinavlar/" + quizId);
+
+      // Veriyi tek seferde çekiyoruz
+      //*get burada sadece bir kez veriyi dinledi
+      get(countRef).then((snapshot) => {
+        const data = snapshot.val();
+        console.log(data);
+        if (data.quizBilgi.cozulduMu == true) {
+          document.body.innerHTML = `
+            <h2>Çözülmüş Quiz!</h2>
+            <a href="index.html">Ana Sayfa</a>
+          `;
+        }
+      });
+    } else {
+      console.log("Kullanıcı oturum açmamış.");
+    }
+  });
+});
 
