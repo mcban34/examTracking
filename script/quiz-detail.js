@@ -42,15 +42,58 @@ let quizs;
 //   });
 // });
 
+const db = getDatabase();
+onAuthStateChanged(auth, (user) => {
+  // console.log(user.uid);
+  const urlParams = new URLSearchParams(window.location.search);
+  const quizId = +urlParams.get("id");
+  const db = getDatabase();
+  const countRef = ref(db, "ogrenciler/" + user.uid + "/sinavlar/");
+  onValue(countRef, (snapshot) => {
+    let data = snapshot.val();
+    console.log(data,quizId);
+    if(data[quizId].quizBilgi.cozulduMu==true){
+      document.body.innerHTML= `
+
+        <h2>Çözülmüş Quiz!</h2>
+        <a href="index.html">Ana Sayfa</a>
+      `
+    }
+  });
+})
+
+
+
+
+// const db = getDatabase();
+// const countRefOgrenci = ref(db, "sinavlar/");
+// onValue(countRefOgrenci, (snapshot) => {
+//   const urlParams = new URLSearchParams(window.location.search);
+//   const quizId = urlParams.get("id");
+//   let data = snapshot.val();
+//   // console.log(data,quizId);
+
+
+//   questionsArray = Object.keys(data).map((key, index) => {
+//     return {
+//       id: index,
+//       ...data[key],
+//     };
+//   });
+//   // console.log(questionsArray,quizId);
+// });
+
+
+
+
 //!tıklanılan quizin adını aldım
 const urlParams = new URLSearchParams(window.location.search);
 const quizId = urlParams.get("id");
 let questionsArray
-const db = getDatabase();
 const countRef = ref(db, "sinavlar/");
 onValue(countRef, (snapshot) => {
   let data = snapshot.val();
-
+  // console.log(data);
   questionsArray = Object.keys(data).map((key, index) => {
     return {
       id: index,
@@ -91,7 +134,7 @@ function quizTimer() {
       clearInterval(myinterval);
       ogrenciBilgileri["sinavPuan"] = dogruSayi * 10;
       sinavSonucKayitEt()
-      console.log(ogrenciBilgileri);
+      // console.log(ogrenciBilgileri);
       document.querySelector(".quizContent").style.display = "none";
       document.querySelector(".quizEndPoint").innerHTML = `Süren Bitti ${ogrenciBilgileri.ogrenciIsimSoyisim
         }! Toplam Puanın : ${dogruSayi * 10}`;
