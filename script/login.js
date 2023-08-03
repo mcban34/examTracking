@@ -31,14 +31,17 @@ onAuthStateChanged(auth, (user) => {
 document.querySelector(".login").addEventListener("click", function () {
   let email = document.querySelector(".loginEmail").value;
   let password = document.querySelector(".loginPass").value;
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      console.log(user);
-      window.location.href = "admin.html";
-    })
-    .catch((error) => {
-      console.error(error);
-      console.log("giriş başarısız");
-    });
+  if(email=="test@test.com"){
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        window.location.href = "admin.html";
+      })
+      .catch((error) => {
+        console.error(error);
+        console.log("giriş başarısız");
+      });
+  }
+  console.log("yönetici değilsin!");
 });

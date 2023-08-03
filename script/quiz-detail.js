@@ -5,6 +5,13 @@ import {
   set,
   onValue,
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAmwJkuxoy2JEUbHzSAL7SQnuGOjWQ71FQ",
@@ -17,34 +24,34 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
+const auth = getAuth();
 let quizs;
 
 //!quiz girişinde grup adını select yapısını yazdırdım
-document.addEventListener("DOMContentLoaded", function () {
-  let filterGrup = document.querySelector(".filterGrup");
-  const db = getDatabase();
-  const countRef = ref(db, "gruplar/");
-  onValue(countRef, (snapshot) => {
-    let data = Object.keys(snapshot.val());
-    for (const i of data) {
-      filterGrup.innerHTML += `
-            <option>${i}</option>
-        `;
-    }
-  });
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//   let filterGrup = document.querySelector(".filterGrup");
+//   const db = getDatabase();
+//   const countRef = ref(db, "gruplar/");
+//   onValue(countRef, (snapshot) => {
+//     let data = Object.keys(snapshot.val());
+//     for (const i of data) {
+//       filterGrup.innerHTML += `
+//             <option>${i}</option>
+//         `;
+//     }
+//   });
+// });
 
 //!tıklanılan quizin adını aldım
 const urlParams = new URLSearchParams(window.location.search);
 const quizId = urlParams.get("id");
-
+let questionsArray
 const db = getDatabase();
 const countRef = ref(db, "sinavlar/");
 onValue(countRef, (snapshot) => {
   let data = snapshot.val();
 
-  const questionsArray = Object.keys(data).map((key, index) => {
+  questionsArray = Object.keys(data).map((key, index) => {
     return {
       id: index,
       ...data[key],
@@ -55,7 +62,7 @@ onValue(countRef, (snapshot) => {
   const quizDetail = questionsArray.find((value) => value.id == quizId);
 
   //*öğrenciye hangi quizi çözdüğünü disabled olarak inputda gösterdim
-  document.querySelector(".quizName").value = quizDetail.quizBilgi.name;
+  // document.querySelector(".quizName").value = quizDetail.quizBilgi.name;
 
   //*quiz detayında gelen o quize ait bütün soruları obje haline çevirdim
   quizs = Object.values(quizDetail.sorular);
@@ -104,18 +111,18 @@ function quizTimer() {
 
 //!sınava başla butonu
 document.querySelector(".quizNext").addEventListener("click", function () {
-  let quizName = document.querySelector(".quizName").value;
-  let quizStartNameSurName = document.querySelector(
-    ".quizStartNameSurName"
-  ).value;
-  let filterGrup = document.querySelector(".filterGrup").value
+  // let quizName = document.querySelector(".quizName").value;
+  // let quizStartNameSurName = document.querySelector(
+  //   ".quizStartNameSurName"
+  // ).value;
+  // let filterGrup = document.querySelector(".filterGrup").value
   //*sınav başladığında zamanlayıcı başladı
   quizTimer();
 
   //*objeye verileri atadım
-  ogrenciBilgileri["ogrenciIsimSoyisim"] = quizStartNameSurName;
-  ogrenciBilgileri["quizName"] = quizName;
-  ogrenciBilgileri["grupName"] = filterGrup;
+  // ogrenciBilgileri["ogrenciIsimSoyisim"] = quizStartNameSurName;
+  // ogrenciBilgileri["quizName"] = quizName;
+  // ogrenciBilgileri["grupName"] = filterGrup;
 
   document.querySelector(".quizStart").style.display = "none";
   document.querySelector(".quiz").style.display = "block";
@@ -176,17 +183,36 @@ document.querySelector(".quizNext").addEventListener("click", function () {
 });
 
 
-//!öğrencilerin sınav sonuçlarını kayıt ettim
-function sinavSonucKayitEt() {
-  console.log(ogrenciBilgileri);
-  const db = getDatabase();
-  set(ref(db, 'ogrenciler/' + ogrenciBilgileri.ogrenciIsimSoyisim + " " + ogrenciBilgileri.quizName), {
-    quizName: ogrenciBilgileri.quizName,
-    quizStartNameSurName: ogrenciBilgileri.ogrenciIsimSoyisim,
-    sinavSonuc: ogrenciBilgileri.sinavPuan,
-    grupName: ogrenciBilgileri.grupName
-  })
+function sinavSonucKayitEt(){
+  console.log("quiz bilgileri : ",questionsArray);
+  onAuthStateChanged(auth, (user) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const quizId = urlParams.get("id");
+    const db = getDatabase();
+    set(ref(db, 'ogrenciler/' + user.uid +  "/sinavlar/" + quizId + "/quizBilgi/"), {
+      cozulduMu:true,
+      name:questionsArray[0].quizBilgi.name,
+      puan:ogrenciBilgileri.sinavPuan,
+      quizContentBody:questionsArray[0].quizBilgi.quizContentBody,
+      quizEtiket:questionsArray[0].quizBilgi.quizEtiket,
+      quizCategory:questionsArray[0].quizBilgi.quizCategory
+    })
+  });
 }
+
+
+//!öğrencilerin sınav sonuçlarını kayıt ettim
+// function sinavSonucKayitEt() {
+
+//   console.log(ogrenciBilgileri);
+//   const db = getDatabase();
+//   set(ref(db, 'ogrenciler/' + ogrenciBilgileri.ogrenciIsimSoyisim + " " + ogrenciBilgileri.quizName), {
+//     quizName: ogrenciBilgileri.quizName,
+//     quizStartNameSurName: ogrenciBilgileri.ogrenciIsimSoyisim,
+//     sinavSonuc: ogrenciBilgileri.sinavPuan,
+//     grupName: ogrenciBilgileri.grupName
+//   })
+// }
 
 
 //!sayfa yenilendiğinde soru soruyorum!
