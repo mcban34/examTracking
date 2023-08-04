@@ -29,7 +29,7 @@ console.log(auth);
 
 const getQuizs = () => {
   const auth = getAuth();
-  
+  let questionsArray
   onAuthStateChanged(auth, (user) => {
     if (user) {
       document.querySelector(".emailName").innerHTML=user.email
@@ -39,7 +39,7 @@ const getQuizs = () => {
       onValue(countRef, (snapshot) => {
         let data = snapshot.val();
         console.log(data);
-        const questionsArray = Object.keys(data).map((key, index) => {
+        questionsArray = Object.keys(data).map((key, index) => {
           return {
             id: index,
             ...data[key],
@@ -88,6 +88,9 @@ const getQuizs = () => {
     for (const i of quizsFilterButton) {
       i.addEventListener("click", function () {
         var filteredQuizzes = [];
+        // console.log("quisteonss array",questionsArray);
+
+        // console.log(i.innerHTML);
 
         if (i.innerHTML === "Hepsi") {
           // Tüm sınavları listele
@@ -97,6 +100,7 @@ const getQuizs = () => {
           filteredQuizzes = questionsArray.filter(function (quiz) {
             return quiz.quizBilgi.quizCategory.includes(i.innerHTML);
           });
+          console.log("filterquize",filteredQuizzes);
         }
         // seçilene active class ekle
         for (var j = 0; j < quizsFilterButton.length; j++) {
@@ -118,7 +122,7 @@ const getQuizs = () => {
         const questionsArrayHTML = quizzes.map((value) => {
           return `
             <div class="col-lg-3 mt-4">
-              <a href="quiz-detail.html?id=${value.id}">
+              <a href="quiz-detail.html?id=${value.id}" class="${value.quizBilgi.cozulduMu==true ? "disabledCard" : "" }">
                 <div class="quizCard">
                   <h5>${value.quizBilgi.name}</h5>
                   <div class="quizCardBody">
