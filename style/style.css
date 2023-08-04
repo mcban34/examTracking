@@ -36,7 +36,7 @@ header .navbar-brand {
   font-family: "Display Uncanny W90 Regular";
   color: white;
 }
-header .login {
+header .navBtn {
   background-color: #E85555;
   color: white;
   font-weight: bold;

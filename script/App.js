@@ -157,7 +157,8 @@ const getQuizs = () => {
           }
         }
       }
-      document.querySelector(".login").style.display="none"
+      document.querySelector(".ogrenciGiris").style.display="none"
+      document.querySelector(".ogrenciKayit").style.display="none"
     } else {
       // User is signed out
       // ...
