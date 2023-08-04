@@ -154,7 +154,7 @@ const getQuizs = () => {
     } else {
       // User is signed out
       // ...
-      // document.querySelector(".quizsContent").style.display="none"
+      document.querySelector(".quizsFilterButtons").style.display="none"
     }
   }); 
 };
