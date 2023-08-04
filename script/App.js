@@ -159,6 +159,7 @@ const getQuizs = () => {
       }
       document.querySelector(".ogrenciGiris").style.display="none"
       document.querySelector(".ogrenciKayit").style.display="none"
+      document.querySelector(".headerContent").style.display="none"
     } else {
       // User is signed out
       // ...
