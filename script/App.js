@@ -88,10 +88,6 @@ const getQuizs = () => {
     for (const i of quizsFilterButton) {
       i.addEventListener("click", function () {
         var filteredQuizzes = [];
-        // console.log("quisteonss array",questionsArray);
-
-        // console.log(i.innerHTML);
-
         if (i.innerHTML === "Hepsi") {
           // Tüm sınavları listele
           filteredQuizzes = questionsArray;
@@ -162,133 +158,14 @@ const getQuizs = () => {
 document.addEventListener("DOMContentLoaded", getQuizs());
 
 
+//!çıkış butonuna basıldığında çıkışı yaptım
 document.querySelector(".quit").addEventListener("click", function () {
   signOut(auth)
     .then(() => {
       console.log("çıkış yapıldı");
+      location.reload()
     })
     .catch(() => {
       console.log("çıkış yapılamadı!");
     });
 });
-
-
-
-// const getQuizs = () => {
-//   const db = getDatabase();
-//   const countRef = ref(db, "sinavlar/");
-//   onValue(countRef, (snapshot) => {
-//     let data = snapshot.val();
-//     const questionsArray = Object.keys(data).map((key, index) => {
-//       return {
-//         id: index,
-//         ...data[key],
-//       };
-//     });
-
-//     const questionsArrayHTML = questionsArray.map((value) => {
-//       return `
-//         <div class="col-lg-3 mt-4">
-//           <a href="quiz-detail.html?id=${value.id}">
-//             <div class="quizCard">
-//               <h5>${value.quizBilgi.name}</h5>
-//               <div class="quizCardBody">
-//                 <div class="quizCardImg">
-//                   <img src="img/quizCard.jpg">
-//                 </div>
-//                 <div class="quizCardEtiket">
-                
-//                 </div>
-//               </div>
-//             </div>
-//           </a>
-//         </div>
-//       `;
-//     });
-//     document.querySelector(".quizsContent").innerHTML =
-//       questionsArrayHTML.join("");
-
-//     //!ana sayfadaki quizlerin etiketleri getirildi
-//     function getCardEtiket() {
-//       let quizCardEtiket = document.querySelectorAll(".quizCardEtiket")
-//       for (let i = 0; i < questionsArray.length; i++) {
-//         for (let j = 0; j < questionsArray[i].quizBilgi.quizEtiket.length; j++) {
-//           let quizCardEtiketSpan = document.createElement("span")
-//           quizCardEtiketSpan.className = "quizCardEtiketSpan"
-//           quizCardEtiketSpan.textContent = questionsArray[i].quizBilgi.quizEtiket[j]
-//           quizCardEtiket[i].append(quizCardEtiketSpan)
-//         }
-//       }
-//     }
-//     getCardEtiket()
-
-
-//     //!ana sayfadaki quiz filtreleme butonları
-//     let quizsFilterButton = document.querySelectorAll(".quizsFilterButton")
-//     quizsFilterButton[0].classList.add("activeQuizFilterButton")
-//     for (const i of quizsFilterButton) {
-//       i.addEventListener("click", function () {
-//         var filteredQuizzes = [];
-
-//         if (i.innerHTML === "Hepsi") {
-//           // Tüm sınavları listele
-//           filteredQuizzes = questionsArray;
-//         } else {
-//           // Belirli kategorideki sınavları filtrele
-//           filteredQuizzes = questionsArray.filter(function (quiz) {
-//             return quiz.quizBilgi.quizCategory.includes(i.innerHTML);
-//           });
-//         }
-//         // seçilene active class ekle
-//         for (var j = 0; j < quizsFilterButton.length; j++) {
-//           quizsFilterButton[j].classList.remove("activeQuizFilterButton");
-//         }
-//         i.classList.add("activeQuizFilterButton")
-//         displayQuizzes(filteredQuizzes);
-//       })
-//     }
-
-//     //*seçilen quiz btn göre ekrana yazdırma işlemi
-//     function displayQuizzes(quizzes) {
-//       var outputDiv = document.querySelector(".quizsContent");
-//       outputDiv.innerHTML = "";
-
-//       if (quizzes.length === 0) {
-//         outputDiv.textContent = "Bu kategoriye ait sınav bulunamadı.";
-//       } else {
-//         const questionsArrayHTML = quizzes.map((value) => {
-//           return `
-//             <div class="col-lg-3 mt-4">
-//               <a href="quiz-detail.html?id=${value.id}">
-//                 <div class="quizCard">
-//                   <h5>${value.quizBilgi.name}</h5>
-//                   <div class="quizCardBody">
-//                     <div class="quizCardImg">
-//                       <img src="img/quizCard.jpg">
-//                     </div>
-//                     <div class="quizCardEtiket">
-                    
-//                     </div>
-//                   </div>
-//                 </div>
-//               </a>
-//             </div>
-//           `;
-//         });
-//         document.querySelector(".quizsContent").innerHTML =
-//           questionsArrayHTML.join("");
-//         let quizCardEtiket = document.querySelectorAll(".quizCardEtiket")
-//         for (let i = 0; i < quizzes.length; i++) {
-//           for (let j = 0; j < quizzes[i].quizBilgi.quizEtiket.length; j++) {
-//             let quizCardEtiketSpan = document.createElement("span")
-//             quizCardEtiketSpan.className = "quizCardEtiketSpan"
-//             quizCardEtiketSpan.textContent = quizzes[i].quizBilgi.quizEtiket[j]
-//             quizCardEtiket[i].append(quizCardEtiketSpan)
-//           }
-//         }
-//       }
-//     }
-//   });
-// };
-
-// document.addEventListener("DOMContentLoaded", getQuizs());
