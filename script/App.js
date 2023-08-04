@@ -9,7 +9,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut
+  signOut,
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -26,13 +26,13 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 console.log(auth);
 
-
 const getQuizs = () => {
   const auth = getAuth();
-  let questionsArray
+  let questionsArray;
   onAuthStateChanged(auth, (user) => {
+    //!kullanıcı girişi varsa quizleri cardlar haline getirip ana  sayfaya bastım
     if (user) {
-      document.querySelector(".emailName").innerHTML=user.email
+      document.querySelector(".emailName").innerHTML = user.email;
 
       const db = getDatabase();
       const countRef = ref(db, "ogrenciler/" + user.uid + "/sinavlar/");
@@ -45,11 +45,13 @@ const getQuizs = () => {
             ...data[key],
           };
         });
-        console.log("quisteion",questionsArray);
-      const questionsArrayHTML = questionsArray.map((value) => {
-      return `
+        console.log("quisteion", questionsArray);
+        const questionsArrayHTML = questionsArray.map((value) => {
+          return `
         <div class="col-lg-3 mt-4">
-          <a href="quiz-detail.html?id=${value.id}" class="${value.quizBilgi.cozulduMu==true ? "disabledCard" : "" }">
+          <a href="quiz-detail.html?id=${value.id}" class="${
+            value.quizBilgi.cozulduMu == true ? "disabledCard" : ""
+          }">
             <div class="quizCard">
               <h5>${value.quizBilgi.name}</h5>
               <div class="quizCardBody">
@@ -64,61 +66,68 @@ const getQuizs = () => {
           </a>
         </div>
       `;
-    });
-    document.querySelector(".quizsContent").innerHTML =
-      questionsArrayHTML.join("");
+        });
+        document.querySelector(".quizsContent").innerHTML =
+          questionsArrayHTML.join("");
 
-    //!ana sayfadaki quizlerin etiketleri getirildi
-    function getCardEtiket() {
-      let quizCardEtiket = document.querySelectorAll(".quizCardEtiket")
-      for (let i = 0; i < questionsArray.length; i++) {
-        for (let j = 0; j < questionsArray[i].quizBilgi.quizEtiket.length; j++) {
-          let quizCardEtiketSpan = document.createElement("span")
-          quizCardEtiketSpan.className = "quizCardEtiketSpan"
-          quizCardEtiketSpan.textContent = questionsArray[i].quizBilgi.quizEtiket[j]
-          quizCardEtiket[i].append(quizCardEtiketSpan)
+        //!ana sayfadaki quizlerin etiketleri getirildi
+        function getCardEtiket() {
+          let quizCardEtiket = document.querySelectorAll(".quizCardEtiket");
+          for (let i = 0; i < questionsArray.length; i++) {
+            for (
+              let j = 0;
+              j < questionsArray[i].quizBilgi.quizEtiket.length;
+              j++
+            ) {
+              let quizCardEtiketSpan = document.createElement("span");
+              quizCardEtiketSpan.className = "quizCardEtiketSpan";
+              quizCardEtiketSpan.textContent =
+                questionsArray[i].quizBilgi.quizEtiket[j];
+              quizCardEtiket[i].append(quizCardEtiketSpan);
+            }
+          }
         }
+        getCardEtiket();
+      });
+      //!ana sayfadaki quiz filtreleme butonları
+      let quizsFilterButton = document.querySelectorAll(".quizsFilterButton");
+      quizsFilterButton[0].classList.add("activeQuizFilterButton");
+      for (const i of quizsFilterButton) {
+        i.addEventListener("click", function () {
+          var filteredQuizzes = [];
+          if (i.innerHTML === "Hepsi") {
+            // Tüm sınavları listele
+            filteredQuizzes = questionsArray;
+          } else {
+            // Belirli kategorideki sınavları filtrele
+            filteredQuizzes = questionsArray.filter(function (quiz) {
+              return quiz.quizBilgi.quizCategory.includes(i.innerHTML);
+            });
+            console.log("filterquize", filteredQuizzes);
+          }
+          // seçilene active class ekle
+          for (var j = 0; j < quizsFilterButton.length; j++) {
+            quizsFilterButton[j].classList.remove("activeQuizFilterButton");
+          }
+          i.classList.add("activeQuizFilterButton");
+          displayQuizzes(filteredQuizzes);
+        });
       }
-    }
-    getCardEtiket()
-    });  
-        //!ana sayfadaki quiz filtreleme butonları
-    let quizsFilterButton = document.querySelectorAll(".quizsFilterButton")
-    quizsFilterButton[0].classList.add("activeQuizFilterButton")
-    for (const i of quizsFilterButton) {
-      i.addEventListener("click", function () {
-        var filteredQuizzes = [];
-        if (i.innerHTML === "Hepsi") {
-          // Tüm sınavları listele
-          filteredQuizzes = questionsArray;
+
+      //*seçilen quiz btn göre ekrana yazdırma işlemi
+      function displayQuizzes(quizzes) {
+        var outputDiv = document.querySelector(".quizsContent");
+        outputDiv.innerHTML = "";
+
+        if (quizzes.length === 0) {
+          outputDiv.textContent = "Bu kategoriye ait sınav bulunamadı.";
         } else {
-          // Belirli kategorideki sınavları filtrele
-          filteredQuizzes = questionsArray.filter(function (quiz) {
-            return quiz.quizBilgi.quizCategory.includes(i.innerHTML);
-          });
-          console.log("filterquize",filteredQuizzes);
-        }
-        // seçilene active class ekle
-        for (var j = 0; j < quizsFilterButton.length; j++) {
-          quizsFilterButton[j].classList.remove("activeQuizFilterButton");
-        }
-        i.classList.add("activeQuizFilterButton")
-        displayQuizzes(filteredQuizzes);
-      })
-    }
-
-    //*seçilen quiz btn göre ekrana yazdırma işlemi
-    function displayQuizzes(quizzes) {
-      var outputDiv = document.querySelector(".quizsContent");
-      outputDiv.innerHTML = "";
-
-      if (quizzes.length === 0) {
-        outputDiv.textContent = "Bu kategoriye ait sınav bulunamadı.";
-      } else {
-        const questionsArrayHTML = quizzes.map((value) => {
-          return `
+          const questionsArrayHTML = quizzes.map((value) => {
+            return `
             <div class="col-lg-3 mt-4">
-              <a href="quiz-detail.html?id=${value.id}" class="${value.quizBilgi.cozulduMu==true ? "disabledCard" : "" }">
+              <a href="quiz-detail.html?id=${value.id}" class="${
+              value.quizBilgi.cozulduMu == true ? "disabledCard" : ""
+            }">
                 <div class="quizCard">
                   <h5>${value.quizBilgi.name}</h5>
                   <div class="quizCardBody">
@@ -133,37 +142,37 @@ const getQuizs = () => {
               </a>
             </div>
           `;
-        });
-        document.querySelector(".quizsContent").innerHTML =
-          questionsArrayHTML.join("");
-        let quizCardEtiket = document.querySelectorAll(".quizCardEtiket")
-        for (let i = 0; i < quizzes.length; i++) {
-          for (let j = 0; j < quizzes[i].quizBilgi.quizEtiket.length; j++) {
-            let quizCardEtiketSpan = document.createElement("span")
-            quizCardEtiketSpan.className = "quizCardEtiketSpan"
-            quizCardEtiketSpan.textContent = quizzes[i].quizBilgi.quizEtiket[j]
-            quizCardEtiket[i].append(quizCardEtiketSpan)
+          });
+          document.querySelector(".quizsContent").innerHTML =
+            questionsArrayHTML.join("");
+          let quizCardEtiket = document.querySelectorAll(".quizCardEtiket");
+          for (let i = 0; i < quizzes.length; i++) {
+            for (let j = 0; j < quizzes[i].quizBilgi.quizEtiket.length; j++) {
+              let quizCardEtiketSpan = document.createElement("span");
+              quizCardEtiketSpan.className = "quizCardEtiketSpan";
+              quizCardEtiketSpan.textContent =
+                quizzes[i].quizBilgi.quizEtiket[j];
+              quizCardEtiket[i].append(quizCardEtiketSpan);
+            }
           }
         }
       }
-    }
     } else {
       // User is signed out
       // ...
-      document.querySelector(".quizsFilterButtons").style.display="none"
+      document.querySelector(".quizsFilterButtons").style.display = "none";
     }
-  }); 
+  });
 };
 
 document.addEventListener("DOMContentLoaded", getQuizs());
-
 
 //!çıkış butonuna basıldığında çıkışı yaptım
 document.querySelector(".quit").addEventListener("click", function () {
   signOut(auth)
     .then(() => {
       console.log("çıkış yapıldı");
-      location.reload()
+      location.reload();
     })
     .catch(() => {
       console.log("çıkış yapılamadı!");
