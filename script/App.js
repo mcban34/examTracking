@@ -157,10 +157,12 @@ const getQuizs = () => {
           }
         }
       }
+      document.querySelector(".login").style.display="none"
     } else {
       // User is signed out
       // ...
       document.querySelector(".quizsFilterButtons").style.display = "none";
+      document.querySelector(".quit").style.display="none"
     }
   });
 };
