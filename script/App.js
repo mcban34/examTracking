@@ -56,7 +56,7 @@ const getQuizs = () => {
               <h5>${value.quizBilgi.name}</h5>
               <div class="quizCardBody">
                 <div class="quizCardImg">
-                  <img src="img/quizCard.jpg">
+                  <img src="img/quizCard-min_1.webp">
                 </div>
                 <div class="quizCardEtiket">
                 
@@ -132,7 +132,7 @@ const getQuizs = () => {
                   <h5>${value.quizBilgi.name}</h5>
                   <div class="quizCardBody">
                     <div class="quizCardImg">
-                      <img src="img/quizCard.jpg">
+                      <img src="img/quizCard-min_1.webp">
                     </div>
                     <div class="quizCardEtiket">
                     
