@@ -3,6 +3,10 @@ img {
   max-width: 100%;
 }
 
+.quiz {
+  display: none;
+}
+
 .disabledCard {
   pointer-events: none;
   opacity: 0.3;
