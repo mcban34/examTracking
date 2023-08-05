@@ -1,0 +1,18 @@
+$dark : #2B444E;
+$lightPurple : #552BC8;
+$darkPurple : #2D1687;
+$btnOrange : #FF7D56;
+@import url(https://db.onlinewebfonts.com/c/da2945dd7266b6f5bf8a16aae48e5a3b?family=Display+Uncanny+W90+Regular);
+
+
+img {
+    max-width: 100%;
+}
+
+.disabledCard {
+    pointer-events: none;
+    opacity: 0.3;
+    filter: grayscale(100%); 
+}
+
+@import "index.scss";
