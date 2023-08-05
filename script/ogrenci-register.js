@@ -96,7 +96,7 @@ document.querySelector(".register").addEventListener("click", function () {
             //       sinavlar:sinavlar[0]
             //     },
             // });
-            window.location.href = "ogrenci-login.html"
+            window.location.href = "index.html"
         })
         .catch((error) => {
             console.log("hata yakalandı", error)
