@@ -113,8 +113,23 @@ onAuthStateChanged(auth, (user) => {
             },
             options: {
                 scales: {
+                    x: {
+                        stacked: true // Yığılmış çubuk grafik için gerekli
+                    },
                     y: {
                         beginAtZero: true
+                    }
+                },
+                plugins: {
+                    zoom: {
+                        pan: {
+                            enabled: true,
+                            mode: 'x'
+                        },
+                        zoom: {
+                            enabled: true,
+                            mode: 'x'
+                        }
                     }
                 }
             }
