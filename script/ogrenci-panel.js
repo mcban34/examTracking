@@ -102,7 +102,14 @@ onAuthStateChanged(auth, (user) => {
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
-                },]
+                },
+                {
+                    label: 'Ortalama',
+                    data: Array(cozulenSinavlar.length).fill(average),
+                    type: 'line',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2
+                }]
             },
             options: {
                 scales: {
