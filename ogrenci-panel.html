@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
+
 <body>
     <h2>öğrenci paneli</h2>
     <table border="1" id="dataTable">
         <thead>
             <tr>
-              <th>Quiz İsim</th>
-              <th>Quiz Puan</th>
+                <th>Quiz İsim</th>
+                <th>Quiz Puan</th>
             </tr>
         </thead>
         <tbody id="dataTableBody">
         </tbody>
     </table>
+    <div style="width: 100%; margin: auto;">
+        <canvas id="myChart"></canvas>
+    </div>
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"></script> <!-- Türkçe dil dosyasının yolu -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"></script>
+    <!-- Türkçe dil dosyasının yolu -->
 
     <script type="module" src="script/ogrenci-panel.js"></script>
 </body>
+
 </html>

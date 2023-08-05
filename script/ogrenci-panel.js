@@ -37,10 +37,10 @@ onAuthStateChanged(auth, (user) => {
         const cozulenSinavlar = []
         for (const i of data[1]) {
             // console.log(i);
-            if(i.quizBilgi.cozulduMu==true){
+            if (i.quizBilgi.cozulduMu == true) {
                 cozulenSinavlar.push({
                     quizName: i.quizBilgi.name,
-                    quizPuan : i.quizBilgi.puan
+                    quizPuan: i.quizBilgi.puan
                 })
             }
             // console.log(i.quizBilgi.cozulduMu);
@@ -60,10 +60,10 @@ onAuthStateChanged(auth, (user) => {
 
         const tbody = document.getElementById("dataTableBody");
         tbody.innerHTML = "";
-      
+
         cozulenSinavlar.forEach(element => {
             const row = document.createElement("tr");
-            
+
             const quizNameCell = document.createElement("td");
             quizNameCell.textContent = element.quizName;
             row.appendChild(quizNameCell);
@@ -71,19 +71,47 @@ onAuthStateChanged(auth, (user) => {
             const quizPuan = document.createElement("td");
             quizPuan.textContent = element.quizPuan;
             row.appendChild(quizPuan);
-            
+
             tbody.appendChild(row);
         });
         $('#dataTable').DataTable({
             language: {
-              "url": "https://cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
+                "url": "https://cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
             },
             pageLength: 10,
             lengthMenu: [5, 10, 25, 50, 100],
             paging: true,
             scrollCollapse: true,
             scrollY: '300px'
-          });
+        });
         console.log(cozulenSinavlar);
+
+
+        const totalPoints = cozulenSinavlar.reduce((sum, data) => sum + data.quizPuan, 0);
+        const average = totalPoints / cozulenSinavlar.length;
+
+        // Chart.js kullanarak grafik oluşturma
+        const ctx = document.getElementById('myChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: cozulenSinavlar.map(data => data.quizName),
+                datasets: [{
+                    label: 'Quiz Puanları',
+                    data: cozulenSinavlar.map(data => data.quizPuan),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                },]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
     })
 });
