@@ -27,40 +27,26 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
 onAuthStateChanged(auth, (user) => {
-    // console.log(user);
-    console.log(user.uid);
+    console.log(user);
+    document.querySelector(".ogrenciName").innerHTML=`Hoşgeldin! ${user.email}` 
     const db = getDatabase();
     const countRef = ref(db, "ogrenciler/" + user.uid);
     onValue(countRef, (snapshot) => {
         let data = Object.values(snapshot.val());
-        // console.log(data[1]);
+        //*çözülmüş sınavlar toparlandı
         const cozulenSinavlar = []
         for (const i of data[1]) {
-            // console.log(i);
             if (i.quizBilgi.cozulduMu == true) {
                 cozulenSinavlar.push({
                     quizName: i.quizBilgi.name,
                     quizPuan: i.quizBilgi.puan
                 })
             }
-            // console.log(i.quizBilgi.cozulduMu);
-            // for (const j of i.quizBilgi) {
-            //     console.log(j);
-            //     // if(j.quizBilgi.cozulduMu==true && j.quizBilgi.puan>0){
-            //     //   cozulenSinavlar.push(
-            //     //       {
-            //     //         sinavSonuclar : i.sinavlar ,
-            //     //         OgrenciBilgiler:i.ogrenciBilgi
-            //     //       }
-            //     //   )
-            //     //     break
-            //     // }
-            // }
         }
 
+        //öğrencinin çözdüğü sınavlar data tableye basıldı
         const tbody = document.getElementById("dataTableBody");
         tbody.innerHTML = "";
-
         cozulenSinavlar.forEach(element => {
             const row = document.createElement("tr");
 
@@ -114,7 +100,7 @@ onAuthStateChanged(auth, (user) => {
             options: {
                 scales: {
                     x: {
-                        stacked: true // Yığılmış çubuk grafik için gerekli
+                        stacked: true
                     },
                     y: {
                         beginAtZero: true
