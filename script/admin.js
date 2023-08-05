@@ -35,6 +35,50 @@ onAuthStateChanged(auth, (user) => {
 });
 
 
+//!admin paneline öğrenciler,gruplar,sınavlar vs. hakkında bilgiyi card şeklinde getirdim
+document.addEventListener("DOMContentLoaded", async function () {
+  const db = getDatabase();
+  const countRefOgrenciler = await ref(db, "ogrenciler/");
+  onValue(countRefOgrenciler, (snapshot) => {
+    //*toplam ogrenciler listelendi
+    let data = Object.values(snapshot.val());
+    document.querySelector(".toplamOgrenci").innerHTML = `Toplam Öğrenci : ${data.length}`
+
+
+    const cozulenSinavlar = []
+    for (const i of data) {
+      for (const j of i.sinavlar) {
+        if (j.quizBilgi.cozulduMu == true) {
+          cozulenSinavlar.push({
+            quizPuan: j.quizBilgi.puan
+          })
+        }
+      }
+    }
+
+    let toplamSinavPuanlari = 0
+    cozulenSinavlar.forEach(element => {
+        toplamSinavPuanlari += element.quizPuan
+    });
+    document.querySelector(".ogrencilerOrtalama").innerHTML=`Öğrenci Ortalama : ${(toplamSinavPuanlari / cozulenSinavlar.length).toFixed(2)}`
+  })
+
+  //*toplam sınavlar listelendi
+  const countRefSinavlar = await ref(db, "sinavlar/");
+  onValue(countRefSinavlar, (snapshot) => {
+    let data = Object.values(snapshot.val());
+    document.querySelector(".toplamSinav").innerHTML = `Toplam Sınavlar : ${data.length}`
+  })
+
+  //*tüm gruplar listelendi
+  const countRefGruplar = await ref(db, "gruplar/");
+  onValue(countRefGruplar, (snapshot) => {
+    let data = Object.values(snapshot.val());
+    document.querySelector(".toplamGrup").innerHTML = `Toplam Gruplar : ${data.length}`
+  })
+
+})
+
 //!dom başlarken select options içerisine quizlerin başlıklarını getirdim
 document.addEventListener("DOMContentLoaded", function () {
   let filterQuizs = document.querySelector(".filterQuizs");
@@ -47,8 +91,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <option>${i}</option>
         `;
     }
-  }) , (error) => {
-    console.log("kodlar gelmedi!",error);
+  }), (error) => {
+    console.log("kodlar gelmedi!", error);
   }
 
 });
@@ -193,53 +237,53 @@ const ogrenciNotlariAsync = async () => {
 
 
 
-      const urlParams = new URLSearchParams(window.location.search);
-      const quizId = urlParams.get("id");
-      const db = getDatabase();
-      const countRef = ref(db, `ogrenciler/`);
-      const snapshot = await get(countRef);
-      let data = Object.values(snapshot.val());
-      // console.log(data);
+    const urlParams = new URLSearchParams(window.location.search);
+    const quizId = urlParams.get("id");
+    const db = getDatabase();
+    const countRef = ref(db, `ogrenciler/`);
+    const snapshot = await get(countRef);
+    let data = Object.values(snapshot.val());
+    // console.log(data);
 
 
 
-      const cozulenSinavlar = []
-      for (const i of data) {
-          // console.log(i);
-          // console.log(i);
-          for (const j of i.sinavlar) {
-              if(j.quizBilgi.cozulduMu==true && j.quizBilgi.puan>0){
-                cozulenSinavlar.push(
-                    {
-                      sinavSonuclar : i.sinavlar ,
-                      OgrenciBilgiler:i.ogrenciBilgi
-                    }
-                )
-                  break
-              }
-          }
+    const cozulenSinavlar = []
+    for (const i of data) {
+      // console.log(i);
+      // console.log(i);
+      for (const j of i.sinavlar) {
+        if (j.quizBilgi.cozulduMu == true && j.quizBilgi.puan > 0) {
+          cozulenSinavlar.push(
+            {
+              sinavSonuclar: i.sinavlar,
+              OgrenciBilgiler: i.ogrenciBilgi
+            }
+          )
+          break
+        }
       }
-      // console.log(cozulenSinavlar);
-      
-      datatableVerileriGoster(cozulenSinavlar);
+    }
+    // console.log(cozulenSinavlar);
+
+    datatableVerileriGoster(cozulenSinavlar);
 
 
 
-      // console.log("sınavını çözenler",cozulenSinavlar);
+    // console.log("sınavını çözenler",cozulenSinavlar);
 
-      // cozulenSinavlar.filter(item => )
+    // cozulenSinavlar.filter(item => )
 
 
-      // console.log(cozulenSinavlar[0]);
+    // console.log(cozulenSinavlar[0]);
 
-      // set(ref(db, 'ogrenciler/' + user.uid +  "/sinavlar/" + quizId + "/quizBilgi/"), {
-      //   cozulduMu:true,
-      //   name:questionsArray[0].quizBilgi.name,
-      //   puan:ogrenciBilgileri.sinavPuan,
-      //   quizContentBody:questionsArray[0].quizBilgi.quizContentBody,
-      //   quizEtiket:questionsArray[0].quizBilgi.quizEtiket,
-      //   quizCategory:questionsArray[0].quizBilgi.quizCategory
-      // })
+    // set(ref(db, 'ogrenciler/' + user.uid +  "/sinavlar/" + quizId + "/quizBilgi/"), {
+    //   cozulduMu:true,
+    //   name:questionsArray[0].quizBilgi.name,
+    //   puan:ogrenciBilgileri.sinavPuan,
+    //   quizContentBody:questionsArray[0].quizBilgi.quizContentBody,
+    //   quizEtiket:questionsArray[0].quizBilgi.quizEtiket,
+    //   quizCategory:questionsArray[0].quizBilgi.quizCategory
+    // })
 
     // const db = getDatabase();
     // const countRef = ref(db, "ogrenciler/");
@@ -268,27 +312,27 @@ function datatableVerileriGoster(veriListesi) {
 
   veriListesi.forEach((veri) => {
     for (const i of veri.sinavSonuclar) {
-      if(i.quizBilgi.cozulduMu==true){
+      if (i.quizBilgi.cozulduMu == true) {
         const row = document.createElement("tr");
-        
+
         const quizNameCell = document.createElement("td");
         quizNameCell.textContent = i.quizBilgi.name;
         // console.log(i.quizBilgi);
         row.appendChild(quizNameCell);
-  
+
         const nameSurnameCell = document.createElement("td");
         nameSurnameCell.textContent = veri.OgrenciBilgiler.kullaniciAdi;
         row.appendChild(nameSurnameCell);
-  
+
         const sinavSonucCell = document.createElement("td");
         sinavSonucCell.textContent = i.quizBilgi.puan;
         sinavSonucCell.className = "ogrenciNotu";
         row.appendChild(sinavSonucCell);
-  
+
         const grupNameCell = document.createElement("td");
         grupNameCell.textContent = veri.OgrenciBilgiler.grupName;
         row.appendChild(grupNameCell);
-  
+
         tbody.appendChild(row);
       }
     }
@@ -354,9 +398,9 @@ document
         name: quizTitle,
         quizContentBody: quizContentBody,
         quizEtiket: quizEtiket,
-        quizCategory:quizGenelKategori,
-        cozulduMu:false,
-        puan:0
+        quizCategory: quizGenelKategori,
+        cozulduMu: false,
+        puan: 0
       },
     });
     location.reload();
