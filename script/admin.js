@@ -28,7 +28,6 @@ const auth = getAuth();
 
 //!kullanıcı girişli değilse admin sayfasına geri dönecektir
 onAuthStateChanged(auth, (user) => {
-  // console.log(user);
   if (!user) {
     window.location.href = "login.html";
   }
@@ -43,7 +42,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     //*toplam ogrenciler listelendi
     let data = Object.values(snapshot.val());
     document.querySelector(".toplamOgrenci").innerHTML = `Toplam Öğrenci : ${data.length}`
-
 
     const cozulenSinavlar = []
     for (const i of data) {
@@ -94,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }), (error) => {
     console.log("kodlar gelmedi!", error);
   }
-
 });
 
 
@@ -102,20 +99,17 @@ document.addEventListener("DOMContentLoaded", function () {
 let filterGroupButtons = document.querySelector(".filterGroupButton")
 const getFilterGrupButtons = async () => {
   try {
-
     const db = getDatabase();
     const countRef = ref(db, "gruplar/");
     const snapshot = await get(countRef);
     let data = Object.values(snapshot.val());
-    // console.log(data);
     for (const i of data) {
-      // console.log(i.grup.Grupname);
       let filterGroupBtn = document.createElement("button")
       filterGroupBtn.textContent = i.grup.Grupname
       filterGroupBtn.addEventListener("click", function () {
         const group = this.innerHTML;
+        
         filterTableByGroup(group);
-
 
         //!filtreleme butonuna tıklandığında grubun genel ortalamasını alıyoruz
         let ogrenciNotlari = []
@@ -124,8 +118,6 @@ const getFilterGrupButtons = async () => {
         for (const i of ogreciNotu) {
           ogrenciNotlari.push(+i.innerHTML)
         }
-
-
 
         let grupOrtalaması = 0
         for (const i of ogrenciNotlari) {
@@ -234,23 +226,16 @@ document.querySelector(".clearOgrenciFilter").addEventListener("click", function
 const ogrenciNotlariAsync = async () => {
   const ogrenciSonuclari = [];
   try {
-
-
-
     const urlParams = new URLSearchParams(window.location.search);
     const quizId = urlParams.get("id");
     const db = getDatabase();
     const countRef = ref(db, `ogrenciler/`);
     const snapshot = await get(countRef);
     let data = Object.values(snapshot.val());
-    // console.log(data);
 
-
-
+    //*çözülen sınavları aldım
     const cozulenSinavlar = []
     for (const i of data) {
-      // console.log(i);
-      // console.log(i);
       for (const j of i.sinavlar) {
         if (j.quizBilgi.cozulduMu == true && j.quizBilgi.puan > 0) {
           cozulenSinavlar.push(
@@ -263,40 +248,8 @@ const ogrenciNotlariAsync = async () => {
         }
       }
     }
-    // console.log(cozulenSinavlar);
 
     datatableVerileriGoster(cozulenSinavlar);
-
-
-
-    // console.log("sınavını çözenler",cozulenSinavlar);
-
-    // cozulenSinavlar.filter(item => )
-
-
-    // console.log(cozulenSinavlar[0]);
-
-    // set(ref(db, 'ogrenciler/' + user.uid +  "/sinavlar/" + quizId + "/quizBilgi/"), {
-    //   cozulduMu:true,
-    //   name:questionsArray[0].quizBilgi.name,
-    //   puan:ogrenciBilgileri.sinavPuan,
-    //   quizContentBody:questionsArray[0].quizBilgi.quizContentBody,
-    //   quizEtiket:questionsArray[0].quizBilgi.quizEtiket,
-    //   quizCategory:questionsArray[0].quizBilgi.quizCategory
-    // })
-
-    // const db = getDatabase();
-    // const countRef = ref(db, "ogrenciler/");
-    // const snapshot = await get(countRef);
-    // let data = snapshot.val();
-
-    // for (const key in data) {
-    //   if (data.hasOwnProperty(key)) {
-    //     const veri = data[key];
-    //     ogrenciSonuclari.push(veri);
-    //   }
-    // }
-    // // console.log(ogrenciSonuclari);
     // //!çekilen öğrenci notlarını tadatable şekilde olan fonksiyonuma parametre olarak gönderdim
   } catch (error) {
     console.error("Veriler alınırken bir hata oluştu:", error);
@@ -337,6 +290,7 @@ function datatableVerileriGoster(veriListesi) {
       }
     }
   });
+  //*datatableye verileri bastım
   $('#dataTable').DataTable({
     language: {
       "url": "https://cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
@@ -480,12 +434,3 @@ document.querySelector(".downloadTable").addEventListener("click", function () {
     return buf;
   }
 })
-
-
-// document.querySelector(".test").addEventListener("click",function(){
-//   let ogreciNotu = document.querySelectorAll(".ogreciNotu")
-//   for (const i of ogreciNotu) {
-//     let xxx =  i.innerHTML.split(",");
-//     console.log(xxx);
-//   }
-// })
