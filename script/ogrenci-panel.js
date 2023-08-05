@@ -27,8 +27,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
 onAuthStateChanged(auth, (user) => {
-    console.log(user);
-    document.querySelector(".ogrenciName").innerHTML=`Hoşgeldin! ${user.email}` 
+    //!öğrenci girişli değilse panele ulaşamaz!
+    if (!user) {
+        window.location.href = "ogrenci-login.html";
+    }
+
+    document.querySelector(".ogrenciName").innerHTML = `Hoşgeldin! ${user.email}`
     const db = getDatabase();
     const countRef = ref(db, "ogrenciler/" + user.uid);
     onValue(countRef, (snapshot) => {
@@ -120,6 +124,5 @@ onAuthStateChanged(auth, (user) => {
                 }
             }
         });
-
     })
 });

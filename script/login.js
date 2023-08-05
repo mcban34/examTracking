@@ -20,7 +20,6 @@ const auth = getAuth(app);
 
 //!girişi olan kullanıcı admine giremez, admin sayfasına yönlendirildi
 onAuthStateChanged(auth, (user) => {
-  console.log(user);
   if (user) {
     window.location.href = "admin.html";
   }
