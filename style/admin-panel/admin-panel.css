@@ -1,0 +1,17 @@
+.admin-panel {
+  width: 100%;
+  display: flex;
+}
+.admin-panel .sideBar {
+  width: 20%;
+}
+.admin-panel .sideBar .panel {
+  cursor: pointer;
+}
+.admin-panel .panelContent {
+  width: 80%;
+  background-color: blue;
+}
+.admin-panel .sideBar, .admin-panel .panelContent {
+  height: 100vh;
+}/*# sourceMappingURL=admin-panel.css.map */

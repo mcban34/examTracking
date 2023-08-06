@@ -9,20 +9,19 @@ img {
     max-width: 100%;
 }
 
+.container-fluid{
+    padding: 0 !important;
+}
+
 .quiz{
     display: none;
 }
 
-.disabledCard {
+.disabledCard { 
     pointer-events: none;
     opacity: 0.3;
     filter: grayscale(100%); 
 }
 
-@import "index.scss";
-
-//!admin panelinde eklenecekler
-//*toplam öğrenci sayısı
-//*toplam quiz sayısı
-//*toplam grup sayısı
-//*genelden öğrencilerin ortalaması
+@import "index/index.css";
+@import "admin-panel/admin-panel.css";

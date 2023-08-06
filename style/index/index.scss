@@ -1,3 +1,7 @@
+$dark : #2B444E;
+$lightPurple : #552BC8;
+$darkPurple : #2D1687;
+$btnOrange : #FF7D56;
 
 header{
     background:linear-gradient(45deg, $darkPurple,$lightPurple);
@@ -7,11 +11,11 @@ header{
         margin-bottom: 2rem;
     }
     .hemenBasla{
-        background-color: $dark;
+        background-color: red;
         color: white;
-        text-decoration: none;
+        text-decoration: none; 
         padding: 1rem 3rem;
-        border-radius: 2rem;
+        border-radius: 2rem; 
     }
     .navbar-brand{
         font-size: 2.5rem;

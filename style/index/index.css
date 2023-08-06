@@ -1,0 +1,95 @@
+header {
+  background: linear-gradient(45deg, #2D1687, #552BC8);
+  color: white;
+}
+header p {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+header .hemenBasla {
+  background-color: red;
+  color: white;
+  text-decoration: none;
+  padding: 1rem 3rem;
+  border-radius: 2rem;
+}
+header .navbar-brand {
+  font-size: 2.5rem;
+  font-family: "Display Uncanny W90 Regular";
+  color: white;
+}
+header .navBtn {
+  background-color: #FF7D56;
+  color: white;
+  font-weight: bold;
+  padding: 1rem 2rem !important;
+  border-radius: 2rem;
+}
+header .headerContent {
+  padding: 1rem 0 4rem 0;
+}
+
+.quizs {
+  padding: 2rem 0;
+}
+.quizs .quizsFilterButtons .quizsFilterButton {
+  background: transparent;
+  border: none;
+  color: #2B444E;
+  font-weight: bold;
+  margin: 0 1rem;
+  opacity: 0.5;
+}
+@media screen and (max-width: 768px) {
+  .quizs .quizsFilterButtons .quizsFilterButton {
+    margin: 0;
+  }
+}
+.quizs .quizsFilterButtons .activeQuizFilterButton {
+  border-bottom: 2px solid #2B444E;
+  opacity: 1;
+}
+.quizs a {
+  text-decoration: none;
+}
+.quizs a .quizCard {
+  background-color: white;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.1) 0px 50px 100px -20px, rgba(0, 0, 0, 0.1) 0px 30px 60px -30px;
+  border-radius: 1rem;
+  border: 1px solid white;
+}
+.quizs a .quizCard h5 {
+  color: white;
+  padding: 1rem;
+  background-color: #2B444E;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+.quizs a .quizCard .quizCardBody {
+  padding: 1rem;
+}
+.quizs a .quizCard .quizCardBody .quizCardImg {
+  text-align: center;
+}
+.quizs a .quizCard .quizCardBody .quizCardImg img {
+  width: 80%;
+}
+.quizs a .quizCard .quizCardBody .quizCardEtiket {
+  padding: 0.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.quizs a .quizCard .quizCardBody .quizCardEtiket .quizCardEtiketSpan {
+  background-color: #552BC8;
+  color: white;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  border-radius: 0.5rem;
+  transition: 0.35s;
+}
+.quizs a .quizCard .quizCardBody .quizCardEtiket .quizCardEtiketSpan:hover {
+  background-color: #2B444E;
+  color: #552BC8;
+}/*# sourceMappingURL=index.css.map */

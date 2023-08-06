@@ -24,7 +24,8 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth();
+const auth = getAuth(); 
+
 
 //!kullanıcı girişli değilse admin sayfasına geri dönecektir
 onAuthStateChanged(auth, (user) => {

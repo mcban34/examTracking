@@ -1,0 +1,22 @@
+$dark : #2B444E;
+$lightPurple : #552BC8;
+$darkPurple : #2D1687;
+$btnOrange : #FF7D56;
+
+.admin-panel{
+    width: 100%;
+    display: flex;
+    .sideBar{
+        width: 20%;
+        .panel{
+            cursor: pointer;
+        }
+    }
+    .panelContent{
+        width: 80%; 
+        background-color: blue;
+    }
+    .sideBar,.panelContent{
+        height: 100vh;
+    } 
+} 
