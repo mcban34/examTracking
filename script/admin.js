@@ -204,6 +204,7 @@ document.querySelector(".filterOgrenci").addEventListener("click", function () {
 
   let ogrenciNotlari = []
   let ogreciNotu = document.querySelectorAll(".ogrenciNotu")
+  console.log(ogreciNotu);
   for (const i of ogreciNotu) {
     ogrenciNotlari.push(+i.innerHTML)
   }
@@ -269,7 +270,7 @@ function datatableVerileriGoster(veriListesi) {
   //*ana sayfada ve öğrenci filtreleme alanın, data tableyi yazarken
   //*aynı işlevleri kullanacağım için bir parametre oluşturdum ve hemen aşşağıda parametreye
   //*değerler gönderdim
-  function dataTableLists(tbodyParametr) {
+  function dataTableLists(tbodyParametr,ogrenciClass) {
     veriListesi.forEach((veri) => {
       for (const i of veri.sinavSonuclar) {
         if (i.quizBilgi.cozulduMu == true) {
@@ -286,7 +287,8 @@ function datatableVerileriGoster(veriListesi) {
 
           const sinavSonucCell = document.createElement("td");
           sinavSonucCell.textContent = i.quizBilgi.puan;
-          sinavSonucCell.className = "ogrenciNotu";
+          //*parametre tanımsız dönerse boş at dönmezse ogrenciNotu adında class ver!
+          sinavSonucCell.className = `${ogrenciClass==undefined ? "" : ogrenciClass}`;
           row.appendChild(sinavSonucCell);
 
           const grupNameCell = document.createElement("td");
@@ -299,7 +301,7 @@ function datatableVerileriGoster(veriListesi) {
     });
   }
   dataTableLists(tbody)
-  dataTableLists(tbodyFilter)
+  dataTableLists(tbodyFilter,"ogrenciNotu")
 
   //*datatableye verileri bastım
   $('#dataTableFilter').DataTable({
