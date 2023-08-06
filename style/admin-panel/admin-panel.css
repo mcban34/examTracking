@@ -10,7 +10,7 @@
 }
 .admin-panel .panelContent {
   width: 80%;
-  background-color: blue;
+  background-color: aliceblue;
 }
 .admin-panel .sideBar, .admin-panel .panelContent {
   height: 100vh;
