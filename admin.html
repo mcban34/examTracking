@@ -47,14 +47,11 @@
             <button class="downloadTable">Tabloyu İndir</button>
           </div>
         </div>
+
         <div id="panel2" style="display: none;">
           <h2>Soru Yarat</h2>
           <select class="filterQuizs">
           </select>
-
-
-          <br><br>
-
           <input type="text" class="soru" placeholder="soru nedir?"> <br>
           <input type="text" class="cevap1" placeholder="cevap1"> <br>
           <input type="text" class="cevap2" placeholder="cevap2"> <br>
@@ -63,6 +60,7 @@
           <input type="text" class="dogruCevap" placeholder="Doğru Cevap Hangi Şık ?">
           <button class="createQuizBtn">Oluştur!</button>
         </div>
+
         <div id="panel3" style="display: none;">
           <h2>Quiz Başlığı Yarat</h2>
           <input type="text" class="quizTitle" placeholder="quiz başlığını giriniz">
@@ -75,6 +73,7 @@
           </select>
           <button class="createQuizTitle">Quiz Başlığı Yarat!</button>
         </div>
+        
         <div id="panel4" style="display: none;">
           <h2>grup Yarat</h2>
           <input type="text" class="grupName" placeholder="Grup Adını Giriniz">
@@ -103,6 +102,22 @@
             <button class="clearGroupFilter">Grup Sıfırla</button>
           </div>
           <h3 class="grupNotOrtalama"></h3>
+
+          <div class="ogrenciNotlari">
+            <table border="1" id="dataTableFilter">
+              <thead>
+                <tr>
+                  <th>Quiz</th>
+                  <th>İsim Soyisim</th>
+                  <th>Puan</th>
+                  <th>Grup İsim</th>
+                </tr>
+              </thead>
+              <tbody id="dataTableBodyFilter">
+              </tbody>
+            </table>
+          </div>
+
         </div>
       </div>
     </section>

@@ -24,7 +24,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(); 
+const auth = getAuth();
 
 
 //!kullanıcı girişli değilse admin sayfasına geri dönecektir
@@ -57,9 +57,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     let toplamSinavPuanlari = 0
     cozulenSinavlar.forEach(element => {
-        toplamSinavPuanlari += element.quizPuan
+      toplamSinavPuanlari += element.quizPuan
     });
-    document.querySelector(".ogrencilerOrtalama").innerHTML=`Öğrenci Ortalama : ${(toplamSinavPuanlari / cozulenSinavlar.length).toFixed(2)}`
+    document.querySelector(".ogrencilerOrtalama").innerHTML = `Öğrenci Ortalama : ${(toplamSinavPuanlari / cozulenSinavlar.length).toFixed(2)}`
   })
 
   //*toplam sınavlar listelendi
@@ -109,7 +109,7 @@ const getFilterGrupButtons = async () => {
       filterGroupBtn.textContent = i.grup.Grupname
       filterGroupBtn.addEventListener("click", function () {
         const group = this.innerHTML;
-        
+
         filterTableByGroup(group);
 
         //!filtreleme butonuna tıklandığında grubun genel ortalamasını alıyoruz
@@ -131,7 +131,7 @@ const getFilterGrupButtons = async () => {
 
       //!burada filtreleme işlemlerini gerçekleştirdim
       function filterTableByGroup(group) {
-        const table = $('#dataTable').DataTable();
+        const table = $('#dataTableFilter').DataTable();
         table.search(group).draw();
       }
       filterGroupButtons.prepend(filterGroupBtn)
@@ -150,7 +150,7 @@ document.querySelector(".clearGroupFilter").addEventListener("click", function (
 
 //!datatable clear eden fonksiyon
 const clearDataTable = () => {
-  let table = $('#dataTable').DataTable();
+  let table = $('#dataTableFilter').DataTable();
   table.search("").draw()
 }
 
@@ -199,7 +199,7 @@ document.querySelector(".selectGrup").addEventListener("change", async function 
 //*2. selectreki öğrenci ismini göre filtreleme butonuna tıklandığında datatablede öğrenciler filtrelendi
 document.querySelector(".filterOgrenci").addEventListener("click", function () {
   let selectOgreci = document.querySelector(".selectOgreci")
-  const table = $('#dataTable').DataTable();
+  const table = $('#dataTableFilter').DataTable();
   table.search(selectOgreci.value).draw()
 
   let ogrenciNotlari = []
@@ -262,46 +262,67 @@ ogrenciNotlariAsync();
 //!sınava giren öğrencilerin bilgilerini panele yazdırdım
 function datatableVerileriGoster(veriListesi) {
   const tbody = document.getElementById("dataTableBody");
+  const tbodyFilter = document.getElementById("dataTableBodyFilter")
   tbody.innerHTML = "";
+  tbodyFilter.innerHTML = "";
+  //*panelde öğrenci notlarını iki farklı yerde gösterdim
+  //*ana sayfada ve öğrenci filtreleme alanın, data tableyi yazarken
+  //*aynı işlevleri kullanacağım için bir parametre oluşturdum ve hemen aşşağıda parametreye
+  //*değerler gönderdim
+  function dataTableLists(tbodyParametr) {
+    veriListesi.forEach((veri) => {
+      for (const i of veri.sinavSonuclar) {
+        if (i.quizBilgi.cozulduMu == true) {
+          const row = document.createElement("tr");
 
-  veriListesi.forEach((veri) => {
-    for (const i of veri.sinavSonuclar) {
-      if (i.quizBilgi.cozulduMu == true) {
-        const row = document.createElement("tr");
+          const quizNameCell = document.createElement("td");
+          quizNameCell.textContent = i.quizBilgi.name;
+          // console.log(i.quizBilgi);
+          row.appendChild(quizNameCell);
 
-        const quizNameCell = document.createElement("td");
-        quizNameCell.textContent = i.quizBilgi.name;
-        // console.log(i.quizBilgi);
-        row.appendChild(quizNameCell);
+          const nameSurnameCell = document.createElement("td");
+          nameSurnameCell.textContent = veri.OgrenciBilgiler.kullaniciAdi;
+          row.appendChild(nameSurnameCell);
 
-        const nameSurnameCell = document.createElement("td");
-        nameSurnameCell.textContent = veri.OgrenciBilgiler.kullaniciAdi;
-        row.appendChild(nameSurnameCell);
+          const sinavSonucCell = document.createElement("td");
+          sinavSonucCell.textContent = i.quizBilgi.puan;
+          sinavSonucCell.className = "ogrenciNotu";
+          row.appendChild(sinavSonucCell);
 
-        const sinavSonucCell = document.createElement("td");
-        sinavSonucCell.textContent = i.quizBilgi.puan;
-        sinavSonucCell.className = "ogrenciNotu";
-        row.appendChild(sinavSonucCell);
+          const grupNameCell = document.createElement("td");
+          grupNameCell.textContent = veri.OgrenciBilgiler.grupName;
+          row.appendChild(grupNameCell);
 
-        const grupNameCell = document.createElement("td");
-        grupNameCell.textContent = veri.OgrenciBilgiler.grupName;
-        row.appendChild(grupNameCell);
-
-        tbody.appendChild(row);
+          tbodyParametr.append(row);
+        }
       }
-    }
-  });
+    });
+  }
+  dataTableLists(tbody)
+  dataTableLists(tbodyFilter)
+
   //*datatableye verileri bastım
+  $('#dataTableFilter').DataTable({
+    language: {
+      "url": "https://cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
+    },
+    pageLength: 10,
+    lengthMenu: [5, 10, 25, 50, 100, 500, 1000],
+    // paging: true,
+    // scrollCollapse: true,
+    // scrollY: '300px'
+  });
   $('#dataTable').DataTable({
     language: {
       "url": "https://cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
     },
     pageLength: 10,
     lengthMenu: [5, 10, 25, 50, 100],
-    paging: true,
-    scrollCollapse: true,
-    scrollY: '300px'
+    // paging: true,
+    // scrollCollapse: true,
+    // scrollY: '300px'
   });
+
 }
 
 
