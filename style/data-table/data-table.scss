@@ -1,0 +1,43 @@
+$dark : #2B444E;
+$lightPurple : #552BC8;
+$darkPurple : #2D1687;
+$btnOrange : #FF7D56;
+.dataTables_wrapper{
+    .dataTables_filter{
+        margin-bottom: 2rem;
+    }
+    .odd{
+        background-color: transparentize($color: $lightPurple, $amount: .9) !important;
+    }
+    th,table{
+        border-bottom: 1px solid $darkPurple;
+    }
+    td{
+        border-right: 1px solid transparentize($color: $lightPurple, $amount: .9);
+        padding: 1rem .5rem !important; 
+    }
+    tr{
+        transition: .20s;
+        &:hover{
+            background-color: $lightPurple !important;
+            color: white;
+            cursor: pointer;
+        }
+    }
+    .dataTables_paginate {
+        span{
+            .current{
+                background: $darkPurple !important;
+                font-weight: bold;
+                color: white !important;
+            }
+            a{
+                &:hover{
+                    background: none !important;
+                    color: black !important;
+
+                }
+            }
+        }
+    }
+}

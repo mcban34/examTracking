@@ -1,6 +1,7 @@
 @import url(https://db.onlinewebfonts.com/c/da2945dd7266b6f5bf8a16aae48e5a3b?family=Display+Uncanny+W90+Regular);
 @import "index/index.css";
 @import "admin-panel/admin-panel.css";
+@import "data-table/data-table.css";
 img {
   max-width: 100%;
 }

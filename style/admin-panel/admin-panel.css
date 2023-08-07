@@ -113,35 +113,4 @@
 .admin-panel .panelContent #panel2 .panel2Content .panel2Container label {
   color: rgb(255, 72, 72);
   font-size: 0.8rem;
-}
-
-.ogrenciNotlari .dataTables_wrapper .dataTables_filter {
-  margin-bottom: 2rem;
-}
-.ogrenciNotlari .dataTables_wrapper .odd {
-  background-color: rgba(85, 43, 200, 0.1) !important;
-}
-.ogrenciNotlari .dataTables_wrapper th, .ogrenciNotlari .dataTables_wrapper table {
-  border-bottom: 1px solid #2D1687;
-}
-.ogrenciNotlari .dataTables_wrapper td {
-  border-right: 1px solid rgba(85, 43, 200, 0.1);
-  padding: 1rem 0.5rem !important;
-}
-.ogrenciNotlari .dataTables_wrapper tr {
-  transition: 0.2s;
-}
-.ogrenciNotlari .dataTables_wrapper tr:hover {
-  background-color: #552BC8 !important;
-  color: white;
-  cursor: pointer;
-}
-.ogrenciNotlari .dataTables_wrapper .dataTables_paginate span .current {
-  background: #2D1687 !important;
-  font-weight: bold;
-  color: white !important;
-}
-.ogrenciNotlari .dataTables_wrapper .dataTables_paginate span a:hover {
-  background: none !important;
-  color: black !important;
 }/*# sourceMappingURL=admin-panel.css.map */
