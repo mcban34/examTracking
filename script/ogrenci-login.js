@@ -18,6 +18,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        window.location.href = "ogrenci-panel.html";
+    }
+})
 
 //!kullanıcın bilgilerine göre giriş işlemini gerçekleştirir
 document.querySelector(".login").addEventListener("click", function () {
@@ -36,13 +41,13 @@ document.querySelector(".login").addEventListener("click", function () {
 });
 
 
-document.querySelector(".hideShowPass").addEventListener("click",function(){
+document.querySelector(".hideShowPass").addEventListener("click", function () {
     let loginPass = document.querySelector(".loginPass")
     let hideShowPass = document.querySelector(".hideShowPass")
-    if(hideShowPass.checked){
-        loginPass.type="input"
+    if (hideShowPass.checked) {
+        loginPass.type = "input"
     }
-    else{
-        loginPass.type="password"
+    else {
+        loginPass.type = "password"
     }
 })
