@@ -25,7 +25,8 @@
             Oluştur</span></div>
         <div class="panel" onclick="showContent('panel3')"><i class="bi bi-bookmark-plus-fill"></i><span>Quiz Başlığı
             Oluştur</span></div>
-        <div class="panel" onclick="showContent('panel4')"><i class="bi bi-person-fill-add"></i><span>Sınıf Oluştur</span>
+        <div class="panel" onclick="showContent('panel4')"><i class="bi bi-person-fill-add"></i><span>Sınıf
+            Oluştur</span>
         </div>
         <div class="panel" onclick="showContent('panel5')"><i class="bi bi-list-columns-reverse"></i><span>Öğrenci &
             Sınıf Filtrele</span></div>
@@ -177,6 +178,13 @@
     </section>
   </div>
 
+  <div class="mobileSideBar">
+    <div class="panel activePanelBtn" onclick="showContent('panel1')"><i class="bi bi-house-fill"></i></div>
+    <div class="panel" onclick="showContent('panel2')"><i class="bi bi-question-circle-fill"></i></div>
+    <div class="panel" onclick="showContent('panel3')"><i class="bi bi-bookmark-plus-fill"></i></div>
+    <div class="panel" onclick="showContent('panel4')"><i class="bi bi-person-fill-add"></i></div>
+    <div class="panel" onclick="showContent('panel5')"><i class="bi bi-list-columns-reverse"></i></div>
+  </div>
   <script>
     function showContent(panelId) {
       var panels = document.querySelectorAll('.panelContent > div');

@@ -45,6 +45,11 @@
 .admin-panel .sideBar .quit i {
   padding: 0 0.5rem;
 }
+@media screen and (max-width: 800px) {
+  .admin-panel .sideBar {
+    display: none;
+  }
+}
 .admin-panel .panelContent {
   width: 80%;
   padding: 3rem;
@@ -108,11 +113,23 @@
   padding: 0.5rem 2rem;
   color: white;
 }
+@media screen and (max-width: 800px) {
+  .admin-panel .panelContent {
+    width: 100%;
+    height: 90vh;
+    padding: 0.5rem;
+  }
+}
 
 .panelContainer {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   padding: 2rem;
   width: 50%;
+}
+@media screen and (max-width: 900px) {
+  .panelContainer {
+    width: 100%;
+  }
 }
 .panelContainer h2 {
   color: #2D1687;
@@ -145,4 +162,23 @@
 .dataTables_length label,
 .dataTableFilter_filter label {
   margin-top: 1rem;
+}
+
+.mobileSideBar {
+  width: 100%;
+  background-color: #2D1687;
+  position: absolute;
+  bottom: 0;
+  display: none;
+}
+.mobileSideBar .panel i {
+  color: white;
+  font-size: 1.7rem;
+}
+@media screen and (max-width: 800px) {
+  .mobileSideBar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+  }
 }/*# sourceMappingURL=admin-panel.css.map */
