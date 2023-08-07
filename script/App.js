@@ -160,11 +160,13 @@ const getQuizs = () => {
       document.querySelector(".ogrenciGiris").style.display="none"
       document.querySelector(".ogrenciKayit").style.display="none"
       document.querySelector(".headerContent").style.display="none"
+      document.querySelector(".ogrenciPanel").style.display="block"
     } else {
       // User is signed out
       // ...
       document.querySelector(".quizsFilterButtons").style.display = "none";
       document.querySelector(".quit").style.display="none"
+      document.querySelector(".ogrenciPanel").style.display="none"
     }
   });
 };
