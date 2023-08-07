@@ -28,47 +28,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 let quizs;
 
-//!quiz girişinde grup adını select yapısını yazdırdım
-// document.addEventListener("DOMContentLoaded", function () {
-//   let filterGrup = document.querySelector(".filterGrup");
-//   const db = getDatabase();
-//   const countRef = ref(db, "gruplar/");
-//   onValue(countRef, (snapshot) => {
-//     let data = Object.keys(snapshot.val());
-//     for (const i of data) {
-//       filterGrup.innerHTML += `
-//             <option>${i}</option>
-//         `;
-//     }
-//   });
-// });
-
 const db = getDatabase();
-
-
-
-
-
-// const db = getDatabase();
-// const countRefOgrenci = ref(db, "sinavlar/");
-// onValue(countRefOgrenci, (snapshot) => {
-//   const urlParams = new URLSearchParams(window.location.search);
-//   const quizId = urlParams.get("id");
-//   let data = snapshot.val();
-//   // console.log(data,quizId);
-
-
-//   questionsArray = Object.keys(data).map((key, index) => {
-//     return {
-//       id: index,
-//       ...data[key],
-//     };
-//   });
-//   // console.log(questionsArray,quizId);
-// });
-
-
-
 
 //!tıklanılan quizin adını aldım
 const urlParams = new URLSearchParams(window.location.search);
@@ -77,7 +37,6 @@ let questionsArray
 const countRef = ref(db, "sinavlar/");
 onValue(countRef, (snapshot) => {
   let data = snapshot.val();
-  // console.log(data);
   questionsArray = Object.keys(data).map((key, index) => {
     return {
       id: index,
@@ -87,9 +46,6 @@ onValue(countRef, (snapshot) => {
 
   //*hangi quizin geleceği filtreledim
   const quizDetail = questionsArray.find((value) => value.id == quizId);
-
-  //*öğrenciye hangi quizi çözdüğünü disabled olarak inputda gösterdim
-  // document.querySelector(".quizName").value = quizDetail.quizBilgi.name;
 
   //*quiz detayında gelen o quize ait bütün soruları obje haline çevirdim
   quizs = Object.values(quizDetail.sorular);
@@ -118,10 +74,8 @@ function quizTimer() {
       clearInterval(myinterval);
       ogrenciBilgileri["sinavPuan"] = dogruSayi * 10;
       sinavSonucKayitEt()
-      // console.log(ogrenciBilgileri);
       document.querySelector(".quizContent").style.display = "none";
-      document.querySelector(".quizEndPoint").innerHTML = `Süren Bitti ${ogrenciBilgileri.ogrenciIsimSoyisim
-        }! Toplam Puanın : ${dogruSayi * 10}`;
+      document.querySelector(".quizEndPoint").innerHTML = `Süren Bitti! Toplam Puanın : ${dogruSayi * 10}`;
     } else {
       if (saniye === 0) {
         dakika--;
@@ -138,18 +92,8 @@ function quizTimer() {
 
 //!sınava başla butonu
 document.querySelector(".quizNext").addEventListener("click", function () {
-  // let quizName = document.querySelector(".quizName").value;
-  // let quizStartNameSurName = document.querySelector(
-  //   ".quizStartNameSurName"
-  // ).value;
-  // let filterGrup = document.querySelector(".filterGrup").value
-  //*sınav başladığında zamanlayıcı başladı
-  quizTimer();
 
-  //*objeye verileri atadım
-  // ogrenciBilgileri["ogrenciIsimSoyisim"] = quizStartNameSurName;
-  // ogrenciBilgileri["quizName"] = quizName;
-  // ogrenciBilgileri["grupName"] = filterGrup;
+  quizTimer();
 
   document.querySelector(".quizStart").style.display = "none";
   document.querySelector(".quiz").style.display = "block";
@@ -161,8 +105,7 @@ document.querySelector(".quizNext").addEventListener("click", function () {
     if (quizs.length == 0) {
       document.querySelector(".quizContent").style.display = "none";
       ogrenciBilgileri["sinavPuan"] = dogruSayi * 10;
-      document.querySelector(".quizEndPoint").innerHTML = `Sınavın Bitti ${ogrenciBilgileri.ogrenciIsimSoyisim
-        }! Toplam Puanın : ${dogruSayi * 10}`;
+      document.querySelector(".quizEndPoint").innerHTML = `Sınavın Bitti! Toplam Puanın : ${dogruSayi * 10}`;
       //*bütün soruları zaman dolmadan çözerse time durduruldu!
       clearInterval(myinterval);
       sinavSonucKayitEt()
@@ -211,44 +154,28 @@ document.querySelector(".quizNext").addEventListener("click", function () {
 
 
 //!öğrencilerin sınav sonuçlarını kayıt ettim
-function sinavSonucKayitEt(){
-  console.log("quiz bilgileri : ",questionsArray);
+function sinavSonucKayitEt() {
+  console.log("quiz bilgileri : ", questionsArray);
   onAuthStateChanged(auth, (user) => {
     const urlParams = new URLSearchParams(window.location.search);
     const quizId = urlParams.get("id");
     const db = getDatabase();
-    set(ref(db, 'ogrenciler/' + user.uid +  "/sinavlar/" + quizId + "/quizBilgi/"), {
-      cozulduMu:true,
-      name:questionsArray[quizId].quizBilgi.name,
-      puan:ogrenciBilgileri.sinavPuan,
-      quizContentBody:questionsArray[quizId].quizBilgi.quizContentBody,
-      quizEtiket:questionsArray[quizId].quizBilgi.quizEtiket,
-      quizCategory:questionsArray[quizId].quizBilgi.quizCategory
+    set(ref(db, 'ogrenciler/' + user.uid + "/sinavlar/" + quizId + "/quizBilgi/"), {
+      cozulduMu: true,
+      name: questionsArray[quizId].quizBilgi.name,
+      puan: ogrenciBilgileri.sinavPuan,
+      quizContentBody: questionsArray[quizId].quizBilgi.quizContentBody,
+      quizEtiket: questionsArray[quizId].quizBilgi.quizEtiket,
+      quizCategory: questionsArray[quizId].quizBilgi.quizCategory
     })
   });
 }
 
-
-
-// function sinavSonucKayitEt() {
-
-//   console.log(ogrenciBilgileri);
-//   const db = getDatabase();
-//   set(ref(db, 'ogrenciler/' + ogrenciBilgileri.ogrenciIsimSoyisim + " " + ogrenciBilgileri.quizName), {
-//     quizName: ogrenciBilgileri.quizName,
-//     quizStartNameSurName: ogrenciBilgileri.ogrenciIsimSoyisim,
-//     sinavSonuc: ogrenciBilgileri.sinavPuan,
-//     grupName: ogrenciBilgileri.grupName
-//   })
-// }
-
-
 //!sayfa yenilendiğinde soru soruyorum!
 //*sayfanın yenilenme durumunda herhangi bir kayıt olmuyor, yenilenme iptal edildiğinde sınav kaldığı yerden devam ediyor
-// window.onbeforeunload = function () {
-//   return "Sayfayı yenilemek istediğinizden emin misiniz?";
-// }
-
+window.onbeforeunload = function () {
+  return "Sayfayı yenilemek istediğinizden emin misiniz?";
+}
 
 //!öğrencinin daha önceden sınava girip girmediğini baktım
 //*öğrenci sınava girmişse ana sayfaya yönlendirme yaptım
