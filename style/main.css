@@ -3,6 +3,7 @@
 @import "admin-panel/admin-panel.css";
 @import "data-table/data-table.css";
 @import "ogrenci-login/ogrenci-login.css";
+@import "ogrenci-register/ogrenci-register.css";
 img {
   max-width: 100%;
 }

@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style/main.css" />
 </head>
-<body>
-    
 
-    <h2>Öğrenci Kayıt Ol</h2>
-    <input type="text" class="registerNameSurname" placeholder="Adınız Soyadınız">
-    <select class="registerGrupName">
-        
-    </select>
-    <input type="text" class="registerEmail" placeholder="email">
-    <input type="text" class="registerPass" placeholder="registerPass">
-    <button class="register">Kayıt Ol</button>
+<body>
+
+    <section class="registerSec">
+        <div class="container">
+            <div class="row justify-content-center vh-100 align-items-center">
+                <div class="col-6">
+                    <div class="registerDiv">
+                        <h2>Öğrenci Kayıt Ol</h2>
+                        <input type="text" class="registerNameSurname" placeholder="Adınız Soyadınız">
+                        <label class="text-danger" for="">*Lütfen Sınıfınızı Seçiniz</label>
+                        <select class="registerGrupName">
+                        </select>
+                        <input type="text" class="registerEmail" placeholder="Email Adresiniz">
+                        <input type="password" class="registerPass" placeholder="Parolanız">
+                        <input type="password" class="registerPass2" placeholder="Parolanızı Tekrar Girin">
+                        <button class="register">Kayıt Ol</button>
+                        <p class="registerError text-danger">*En Az 6 Karakterli Güçlü Bir Şifre Giriniz</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
 
     <script type="module" src="script/ogrenci-register.js"></script>
 </body>
+
 </html>

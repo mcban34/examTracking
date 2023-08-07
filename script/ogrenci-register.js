@@ -46,25 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function handleRegistrationSuccess(userCredential, registerNameSurname, registerGrupName) {
-    // Kullanıcının UID'sini alın
     const uid = userCredential.user.uid;
-
-    // Kullanıcının adı ve diğer bilgileri
     const kullaniciAdi = registerNameSurname;
     const email = userCredential.user.email;
-
-    // Realtime Database bağlantısını alın
-    // const database = firebase.database();
-
-    // // Kullanıcının bilgilerini Realtime Database'e kaydedin
-    // database.ref("ogrenciler/" + uid).set({
-    //     ogrenciBilgi:{
-    //         kullaniciAdi: kullaniciAdi,
-    //         email: email,
-    //     },
-    //     sinavlar:sinavlar[0]
-    // })
-
     const db = getDatabase();
     set(ref(db, "ogrenciler/" + uid), {
         ogrenciBilgi: {
@@ -81,24 +65,25 @@ function handleRegistrationSuccess(userCredential, registerNameSurname, register
 document.querySelector(".register").addEventListener("click", function () {
     let email = document.querySelector(".registerEmail").value
     let password = document.querySelector(".registerPass").value
+    let password2 = document.querySelector(".registerPass2").value
     let registerNameSurname = document.querySelector(".registerNameSurname").value
     let registerGrupName = document.querySelector(".registerGrupName").value
-    createUserWithEmailAndPassword(auth, email, password, registerNameSurname, registerGrupName)
-        .then((userCredential) => {
-            console.log("katıt başarılı");
-            console.log(sinavlar[0]);
-            //*sınavları çektim
-            handleRegistrationSuccess(userCredential, registerNameSurname, registerGrupName)
 
-            // const db = getDatabase();
-            // set(ref(db, "ogrenciler/" +  registerNameSurname + " " + registerGrupName), {
-            //     sinav: {
-            //       sinavlar:sinavlar[0]
-            //     },
-            // });
-            window.location.href = "index.html"
-        })
-        .catch((error) => {
-            console.log("hata yakalandı", error)
-        })
+    if (password == password2) {
+        createUserWithEmailAndPassword(auth, email, password, registerNameSurname, registerGrupName)
+            .then((userCredential) => {
+                console.log("katıt başarılı");
+                console.log(sinavlar[0]);
+                //*sınavları çektim
+                handleRegistrationSuccess(userCredential, registerNameSurname, registerGrupName)
+                window.location.href = "index.html"
+            })
+            .catch((error) => {
+                console.log("hata yakalandı", error)
+            })
+    }
+    else{
+        document.querySelector(".registerError").innerHTML="Girdiğiniz Şifreler Uyuşmuyor!"
+    }
+
 })
