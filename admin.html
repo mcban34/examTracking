@@ -92,7 +92,7 @@
 
         <div id="panel2" style="display: none;">
           <div class="panel2Content">
-            <div class="panel2Container">
+            <div class="panel2Container panelContainer">
               <h2>Soru Oluştur</h2>
               <select class="filterQuizs"></select>
               <label for="">*Lütfen Soruyu Hangi Quize Oluşturucağınızı Belirtiniz!</label>
@@ -108,22 +108,30 @@
         </div>
 
         <div id="panel3" style="display: none;">
-          <h2>Quiz Başlığı Yarat</h2>
-          <input type="text" class="quizTitle" placeholder="quiz başlığını giriniz">
-          <textarea name="" id="" class="quizContentBody" cols="30" placeholder="quiz içeriği hakkında..."
-            rows="10"></textarea>
-          <input type="text" class="quizEtiket" placeholder="quiz hakkında etiketler">
-          <select class="quizGenelKategori">
-            <option>Frontend Sınavları</option>
-            <option>Backend Sınavları</option>
-          </select>
-          <button class="createQuizTitle">Quiz Başlığı Yarat!</button>
+          <div class="panel3Content">
+            <div class="panel3Container panelContainer">
+              <h2>Quiz Başlığı Oluştur</h2>
+              <input type="text" class="quizTitle" placeholder="quiz başlığını giriniz">
+              <textarea name="" id="" class="quizContentBody" cols="30" placeholder="quiz içeriği hakkında..."
+                rows="10"></textarea>
+              <input type="text" class="quizEtiket" placeholder="quiz hakkında etiketler">
+              <select class="quizGenelKategori">
+                <option>Frontend Sınavları</option>
+                <option>Backend Sınavları</option>
+              </select>
+              <button class="createQuizTitle">Quiz Başlığı Oluştur</button>
+            </div>
+          </div>
         </div>
 
         <div id="panel4" style="display: none;">
-          <h2>grup Yarat</h2>
-          <input type="text" class="grupName" placeholder="Grup Adını Giriniz">
-          <button class="createGroup">Grup Yarat</button>
+          <div class="panel4Content">
+            <div class="panel4Container panelContainer">
+              <h2>Sınıf Oluştur</h2>
+              <input type="text" class="grupName" placeholder="Sınıf Adını Giriniz">
+              <button class="createGroup">Sınıf Oluştur</button>
+            </div>
+          </div>
         </div>
 
         <div id="panel5" style="display: none;">

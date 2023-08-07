@@ -83,34 +83,45 @@
 .admin-panel .panelContent .downloadTable .bi {
   margin-right: 0.5rem;
 }
-.admin-panel .panelContent #panel2 .panel2Content {
+.admin-panel .panelContent .panel2Content,
+.admin-panel .panelContent .panel3Content,
+.admin-panel .panelContent .panel4Content {
   width: 100%;
   height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.admin-panel .panelContent #panel2 .panel2Content .panel2Container {
+
+.panelContainer {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   padding: 2rem;
   width: 50%;
 }
-.admin-panel .panelContent #panel2 .panel2Content .panel2Container input, .admin-panel .panelContent #panel2 .panel2Content .panel2Container select, .admin-panel .panelContent #panel2 .panel2Content .panel2Container button {
-  width: 100%;
-  height: 3rem;
-  margin-top: 1rem;
+.panelContainer h2 {
+  color: #2D1687;
+  text-align: center;
 }
-.admin-panel .panelContent #panel2 .panel2Content .panel2Container textarea {
+.panelContainer input,
+.panelContainer select,
+.panelContainer button {
+  width: 100%;
+  height: 2.5rem;
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+}
+.panelContainer textarea {
   width: 100%;
   margin-top: 1rem;
   resize: none;
+  padding: 0.5rem;
 }
-.admin-panel .panelContent #panel2 .panel2Content .panel2Container button {
+.panelContainer button {
   background-color: #FF7D56;
   border: none;
   color: white;
 }
-.admin-panel .panelContent #panel2 .panel2Content .panel2Container label {
+.panelContainer label {
   color: rgb(255, 72, 72);
   font-size: 0.8rem;
 }/*# sourceMappingURL=admin-panel.css.map */

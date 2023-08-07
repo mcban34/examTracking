@@ -63,74 +63,97 @@ $btnOrange : #FF7D56;
         width: 80%;
         padding: 3rem;
         overflow: auto;
-        .homeCards{
+
+        .homeCards {
             display: flex;
             width: 100%;
             justify-content: space-between;
             margin-top: 1rem;
-            .homeCard{
+
+            .homeCard {
                 display: flex;
                 justify-content: space-between;
                 width: 22%;
                 box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
                 padding: .8rem;
-                .homeCardRight{
+
+                .homeCardRight {
                     width: 50px;
                 }
-                .homeCardLeft{
-                    h6{
+
+                .homeCardLeft {
+                    h6 {
                         color: #7e7e7e;
                     }
-                    h5{
+
+                    h5 {
                         color: $dark;
                         font-weight: 800;
                     }
                 }
             }
         }
-        .downloadTable{
+
+        .downloadTable {
             background-color: #1d6f42;
             border: none;
             color: white;
             padding: .5rem 2rem;
             margin-top: 1rem;
-            .bi{
+
+            .bi {
                 margin-right: .5rem;
             }
         }
 
-        #panel2{
-            .panel2Content{
-                width: 100%;
-                height: 90vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                .panel2Container{
-                    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-                    padding: 2rem;
-                    width: 50%;
-                    input,select,button{
-                        width: 100%;
-                        height: 3rem;
-                        margin-top: 1rem;
-                    }
-                    textarea{
-                        width: 100%;
-                        margin-top: 1rem;
-                        resize: none;
-                    }
-                    button{
-                        background-color: $btnOrange;
-                        border: none;
-                        color: white;
-                    }
-                    label{
-                        color: rgb(255, 72, 72);
-                        font-size: .8rem;
-                    }
-                }
-            }
+        .panel2Content,
+        .panel3Content,
+        .panel4Content {
+            width: 100%;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+    }
+}
+
+
+
+.panelContainer {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 2rem;
+    width: 50%;
+
+    h2 {
+        color: $darkPurple;
+        text-align: center;
+    }
+
+    input,
+    select,
+    button {
+        width: 100%;
+        height: 2.5rem;
+        margin-top: 1rem;
+        padding: 0 .5rem;
+    }
+
+    textarea {
+        width: 100%;
+        margin-top: 1rem;
+        resize: none;
+        padding: .5rem;
+    }
+
+    button {
+        background-color: $btnOrange;
+        border: none;
+        color: white;
+    }
+
+    label {
+        color: rgb(255, 72, 72);
+        font-size: .8rem;
     }
 }

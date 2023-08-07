@@ -19,7 +19,7 @@
   color: white;
   cursor: pointer;
 }
-.dataTables_wrapper .dataTables_paginate span .current {
+.dataTables_wrapper .dataTables_paginate span .paginate_button.current {
   background: #2D1687 !important;
   font-weight: bold;
   color: white !important;
