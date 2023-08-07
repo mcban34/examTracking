@@ -1,16 +1,16 @@
-body {
+.loginSec {
   background: linear-gradient(#2D1687, #552BC8);
 }
-body .loginDiv {
+.loginSec .loginDiv {
   background-color: white;
   padding: 2rem;
 }
-body .loginDiv .loginEmail, body .loginDiv .loginPass {
+.loginSec .loginDiv .loginEmail, .loginSec .loginDiv .loginPass {
   width: 100%;
   height: 2.5rem;
   margin-top: 1rem;
 }
-body .loginDiv .login {
+.loginSec .loginDiv .login {
   background-color: #FF7D56;
   color: white;
   border: none;
