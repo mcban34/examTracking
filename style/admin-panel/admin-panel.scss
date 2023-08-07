@@ -115,6 +115,29 @@ $btnOrange : #FF7D56;
             align-items: center;
             justify-content: center;
         }
+
+        #panel5 {
+            .ogrenciFiltrele{
+                .selectGrup,.selectOgreci{
+                    padding: .5rem 2rem;
+                }
+            }
+
+            .filterGrupBtn,.filterOgrenci {
+                background-color: $btnOrange;
+                color: white;
+                border: none;
+                margin-right: .5rem;
+                padding: .5rem 2rem;
+            }
+
+            .clearGroupFilter,.clearOgrenciFilter {
+                background-color: rgb(230, 22, 22);
+                border: none;
+                padding: .5rem 2rem;
+                color: white;
+            }
+        }
     }
 }
 
@@ -155,5 +178,12 @@ $btnOrange : #FF7D56;
     label {
         color: rgb(255, 72, 72);
         font-size: .8rem;
+    }
+}
+
+.dataTables_length,
+.dataTableFilter_filter {
+    label {
+        margin-top: 1rem;
     }
 }

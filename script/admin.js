@@ -119,6 +119,7 @@ const getFilterGrupButtons = async () => {
     for (const i of data) {
       let filterGroupBtn = document.createElement("button")
       filterGroupBtn.textContent = i.grup.Grupname
+      filterGroupBtn.className="filterGrupBtn"
       filterGroupBtn.addEventListener("click", function () {
         const group = this.innerHTML;
 

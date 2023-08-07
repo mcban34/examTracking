@@ -28,7 +28,7 @@
         <div class="panel" onclick="showContent('panel4')"><i class="bi bi-person-fill-add"></i><span>Sınıf Oluştur</span>
         </div>
         <div class="panel" onclick="showContent('panel5')"><i class="bi bi-list-columns-reverse"></i><span>Öğrenci &
-            Grup Filtrele</span></div>
+            Sınıf Filtrele</span></div>
         <button class="quit"><i class="bi bi-box-arrow-left"></i>Çıkış</button>
       </div>
       <div class="panelContent">
@@ -135,27 +135,27 @@
         </div>
 
         <div id="panel5" style="display: none;">
-          <h5>Öğrenci Filtrele</h5>
+          <h2>Öğrenci & Sınıf Filtrele</h2>
+          <h5 class="mt-3 mb-3">Öğrenci Filtrele</h5>
           <div class="ogrenciFiltrele">
             <select class="selectGrup">
-              <option value="">Grup Seçiniz</option>
+              <option value="">Sınıf Seçiniz</option>
             </select>
 
             <select class="selectOgreci">
               <option value="">Öğreci Seçiniz</option>
             </select>
 
-            <button class="filterOgrenci">Öğrenci Filtrele</button>
+            <button class="filterOgrenci ms-2">Öğrenci Filtrele</button>
             <button class="clearOgrenciFilter">Öğrenci Sıfırla</button>
-            <h3 class="ogrenciOrtalama"></h3>
+            <h6 class="ogrenciOrtalama mt-3"></h6>
           </div>
 
-          <h2>Öğrenci Notları</h2>
-          <h5>Grup Filtrele</h5>
-          <div class="filterGroupButton">
-            <button class="clearGroupFilter">Grup Sıfırla</button>
+          <h5 class="mt-5 mb-3">Sınıf Filtrele</h5>
+          <div class="filterGroupButton mb-5">
+            <button class="clearGroupFilter">Sınıf Sıfırla</button>
+            <h6 class="grupNotOrtalama"></h6>
           </div>
-          <h3 class="grupNotOrtalama"></h3>
 
           <div class="ogrenciNotlari">
             <table border="1" id="dataTableFilter">

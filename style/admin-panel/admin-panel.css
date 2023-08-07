@@ -92,6 +92,22 @@
   align-items: center;
   justify-content: center;
 }
+.admin-panel .panelContent #panel5 .ogrenciFiltrele .selectGrup, .admin-panel .panelContent #panel5 .ogrenciFiltrele .selectOgreci {
+  padding: 0.5rem 2rem;
+}
+.admin-panel .panelContent #panel5 .filterGrupBtn, .admin-panel .panelContent #panel5 .filterOgrenci {
+  background-color: #FF7D56;
+  color: white;
+  border: none;
+  margin-right: 0.5rem;
+  padding: 0.5rem 2rem;
+}
+.admin-panel .panelContent #panel5 .clearGroupFilter, .admin-panel .panelContent #panel5 .clearOgrenciFilter {
+  background-color: rgb(230, 22, 22);
+  border: none;
+  padding: 0.5rem 2rem;
+  color: white;
+}
 
 .panelContainer {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -124,4 +140,9 @@
 .panelContainer label {
   color: rgb(255, 72, 72);
   font-size: 0.8rem;
+}
+
+.dataTables_length label,
+.dataTableFilter_filter label {
+  margin-top: 1rem;
 }/*# sourceMappingURL=admin-panel.css.map */
