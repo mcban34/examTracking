@@ -49,6 +49,21 @@ h1, h2, h3, h4, h5, h6, p {
 .quizDetailStart #timerSec p i {
   margin-right: 0.5rem;
 }
+@media screen and (max-width: 800px) {
+  .quizDetailStart #timerSec p {
+    padding-right: 0;
+    font-size: 1rem;
+  }
+  .quizDetailStart #timerSec p b {
+    display: none;
+  }
+  .quizDetailStart #timerSec p i {
+    font-size: 1.5rem;
+  }
+  .quizDetailStart #timerSec span {
+    width: 130px;
+  }
+}
 
 .quiz {
   background-color: white;

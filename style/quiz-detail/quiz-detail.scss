@@ -52,6 +52,21 @@ h1,h2,h3,h4,h5,h6,p{
             margin-right: .5rem;
         }
       }
+      @media screen and (max-width:800px) {
+        p{
+            padding-right: 0;
+            font-size: 1rem;
+            b{
+                display: none;
+            }
+            i{
+                font-size: 1.5rem;
+            }
+        }
+        span{
+            width: 130px;
+        }
+      }
     }
 }
 
