@@ -57,6 +57,7 @@ $btnOrange : #FF7D56;
                 padding: 0 .5rem;
             }
         }
+
         @media screen and (max-width:800px) {
             display: none;
         }
@@ -95,6 +96,15 @@ $btnOrange : #FF7D56;
                     }
                 }
             }
+
+            @media screen and (max-width:800px) {
+                flex-wrap: wrap;
+                .homeCard {
+                    display: flex;
+                    width: 49%;
+                    margin-top: 1rem;
+                }
+            }
         }
 
         .downloadTable {
@@ -120,13 +130,16 @@ $btnOrange : #FF7D56;
         }
 
         #panel5 {
-            .ogrenciFiltrele{
-                .selectGrup,.selectOgreci{
+            .ogrenciFiltrele {
+
+                .selectGrup,
+                .selectOgreci {
                     padding: .5rem 2rem;
                 }
             }
 
-            .filterGrupBtn,.filterOgrenci {
+            .filterGrupBtn,
+            .filterOgrenci {
                 background-color: $btnOrange;
                 color: white;
                 border: none;
@@ -134,17 +147,25 @@ $btnOrange : #FF7D56;
                 padding: .5rem 2rem;
             }
 
-            .clearGroupFilter,.clearOgrenciFilter {
+            .clearGroupFilter,
+            .clearOgrenciFilter {
                 background-color: rgb(230, 22, 22);
                 border: none;
                 padding: .5rem 2rem;
                 color: white;
             }
         }
+
         @media screen and (max-width:800px) {
             width: 100%;
-            height: 90vh;
+            height: 92vh;
             padding: .5rem;
+
+            .filterGrupBtn,
+            .filterOgrenci {
+                margin-top: 1rem;
+                margin-left: 0 !important;
+            }
         }
     }
 }
@@ -155,9 +176,11 @@ $btnOrange : #FF7D56;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     padding: 2rem;
     width: 50%;
+
     @media screen and (max-width:900px) {
         width: 100%;
     }
+
     h2 {
         color: $darkPurple;
         text-align: center;
@@ -198,22 +221,28 @@ $btnOrange : #FF7D56;
     }
 }
 
-.mobileSideBar{
+.mobileSideBar {
     width: 100%;
     // height: 10vh;
     background-color: $darkPurple;
     position: absolute;
     bottom: 0;
     display: none;
-    .panel{
-        i{
+
+    .panel {
+        i {
             color: white;
             font-size: 1.7rem;
         }
     }
+
+    button {
+        border: none;
+    }
+
     @media screen and (max-width:800px) {
         display: flex;
         justify-content: space-between;
-        padding: 1rem;
+        padding: .5rem 1rem;
     }
 }

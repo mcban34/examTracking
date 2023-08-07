@@ -78,6 +78,16 @@
   color: #2B444E;
   font-weight: 800;
 }
+@media screen and (max-width: 800px) {
+  .admin-panel .panelContent .homeCards {
+    flex-wrap: wrap;
+  }
+  .admin-panel .panelContent .homeCards .homeCard {
+    display: flex;
+    width: 49%;
+    margin-top: 1rem;
+  }
+}
 .admin-panel .panelContent .downloadTable {
   background-color: #1d6f42;
   border: none;
@@ -97,17 +107,20 @@
   align-items: center;
   justify-content: center;
 }
-.admin-panel .panelContent #panel5 .ogrenciFiltrele .selectGrup, .admin-panel .panelContent #panel5 .ogrenciFiltrele .selectOgreci {
+.admin-panel .panelContent #panel5 .ogrenciFiltrele .selectGrup,
+.admin-panel .panelContent #panel5 .ogrenciFiltrele .selectOgreci {
   padding: 0.5rem 2rem;
 }
-.admin-panel .panelContent #panel5 .filterGrupBtn, .admin-panel .panelContent #panel5 .filterOgrenci {
+.admin-panel .panelContent #panel5 .filterGrupBtn,
+.admin-panel .panelContent #panel5 .filterOgrenci {
   background-color: #FF7D56;
   color: white;
   border: none;
   margin-right: 0.5rem;
   padding: 0.5rem 2rem;
 }
-.admin-panel .panelContent #panel5 .clearGroupFilter, .admin-panel .panelContent #panel5 .clearOgrenciFilter {
+.admin-panel .panelContent #panel5 .clearGroupFilter,
+.admin-panel .panelContent #panel5 .clearOgrenciFilter {
   background-color: rgb(230, 22, 22);
   border: none;
   padding: 0.5rem 2rem;
@@ -116,8 +129,13 @@
 @media screen and (max-width: 800px) {
   .admin-panel .panelContent {
     width: 100%;
-    height: 90vh;
+    height: 92vh;
     padding: 0.5rem;
+  }
+  .admin-panel .panelContent .filterGrupBtn,
+  .admin-panel .panelContent .filterOgrenci {
+    margin-top: 1rem;
+    margin-left: 0 !important;
   }
 }
 
@@ -175,10 +193,13 @@
   color: white;
   font-size: 1.7rem;
 }
+.mobileSideBar button {
+  border: none;
+}
 @media screen and (max-width: 800px) {
   .mobileSideBar {
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
   }
 }/*# sourceMappingURL=admin-panel.css.map */
