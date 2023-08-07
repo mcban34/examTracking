@@ -16,12 +16,16 @@
 .admin-panel .sideBar .panel:first-child {
   margin-top: 0 !important;
 }
+.admin-panel .sideBar .panel span {
+  margin-left: 0.5rem;
+  font-weight: bold;
+}
 .admin-panel .sideBar .activePanelBtn {
   background-color: #552BC8;
+  border-left: 5px solid white;
 }
 .admin-panel .panelContent {
   width: 80%;
-  background-color: aliceblue;
   padding: 3rem;
 }
 .admin-panel .sideBar,

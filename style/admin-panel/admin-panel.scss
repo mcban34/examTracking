@@ -20,17 +20,20 @@ $btnOrange : #FF7D56;
             &:first-child{
                 margin-top: 0 !important;
             }
+            span{
+                margin-left: .5rem;
+                font-weight: bold;
+            }
         }
 
         .activePanelBtn {
             background-color: $lightPurple;
-            
+            border-left: 5px solid white;
         }
     }
 
     .panelContent {
         width: 80%;
-        background-color: aliceblue;
         padding: 3rem;
     }
 
