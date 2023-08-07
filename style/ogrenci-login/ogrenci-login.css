@@ -1,0 +1,18 @@
+body {
+  background: linear-gradient(#2D1687, #552BC8);
+}
+body .loginDiv {
+  background-color: white;
+  padding: 2rem;
+}
+body .loginDiv .loginEmail, body .loginDiv .loginPass {
+  width: 100%;
+  height: 2.5rem;
+  margin-top: 1rem;
+}
+body .loginDiv .login {
+  background-color: #FF7D56;
+  color: white;
+  border: none;
+  padding: 1rem 0;
+}/*# sourceMappingURL=ogrenci-login.css.map */

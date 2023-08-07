@@ -1,0 +1,23 @@
+$dark : #2B444E;
+$lightPurple : #552BC8;
+$darkPurple : #2D1687;
+$btnOrange : #FF7D56;
+
+body{
+    background: linear-gradient($darkPurple,$lightPurple);
+    .loginDiv{
+        background-color: white;
+        padding: 2rem;
+        .loginEmail,.loginPass{
+            width: 100%;
+            height: 2.5rem;
+            margin-top: 1rem;
+        }
+        .login{
+            background-color: $btnOrange;
+            color: white;
+            border: none;
+            padding: 1rem 0;
+        }
+    }
+}
