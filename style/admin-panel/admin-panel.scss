@@ -3,20 +3,39 @@ $lightPurple : #552BC8;
 $darkPurple : #2D1687;
 $btnOrange : #FF7D56;
 
-.admin-panel{
+.admin-panel {
     width: 100%;
     display: flex;
-    .sideBar{
+
+    .sideBar {
         width: 20%;
-        .panel{
+        background: linear-gradient($darkPurple, $lightPurple);
+        color: white;
+        padding: 3rem 0;
+
+        .panel {
             cursor: pointer;
+            margin-top: 1rem;
+            padding: 1rem;
+            &:first-child{
+                margin-top: 0 !important;
+            }
+        }
+
+        .activePanelBtn {
+            background-color: $lightPurple;
+            
         }
     }
-    .panelContent{
-        width: 80%; 
+
+    .panelContent {
+        width: 80%;
         background-color: aliceblue;
+        padding: 3rem;
     }
-    .sideBar,.panelContent{
+
+    .sideBar,
+    .panelContent {
         height: 100vh;
-    } 
-} 
+    }
+}

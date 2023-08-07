@@ -4,14 +4,27 @@
 }
 .admin-panel .sideBar {
   width: 20%;
+  background: linear-gradient(#2D1687, #552BC8);
+  color: white;
+  padding: 3rem 0;
 }
 .admin-panel .sideBar .panel {
   cursor: pointer;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+.admin-panel .sideBar .panel:first-child {
+  margin-top: 0 !important;
+}
+.admin-panel .sideBar .activePanelBtn {
+  background-color: #552BC8;
 }
 .admin-panel .panelContent {
   width: 80%;
   background-color: aliceblue;
+  padding: 3rem;
 }
-.admin-panel .sideBar, .admin-panel .panelContent {
+.admin-panel .sideBar,
+.admin-panel .panelContent {
   height: 100vh;
 }/*# sourceMappingURL=admin-panel.css.map */

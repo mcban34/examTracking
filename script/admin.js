@@ -34,6 +34,18 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
+let panelsBtn = document.querySelectorAll(".panel")
+for (const panel of panelsBtn) {
+  panel.addEventListener("click", function() {
+    // Önce tüm panellerin üzerindeki "activePanelBtn" sınıfını kaldırın
+    for (const otherPanel of panelsBtn) {
+      otherPanel.classList.remove("activePanelBtn");
+    }
+    
+    // Sadece tıklanan panele "activePanelBtn" sınıfını ekleyin
+    panel.classList.add("activePanelBtn");
+  });
+}
 
 //!admin paneline öğrenciler,gruplar,sınavlar vs. hakkında bilgiyi card şeklinde getirdim
 document.addEventListener("DOMContentLoaded", async function () {
@@ -326,7 +338,6 @@ function datatableVerileriGoster(veriListesi) {
   });
 
 }
-
 
 
 
