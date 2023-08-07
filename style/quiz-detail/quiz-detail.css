@@ -126,4 +126,7 @@ h1, h2, h3, h4, h5, h6, p {
   to {
     margin-left: 10px;
   }
+}
+.quiz .quizEndPoint {
+  padding: 2rem;
 }/*# sourceMappingURL=quiz-detail.css.map */
