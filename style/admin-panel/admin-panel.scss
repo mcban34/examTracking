@@ -7,17 +7,24 @@ $btnOrange : #FF7D56;
     width: 100%;
     display: flex;
 
+    .sideBar,
+    .panelContent {
+        height: 100vh;
+    }
+
     .sideBar {
         width: 20%;
         background: linear-gradient($darkPurple, $lightPurple);
         color: white;
         padding: 3rem 0;
         position: relative;
+
         .panel {
             cursor: pointer;
             margin-top: 1rem;
             padding: 1rem;
             transition: padding-left .34s;
+
             // text-align: end;
             &:first-child {
                 margin-top: 0 !important;
@@ -45,7 +52,8 @@ $btnOrange : #FF7D56;
             bottom: 0;
             padding: 1rem 0;
             font-weight: bold;
-            i{
+
+            i {
                 padding: 0 .5rem;
             }
         }
@@ -55,10 +63,29 @@ $btnOrange : #FF7D56;
         width: 80%;
         padding: 3rem;
         overflow: auto;
-    }
-
-    .sideBar,
-    .panelContent {
-        height: 100vh;
+        .homeCards{
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            .homeCard{
+                display: flex;
+                justify-content: space-between;
+                width: 22%;
+                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+                padding: .8rem;
+                .homeCardRight{
+                    width: 50px;
+                }
+                .homeCardLeft{
+                    h6{
+                        color: #7e7e7e;
+                    }
+                    h5{
+                        color: $dark;
+                        font-weight: 800;
+                    }
+                }
+            }
+        }
     }
 }

@@ -19,21 +19,60 @@
   <div class="container-fluid">
     <section class="admin-panel">
       <div class="sideBar">
-        <div class="panel activePanelBtn" onclick="showContent('panel1')"><i class="bi bi-house-fill"></i><span>Ana Sayfa</span></div>
-        <div class="panel" onclick="showContent('panel2')"><i class="bi bi-question-circle-fill"></i><span>Soru Yarat</span></div>
-        <div class="panel" onclick="showContent('panel3')"><i class="bi bi-bookmark-plus-fill"></i><span>Quiz Başlığı Yarat</span></div>
-        <div class="panel" onclick="showContent('panel4')"><i class="bi bi-person-fill-add"></i><span>Grup Yarat</span></div>
-        <div class="panel" onclick="showContent('panel5')"><i class="bi bi-list-columns-reverse"></i><span>Öğrenci & Grup Filtrele</span></div>
+        <div class="panel activePanelBtn" onclick="showContent('panel1')"><i class="bi bi-house-fill"></i><span>Ana
+            Sayfa</span></div>
+        <div class="panel" onclick="showContent('panel2')"><i class="bi bi-question-circle-fill"></i><span>Soru
+            Yarat</span></div>
+        <div class="panel" onclick="showContent('panel3')"><i class="bi bi-bookmark-plus-fill"></i><span>Quiz Başlığı
+            Yarat</span></div>
+        <div class="panel" onclick="showContent('panel4')"><i class="bi bi-person-fill-add"></i><span>Grup Yarat</span>
+        </div>
+        <div class="panel" onclick="showContent('panel5')"><i class="bi bi-list-columns-reverse"></i><span>Öğrenci &
+            Grup Filtrele</span></div>
         <button class="quit"><i class="bi bi-box-arrow-left"></i>Çıkış</button>
       </div>
       <div class="panelContent">
         <h2>Hoşgeldin Admin!</h2>
 
         <div id="panel1">
-          <h5 class="toplamSinav">Toplam Sınavlar : </h5>
-          <h5 class="toplamGrup">Toplam Gruplar : </h5>
-          <h5 class=" toplamOgrenci">Toplam Öğrenci : </h5>
-          <h5 class="ogrencilerOrtalama">Öğrenci Ortalama : </h5>
+          <div class="homeCards">
+            <div class="homeCard">
+              <div class="homeCardLeft">
+                <h6>Sınavlar</h6>
+                <h5 class="toplamSinav"></h5>
+              </div>
+              <div class="homeCardRight">
+                <img src="img/sinav.png" alt="">
+              </div>
+            </div>
+            <div class="homeCard">
+              <div class="homeCardLeft">
+                <h6>Sınıflar</h6>
+                <h5 class="toplamGrup"></h5>
+              </div>
+              <div class="homeCardRight">
+                <img src="img/siniflar.png" alt="">
+              </div>
+            </div>
+            <div class="homeCard">
+              <div class="homeCardLeft">
+                <h6>Öğrenciler</h6>
+                <h5 class=" toplamOgrenci"></h5>
+              </div>
+              <div class="homeCardRight">
+                <img src="img/ogrenci.png" alt="">
+              </div>
+            </div>
+            <div class="homeCard">
+              <div class="homeCardLeft">
+                <h6>Genel Ortalama</h6>
+                <h5 class="ogrencilerOrtalama"></h5>
+              </div>
+              <div class="homeCardRight">
+                <img src="img/ortalama.png" alt="">
+              </div>
+            </div>
+          </div>
           <br><br>
           <div class="ogrenciNotlari">
             <table border="1" id="dataTable">

@@ -2,6 +2,10 @@
   width: 100%;
   display: flex;
 }
+.admin-panel .sideBar,
+.admin-panel .panelContent {
+  height: 100vh;
+}
 .admin-panel .sideBar {
   width: 20%;
   background: linear-gradient(#2D1687, #552BC8);
@@ -46,7 +50,25 @@
   padding: 3rem;
   overflow: auto;
 }
-.admin-panel .sideBar,
-.admin-panel .panelContent {
-  height: 100vh;
+.admin-panel .panelContent .homeCards {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.admin-panel .panelContent .homeCards .homeCard {
+  display: flex;
+  justify-content: space-between;
+  width: 22%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 0.8rem;
+}
+.admin-panel .panelContent .homeCards .homeCard .homeCardRight {
+  width: 50px;
+}
+.admin-panel .panelContent .homeCards .homeCard .homeCardLeft h6 {
+  color: #7e7e7e;
+}
+.admin-panel .panelContent .homeCards .homeCard .homeCardLeft h5 {
+  color: #2B444E;
+  font-weight: 800;
 }/*# sourceMappingURL=admin-panel.css.map */

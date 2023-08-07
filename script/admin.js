@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   onValue(countRefOgrenciler, (snapshot) => {
     //*toplam ogrenciler listelendi
     let data = Object.values(snapshot.val());
-    document.querySelector(".toplamOgrenci").innerHTML = `Toplam Öğrenci : ${data.length}`
+    document.querySelector(".toplamOgrenci").innerHTML = `${data.length}+`
 
     const cozulenSinavlar = []
     for (const i of data) {
@@ -71,21 +71,21 @@ document.addEventListener("DOMContentLoaded", async function () {
     cozulenSinavlar.forEach(element => {
       toplamSinavPuanlari += element.quizPuan
     });
-    document.querySelector(".ogrencilerOrtalama").innerHTML = `Öğrenci Ortalama : ${(toplamSinavPuanlari / cozulenSinavlar.length).toFixed(2)}`
+    document.querySelector(".ogrencilerOrtalama").innerHTML = `${(toplamSinavPuanlari / cozulenSinavlar.length).toFixed(2)}+`
   })
 
   //*toplam sınavlar listelendi
   const countRefSinavlar = await ref(db, "sinavlar/");
   onValue(countRefSinavlar, (snapshot) => {
     let data = Object.values(snapshot.val());
-    document.querySelector(".toplamSinav").innerHTML = `Toplam Sınavlar : ${data.length}`
+    document.querySelector(".toplamSinav").innerHTML = `${data.length}+`
   })
 
   //*tüm gruplar listelendi
   const countRefGruplar = await ref(db, "gruplar/");
   onValue(countRefGruplar, (snapshot) => {
     let data = Object.values(snapshot.val());
-    document.querySelector(".toplamGrup").innerHTML = `Toplam Gruplar : ${data.length}`
+    document.querySelector(".toplamGrup").innerHTML = `${data.length}+`
   })
 
 })
