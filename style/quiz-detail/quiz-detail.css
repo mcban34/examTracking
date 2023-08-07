@@ -59,4 +59,23 @@ h1, h2, h3, h4, h5, h6, p {
   color: white;
   font-weight: bold;
   border: none;
+}
+.quiz .quizContent .nextQuestion span {
+  margin-right: 0.5rem;
+}
+.quiz .quizContent .nextQuestion i {
+  animation-name: nextQuestion;
+  animation-duration: 0.5s;
+  animation-delay: 1s;
+  position: absolute;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes nextQuestion {
+  from {
+    margin-left: 0;
+  }
+  to {
+    margin-left: 15px;
+  }
 }/*# sourceMappingURL=quiz-detail.css.map */
