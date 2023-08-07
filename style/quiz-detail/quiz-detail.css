@@ -6,6 +6,9 @@ h1, h2, h3, h4, h5, h6, p {
 .quizDetailStart {
   background: linear-gradient(#552BC8, #2D1687);
 }
+.quizDetailStart .quizDetailStartContent {
+  height: 100vh;
+}
 .quizDetailStart .quizStart {
   background-color: white;
   padding: 2rem;
@@ -15,6 +18,36 @@ h1, h2, h3, h4, h5, h6, p {
   color: white;
   border: none;
   padding: 0.5rem 2rem;
+}
+.quizDetailStart #timerSec {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #FF7D56;
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 50px;
+}
+.quizDetailStart #timerSec span {
+  width: 130px;
+  background-color: white;
+  padding: 0.5rem 2rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #2B444E;
+  border-radius: 30px;
+}
+.quizDetailStart #timerSec p {
+  color: white;
+  font-size: 1.3rem;
+  padding-right: 0.5rem;
+  font-weight: bold;
+}
+.quizDetailStart #timerSec p i {
+  margin-right: 0.5rem;
 }
 
 .quiz {
@@ -76,6 +109,6 @@ h1, h2, h3, h4, h5, h6, p {
     margin-left: 0;
   }
   to {
-    margin-left: 15px;
+    margin-left: 10px;
   }
 }/*# sourceMappingURL=quiz-detail.css.map */
