@@ -67,6 +67,7 @@ $btnOrange : #FF7D56;
             display: flex;
             width: 100%;
             justify-content: space-between;
+            margin-top: 1rem;
             .homeCard{
                 display: flex;
                 justify-content: space-between;
@@ -83,6 +84,59 @@ $btnOrange : #FF7D56;
                     h5{
                         color: $dark;
                         font-weight: 800;
+                    }
+                }
+            }
+        }
+        .downloadTable{
+            background-color: #1d6f42;
+            border: none;
+            color: white;
+            padding: .5rem 2rem;
+            margin-top: 1rem;
+            .bi{
+                margin-right: .5rem;
+            }
+        }
+    }
+}
+
+
+.ogrenciNotlari{
+    .dataTables_wrapper{
+        .dataTables_filter{
+            margin-bottom: 2rem;
+        }
+        .odd{
+            background-color: transparentize($color: $lightPurple, $amount: .9) !important;
+        }
+        th,table{
+            border-bottom: 1px solid $darkPurple;
+        }
+        td{
+            border-right: 1px solid transparentize($color: $lightPurple, $amount: .9);
+            padding: 1rem .5rem !important; 
+        }
+        tr{
+            transition: .20s;
+            &:hover{
+                background-color: $lightPurple !important;
+                color: white;
+                cursor: pointer;
+            }
+        }
+        .dataTables_paginate {
+            span{
+                .current{
+                    background: $darkPurple !important;
+                    font-weight: bold;
+                    color: white !important;
+                }
+                a{
+                    &:hover{
+                        background: none !important;
+                        color: black !important;
+
                     }
                 }
             }

@@ -320,7 +320,7 @@ function datatableVerileriGoster(veriListesi) {
     language: {
       "url": "https://cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
     },
-    pageLength: 10,
+    pageLength: 5,
     lengthMenu: [5, 10, 25, 50, 100, 500, 1000],
     // paging: true,
     // scrollCollapse: true,
@@ -330,7 +330,7 @@ function datatableVerileriGoster(veriListesi) {
     language: {
       "url": "https://cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
     },
-    pageLength: 10,
+    pageLength: 5,
     lengthMenu: [5, 10, 25, 50, 100],
     // paging: true,
     // scrollCollapse: true,
