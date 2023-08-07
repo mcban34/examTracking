@@ -21,3 +21,49 @@ h1,h2,h3,h4,h5,h6,p{
         }
     }
 }
+
+.quiz{
+    background-color: white;
+    height: 70vh;
+    border-radius: 1rem;
+    position: relative;
+    .quizTopImg{
+        width: 100%;
+        height: 20vh;
+        background-image: url("../../img/quizDetailBg.webp");
+        background-position: 50% 100%;
+        background-size: 100% 150%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+    }
+    .quizContent{
+        padding: 2rem;
+        .answers{
+            .cevapButton{
+                width: 47%;
+                height: 3rem;
+                margin: .5rem .5rem;
+                color: $dark;
+                font-weight: 700;
+                background: transparent;
+                border: none;
+                border: 2px solid $darkPurple;
+                transition: .34s;
+                &:hover{
+                    background-color: $darkPurple;
+                    color: white;
+                }
+            }   
+        }
+        .nextQuestion{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            padding: 1rem 3rem;
+            background-color: $btnOrange;
+            color: white;
+            font-weight: bold;
+            border: none;
+        }
+    }
+}

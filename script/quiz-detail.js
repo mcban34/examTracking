@@ -144,7 +144,7 @@ document.querySelector(".quizNext").addEventListener("click", function () {
   // ).value;
   // let filterGrup = document.querySelector(".filterGrup").value
   //*sınav başladığında zamanlayıcı başladı
-  quizTimer();
+  // quizTimer();
 
   //*objeye verileri atadım
   // ogrenciBilgileri["ogrenciIsimSoyisim"] = quizStartNameSurName;
