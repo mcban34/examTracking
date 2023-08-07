@@ -1,0 +1,18 @@
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+}
+
+.quizDetailStart {
+  background: linear-gradient(#552BC8, #2D1687);
+}
+.quizDetailStart .quizStart {
+  background-color: white;
+  padding: 2rem;
+}
+.quizDetailStart .quizStart .quizNext {
+  background-color: #FF7D56;
+  color: white;
+  border: none;
+  padding: 0.5rem 2rem;
+}/*# sourceMappingURL=quiz-detail.css.map */

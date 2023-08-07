@@ -245,9 +245,9 @@ function sinavSonucKayitEt(){
 
 //!sayfa yenilendiğinde soru soruyorum!
 //*sayfanın yenilenme durumunda herhangi bir kayıt olmuyor, yenilenme iptal edildiğinde sınav kaldığı yerden devam ediyor
-window.onbeforeunload = function () {
-  return "Sayfayı yenilemek istediğinizden emin misiniz?";
-}
+// window.onbeforeunload = function () {
+//   return "Sayfayı yenilemek istediğinizden emin misiniz?";
+// }
 
 
 //!öğrencinin daha önceden sınava girip girmediğini baktım

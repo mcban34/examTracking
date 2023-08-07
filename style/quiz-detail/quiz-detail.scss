@@ -1,0 +1,23 @@
+$dark : #2B444E;
+$lightPurple : #552BC8;
+$darkPurple : #2D1687;
+$btnOrange : #FF7D56;
+
+h1,h2,h3,h4,h5,h6,p{
+    margin: 0;
+    padding: 0;
+}
+
+.quizDetailStart{
+    background: linear-gradient($lightPurple,$darkPurple);
+    .quizStart{
+        background-color: white;
+        padding: 2rem;
+        .quizNext{
+            background-color: $btnOrange;
+            color: white;
+            border: none;
+            padding: .5rem 2rem;
+        }
+    }
+}
