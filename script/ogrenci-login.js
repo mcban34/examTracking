@@ -34,3 +34,15 @@ document.querySelector(".login").addEventListener("click", function () {
             console.log("giriş başarısız");
         });
 });
+
+
+document.querySelector(".hideShowPass").addEventListener("click",function(){
+    let loginPass = document.querySelector(".loginPass")
+    let hideShowPass = document.querySelector(".hideShowPass")
+    if(hideShowPass.checked){
+        loginPass.type="input"
+    }
+    else{
+        loginPass.type="password"
+    }
+})
