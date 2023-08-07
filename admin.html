@@ -32,7 +32,6 @@
         <button class="quit"><i class="bi bi-box-arrow-left"></i>Çıkış</button>
       </div>
       <div class="panelContent">
-        <h2>Hoşgeldin Admin!</h2>
 
         <div id="panel1">
           <div class="homeCards">
@@ -92,16 +91,20 @@
         </div>
 
         <div id="panel2" style="display: none;">
-          <h2>Soru Yarat</h2>
-          <select class="filterQuizs">
-          </select>
-          <input type="text" class="soru" placeholder="soru nedir?"> <br>
-          <input type="text" class="cevap1" placeholder="cevap1"> <br>
-          <input type="text" class="cevap2" placeholder="cevap2"> <br>
-          <input type="text" class="cevap3" placeholder="cevap3"> <br>
-          <input type="text" class="cevap4" placeholder="cevap4"> <br>
-          <input type="text" class="dogruCevap" placeholder="Doğru Cevap Hangi Şık ?">
-          <button class="createQuizBtn">Oluştur!</button>
+          <div class="panel2Content">
+            <div class="panel2Container">
+              <h2>Soru Oluştur</h2>
+              <select class="filterQuizs"></select>
+              <label for="">*Lütfen Soruyu Hangi Quize Oluşturucağınızı Belirtiniz!</label>
+              <textarea rows="8" cols="20" class="soru" placeholder="Lütfen Soruyu Yazınız"></textarea>
+              <input type="text" class="cevap1" placeholder="Cevap 1">
+              <input type="text" class="cevap2" placeholder="Cevap 2">
+              <input type="text" class="cevap3" placeholder="Cevap 3">
+              <input type="text" class="cevap4" placeholder="Cevap 4">
+              <input type="text" class="dogruCevap" placeholder="Doğru Cevap Hangi Şık ? (Örn:1)">
+              <button class="createQuizBtn">Oluştur!</button>
+            </div>
+          </div>
         </div>
 
         <div id="panel3" style="display: none;">

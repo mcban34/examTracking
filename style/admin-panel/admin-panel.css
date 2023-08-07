@@ -83,6 +83,37 @@
 .admin-panel .panelContent .downloadTable .bi {
   margin-right: 0.5rem;
 }
+.admin-panel .panelContent #panel2 .panel2Content {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.admin-panel .panelContent #panel2 .panel2Content .panel2Container {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 2rem;
+  width: 50%;
+}
+.admin-panel .panelContent #panel2 .panel2Content .panel2Container input, .admin-panel .panelContent #panel2 .panel2Content .panel2Container select, .admin-panel .panelContent #panel2 .panel2Content .panel2Container button {
+  width: 100%;
+  height: 3rem;
+  margin-top: 1rem;
+}
+.admin-panel .panelContent #panel2 .panel2Content .panel2Container textarea {
+  width: 100%;
+  margin-top: 1rem;
+  resize: none;
+}
+.admin-panel .panelContent #panel2 .panel2Content .panel2Container button {
+  background-color: #FF7D56;
+  border: none;
+  color: white;
+}
+.admin-panel .panelContent #panel2 .panel2Content .panel2Container label {
+  color: rgb(255, 72, 72);
+  font-size: 0.8rem;
+}
 
 .ogrenciNotlari .dataTables_wrapper .dataTables_filter {
   margin-bottom: 2rem;
