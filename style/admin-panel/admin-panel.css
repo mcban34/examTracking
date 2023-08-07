@@ -7,11 +7,13 @@
   background: linear-gradient(#2D1687, #552BC8);
   color: white;
   padding: 3rem 0;
+  position: relative;
 }
 .admin-panel .sideBar .panel {
   cursor: pointer;
   margin-top: 1rem;
   padding: 1rem;
+  transition: padding-left 0.34s;
 }
 .admin-panel .sideBar .panel:first-child {
   margin-top: 0 !important;
@@ -23,10 +25,26 @@
 .admin-panel .sideBar .activePanelBtn {
   background-color: #552BC8;
   border-left: 5px solid white;
+  padding-left: 30px;
+}
+.admin-panel .sideBar .quit {
+  background-color: #FF7D56;
+  border: none;
+  color: white;
+  display: block;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding: 1rem 0;
+  font-weight: bold;
+}
+.admin-panel .sideBar .quit i {
+  padding: 0 0.5rem;
 }
 .admin-panel .panelContent {
   width: 80%;
   padding: 3rem;
+  overflow: auto;
 }
 .admin-panel .sideBar,
 .admin-panel .panelContent {
