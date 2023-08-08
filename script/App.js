@@ -24,7 +24,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-console.log(auth);
+// console.log(auth);
 
 const getQuizs = () => {
   const auth = getAuth();
@@ -38,20 +38,19 @@ const getQuizs = () => {
       const countRef = ref(db, "ogrenciler/" + user.uid + "/sinavlar/");
       onValue(countRef, (snapshot) => {
         let data = snapshot.val();
-        console.log(data);
+        // console.log(data);
         questionsArray = Object.keys(data).map((key, index) => {
           return {
             id: index,
             ...data[key],
           };
         });
-        console.log("quisteion", questionsArray);
+        // console.log("quisteion", questionsArray);
         const questionsArrayHTML = questionsArray.map((value) => {
           return `
         <div class="col-lg-3 mt-4">
-          <a href="quiz-detail.html?id=${value.id}" class="${
-            value.quizBilgi.cozulduMu == true ? "disabledCard" : ""
-          }">
+          <a href="quiz-detail.html?id=${value.id}" class="${value.quizBilgi.cozulduMu == true ? "disabledCard" : ""
+            }">
             <div class="quizCard">
               <h5>${value.quizBilgi.name}</h5>
               <div class="quizCardBody">
@@ -90,29 +89,53 @@ const getQuizs = () => {
         getCardEtiket();
       });
       //!ana sayfadaki quiz filtreleme butonları
-      let quizsFilterButton = document.querySelectorAll(".quizsFilterButton");
-      quizsFilterButton[0].classList.add("activeQuizFilterButton");
-      for (const i of quizsFilterButton) {
-        i.addEventListener("click", function () {
-          var filteredQuizzes = [];
-          if (i.innerHTML === "Hepsi") {
-            // Tüm sınavları listele
-            filteredQuizzes = questionsArray;
-          } else {
-            // Belirli kategorideki sınavları filtrele
-            filteredQuizzes = questionsArray.filter(function (quiz) {
-              return quiz.quizBilgi.quizCategory.includes(i.innerHTML);
-            });
-            console.log("filterquize", filteredQuizzes);
-          }
-          // seçilene active class ekle
-          for (var j = 0; j < quizsFilterButton.length; j++) {
-            quizsFilterButton[j].classList.remove("activeQuizFilterButton");
-          }
-          i.classList.add("activeQuizFilterButton");
-          displayQuizzes(filteredQuizzes);
-        });
-      }
+      let quizsFilterButtons = document.querySelector(".quizsFilterButtons")
+      const derslerRef = ref(db, "dersler/");
+      onValue(derslerRef, (snapshot) => {
+        const data = Object.values(snapshot.val());
+        for (const i of data) {
+          let filterBtn = document.createElement("button")
+          filterBtn.className = "quizsFilterButton"
+          filterBtn.innerHTML = i.dersBaslik
+          quizsFilterButtons.appendChild(filterBtn)
+
+          filterBtn.addEventListener("click", function () {
+            // console.log(filterBtn.innerHTML);
+           
+          })
+        }
+        let quizsFilterButton = document.querySelectorAll(".quizsFilterButton");
+        // console.log("filtreleme butonları", quizsFilterButton);
+        quizsFilterButton[0].classList.add("activeQuizFilterButton");
+        for (const i of quizsFilterButton) {
+          i.addEventListener("click", function () {
+            var filteredQuizzes = [];
+            if (i.innerHTML === "Hepsi") {
+              // Tüm sınavları listele
+              filteredQuizzes = questionsArray;
+            } else {
+              // Belirli kategorideki sınavları filtrele
+              filteredQuizzes = questionsArray.filter(function (quiz) {
+                return quiz.quizBilgi.quizCategory.includes(i.innerHTML);
+              });
+              // console.log("filterquize", filteredQuizzes);
+            }
+            // seçilene active class ekle
+            for (var j = 0; j < quizsFilterButton.length; j++) {
+              if (quizsFilterButton[j] !== i) {
+                quizsFilterButton[j].classList.remove("activeQuizFilterButton");
+              }
+            }
+            
+            i.classList.add("activeQuizFilterButton");
+            displayQuizzes(filteredQuizzes);
+          });
+        }
+      });
+
+
+
+
 
       //*seçilen quiz btn göre ekrana yazdırma işlemi
       function displayQuizzes(quizzes) {
@@ -125,9 +148,8 @@ const getQuizs = () => {
           const questionsArrayHTML = quizzes.map((value) => {
             return `
             <div class="col-lg-3 mt-4">
-              <a href="quiz-detail.html?id=${value.id}" class="${
-              value.quizBilgi.cozulduMu == true ? "disabledCard" : ""
-            }">
+              <a href="quiz-detail.html?id=${value.id}" class="${value.quizBilgi.cozulduMu == true ? "disabledCard" : ""
+              }">
                 <div class="quizCard">
                   <h5>${value.quizBilgi.name}</h5>
                   <div class="quizCardBody">
@@ -157,16 +179,16 @@ const getQuizs = () => {
           }
         }
       }
-      document.querySelector(".ogrenciGiris").style.display="none"
-      document.querySelector(".ogrenciKayit").style.display="none"
-      document.querySelector(".headerContent").style.display="none"
-      document.querySelector(".ogrenciPanel").style.display="block"
+      document.querySelector(".ogrenciGiris").style.display = "none"
+      document.querySelector(".ogrenciKayit").style.display = "none"
+      document.querySelector(".headerContent").style.display = "none"
+      document.querySelector(".ogrenciPanel").style.display = "block"
     } else {
       // User is signed out
       // ...
       document.querySelector(".quizsFilterButtons").style.display = "none";
-      document.querySelector(".quit").style.display="none"
-      document.querySelector(".ogrenciPanel").style.display="none"
+      document.querySelector(".quit").style.display = "none"
+      document.querySelector(".ogrenciPanel").style.display = "none"
     }
   });
 };

@@ -5,6 +5,7 @@ import {
   ref,
   onValue,
   get,
+  push
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
 
 import {
@@ -33,6 +34,19 @@ onAuthStateChanged(auth, (user) => {
     window.location.href = "login.html";
   }
 });
+
+
+//!ders başlığı oluşturmak için 
+//*benzersiz bir anahtar üreterek veriyi yükledik (push)
+document.querySelector(".dersBasligiOlustur").addEventListener("click",function(){
+  let dersBasligi = document.querySelector(".dersBasligi").value
+  const db = getDatabase();
+  const newDersRef = push(ref(db, "dersler/"));
+  set(newDersRef, {
+    dersBaslik: dersBasligi
+  });
+  
+})
 
 let panelsBtn = document.querySelectorAll(".panel")
 for (const panel of panelsBtn) {
@@ -105,6 +119,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }), (error) => {
     console.log("kodlar gelmedi!", error);
   }
+
+  const countRefDersler = ref(db, "dersler/");
+  let quizGenelKategori = document.querySelector(".quizGenelKategori")
+  onValue(countRefDersler, (snapshot) => {
+    let data = Object.values(snapshot.val());
+    for (const i of data) {
+      quizGenelKategori.innerHTML += `
+            <option>${i.dersBaslik}</option>
+        `;
+    }
+  })
+
+
 });
 
 
