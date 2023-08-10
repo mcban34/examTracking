@@ -126,3 +126,16 @@ onAuthStateChanged(auth, (user) => {
         });
     })
 });
+
+
+//!çıkış butonuna basıldığında çıkışı yaptım
+document.querySelector(".quit").addEventListener("click", function () {
+    signOut(auth)
+      .then(() => {
+        console.log("çıkış yapıldı");
+        location.reload();
+      })
+      .catch(() => {
+        console.log("çıkış yapılamadı!");
+      });
+  });
