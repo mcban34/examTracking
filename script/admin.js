@@ -503,3 +503,58 @@ document.querySelector(".downloadTable").addEventListener("click", function () {
     return buf;
   }
 })
+
+
+//!soruları düzenleme alanı
+
+const sinavlarPanel = document.querySelector(".sinavlar")
+
+function fetchSinavlar(){
+  const db = getDatabase();
+  const countRefSiniflar = ref(db, "sinavlar/");
+  onValue(countRefSiniflar, (snapshot) => {
+    //*toplam ogrenciler listelendi
+    let data = Object.values(snapshot.val());
+    // console.log(data);
+    const sinavlarYazdir = data.map(value => {
+      return `
+        <div class="col-4">
+          <div class="sinavDuzenleCard">
+            <h4>${value.quizBilgi.name}</h4>
+            <button class="editBtn" data-id="${value.quizBilgi.name}">Düzenle</button>
+          </div>
+        </div>
+      `
+    })
+
+    sinavlarPanel.innerHTML=sinavlarYazdir.join("")
+    attachEditEventListeners()
+  })
+}
+
+
+
+function attachEditEventListeners(){
+  const editBtns = document.querySelectorAll(".editBtn")
+  editBtns.forEach(element => {
+    element.addEventListener("click",function(e){
+      const examName = e.target.getAttribute("data-id")
+      console.log(examName);
+      editExam(examName)
+    })
+  });
+}
+
+
+function editExam(examNameParams){
+  const db = getDatabase();
+  const countRefSiniflar = ref(db, "sinavlar/");
+  onValue(countRefSiniflar, (snapshot) => {
+    //*toplam ogrenciler listelendi
+    let data = Object.values(snapshot.val());
+    const test = data.filter(value => examNameParams==value.quizBilgi.name)
+    console.log(test);
+  })
+}
+
+fetchSinavlar()
