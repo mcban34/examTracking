@@ -57,12 +57,14 @@ function handleRegistrationSuccess(userCredential, registerNameSurname, register
     const uid = userCredential.user.uid;
     const kullaniciAdi = registerNameSurname;
     const email = userCredential.user.email;
+    const userRole = "student"
     const db = getDatabase();
     set(ref(db, "ogrenciler/" + uid), {
         ogrenciBilgi: {
             kullaniciAdi: kullaniciAdi,
             email: email,
-            grupName: registerGrupName
+            grupName: registerGrupName,
+            displayName: userRole
         },
         sinavlar: sinavlar[0]
     });

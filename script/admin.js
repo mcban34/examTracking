@@ -33,7 +33,12 @@ onAuthStateChanged(auth, (user) => {
   if (!user) {
     window.location.href = "login.html";
   }
+  if(user.email!="test@test.com"){
+    window.location.href = "index.html"
+  }
+  console.log(user);
 });
+
 
 
 //!ders başlığı oluşturmak için 
