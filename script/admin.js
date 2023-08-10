@@ -33,6 +33,7 @@ onAuthStateChanged(auth, (user) => {
   if (!user) {
     window.location.href = "login.html";
   }
+  //!kullancı admin değilse ana sayfaya yönlendirildi
   if(user.email!="test@test.com"){
     window.location.href = "index.html"
   }
