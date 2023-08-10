@@ -34,7 +34,7 @@ onAuthStateChanged(auth, (user) => {
     window.location.href = "login.html";
   }
   //!kullancı admin değilse ana sayfaya yönlendirildi
-  if(user.email!="test@test.com"){
+  if (user.email != "test@test.com") {
     window.location.href = "index.html"
   }
   console.log(user);
@@ -44,24 +44,24 @@ onAuthStateChanged(auth, (user) => {
 
 //!ders başlığı oluşturmak için 
 //*benzersiz bir anahtar üreterek veriyi yükledik (push)
-document.querySelector(".dersBasligiOlustur").addEventListener("click",function(){
+document.querySelector(".dersBasligiOlustur").addEventListener("click", function () {
   let dersBasligi = document.querySelector(".dersBasligi").value
   const db = getDatabase();
   const newDersRef = push(ref(db, "dersler/"));
   set(newDersRef, {
     dersBaslik: dersBasligi
   });
-  
+
 })
 
 let panelsBtn = document.querySelectorAll(".panel")
 for (const panel of panelsBtn) {
-  panel.addEventListener("click", function() {
+  panel.addEventListener("click", function () {
     // Önce tüm panellerin üzerindeki "activePanelBtn" sınıfını kaldırın
     for (const otherPanel of panelsBtn) {
       otherPanel.classList.remove("activePanelBtn");
     }
-    
+
     // Sadece tıklanan panele "activePanelBtn" sınıfını ekleyin
     panel.classList.add("activePanelBtn");
   });
@@ -152,7 +152,7 @@ const getFilterGrupButtons = async () => {
     for (const i of data) {
       let filterGroupBtn = document.createElement("button")
       filterGroupBtn.textContent = i.grup.Grupname
-      filterGroupBtn.className="filterGrupBtn"
+      filterGroupBtn.className = "filterGrupBtn"
       filterGroupBtn.addEventListener("click", function () {
         const group = this.innerHTML;
 
@@ -316,7 +316,7 @@ function datatableVerileriGoster(veriListesi) {
   //*ana sayfada ve öğrenci filtreleme alanın, data tableyi yazarken
   //*aynı işlevleri kullanacağım için bir parametre oluşturdum ve hemen aşşağıda parametreye
   //*değerler gönderdim
-  function dataTableLists(tbodyParametr,ogrenciClass) {
+  function dataTableLists(tbodyParametr, ogrenciClass) {
     veriListesi.forEach((veri) => {
       for (const i of veri.sinavSonuclar) {
         if (i.quizBilgi.cozulduMu == true) {
@@ -334,7 +334,7 @@ function datatableVerileriGoster(veriListesi) {
           const sinavSonucCell = document.createElement("td");
           sinavSonucCell.textContent = i.quizBilgi.puan;
           //*parametre tanımsız dönerse boş at dönmezse ogrenciNotu adında class ver!
-          sinavSonucCell.className = `${ogrenciClass==undefined ? "" : ogrenciClass}`;
+          sinavSonucCell.className = `${ogrenciClass == undefined ? "" : ogrenciClass}`;
           row.appendChild(sinavSonucCell);
 
           const grupNameCell = document.createElement("td");
@@ -347,7 +347,7 @@ function datatableVerileriGoster(veriListesi) {
     });
   }
   dataTableLists(tbody)
-  dataTableLists(tbodyFilter,"ogrenciNotu")
+  dataTableLists(tbodyFilter, "ogrenciNotu")
 
   //*datatableye verileri bastım
   $('#dataTableFilter').DataTable({
@@ -506,10 +506,9 @@ document.querySelector(".downloadTable").addEventListener("click", function () {
 
 
 //!soruları düzenleme alanı
-
 const sinavlarPanel = document.querySelector(".sinavlar")
 
-function fetchSinavlar(){
+function fetchSinavlar() {
   const db = getDatabase();
   const countRefSiniflar = ref(db, "sinavlar/");
   onValue(countRefSiniflar, (snapshot) => {
@@ -521,39 +520,114 @@ function fetchSinavlar(){
         <div class="col-4">
           <div class="sinavDuzenleCard">
             <h4>${value.quizBilgi.name}</h4>
-            <button class="editBtn" data-id="${value.quizBilgi.name}">Düzenle</button>
+            <button class="editBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${value.quizBilgi.name}">Düzenle</button>
           </div>
         </div>
       `
     })
 
-    sinavlarPanel.innerHTML=sinavlarYazdir.join("")
+    sinavlarPanel.innerHTML = sinavlarYazdir.join("")
     attachEditEventListeners()
   })
 }
 
 
 
-function attachEditEventListeners(){
+function attachEditEventListeners() {
   const editBtns = document.querySelectorAll(".editBtn")
   editBtns.forEach(element => {
-    element.addEventListener("click",function(e){
+    element.addEventListener("click", function (e) {
       const examName = e.target.getAttribute("data-id")
-      console.log(examName);
+      // console.log(examName);
       editExam(examName)
     })
   });
 }
 
 
-function editExam(examNameParams){
+function editExam(examNameParams) {
   const db = getDatabase();
   const countRefSiniflar = ref(db, "sinavlar/");
   onValue(countRefSiniflar, (snapshot) => {
-    //*toplam ogrenciler listelendi
+
     let data = Object.values(snapshot.val());
-    const test = data.filter(value => examNameParams==value.quizBilgi.name)
-    console.log(test);
+    // console.log(data);
+    let duzenlenilenSinav = data.filter(value => examNameParams == value.quizBilgi.name)
+    // console.log("tıklanılan Veri : ", duzenlenilenSinav);
+
+    //*modalın başlığı getirildi
+    const duzenlenilenSinavTitle = duzenlenilenSinav[0].quizBilgi.name
+    const modalTitle = document.querySelector(".modal-title")
+    modalTitle.innerHTML = duzenlenilenSinavTitle
+
+    // //*modal body
+    let duzenlenilenSinavSorular = Object.values(duzenlenilenSinav[0].sorular)
+    // console.log("tıklanılan sorular", duzenlenilenSinavSorular);
+
+
+    const duzenlenilenSinavSorularHTML = duzenlenilenSinavSorular.map((element, index) => {
+      return `
+          <option class="sınavBasliklarOptions">${element.soru}</option>        
+      `
+    })
+
+    document.querySelector(".testla").innerHTML = duzenlenilenSinavSorularHTML.join("")
+
+
+
+    var selectElement = document.querySelector(".testla");
+    let  sınavBasliklarOptions = document.querySelectorAll(".sınavBasliklarOptions")
+
+    sınavBasliklarOptions.forEach((element,index) => {      
+          var selectedOption = selectElement.options[index];
+          var maxLength = 40; // Maksimum karakter uzunluğunu belirleyin
+      
+          if (selectedOption.text.length > maxLength) {
+            selectedOption.text = selectedOption.text.substring(0, maxLength);
+          }
+    });
+
+
+      document.querySelector(".getExam").addEventListener("click",function(){
+        let secilenSoru = duzenlenilenSinavSorular.find(function(soru){
+          return soru.soru.substring(0,40) === selectElement.value
+        })
+        console.log("seçilen soru",secilenSoru);
+      })   
+      // console.log(selectElement.value);
+      // console.log("test",duzenlenilenSinavSorular);
+
+
+
+      // console.log(duzenlenilenSinavSorular[0].soru.substring(0,5));
+      // console.log(selectElement.value)
+
+
+
+      // const test = duzenlenilenSinavSorular.filter(value => value.soru.includes())
+      // console.log(test);
+
+    // const duzenlenilenSinavSorularHTML = duzenlenilenSinavSorular.map((element,index) => {
+    //   return `
+    //     <h3>${index+1}. Soru</h3>
+
+    //     <p><b>Soru</b></p>
+    //     <input class="modalBodySoru mt-2" value="${element.soru}"></input>
+
+    //     <p class="mt-3"><b>Cevaplar</b></p>
+    //     <input class="modalBodyCevap" value="${element.cevaplar[0]}"></input>
+    //     <input class="modalBodyCevap" value="${element.cevaplar[1]}"></input>
+    //     <input class="modalBodyCevap" value="${element.cevaplar[2]}"></input>
+    //     <input class="modalBodyCevap" value="${element.cevaplar[3]}"></input>
+
+    //     <p class="mt-3"><b>Doğru Cevap</b></p>
+    //     <input class="modalBodyDogruCevap" value="${element.dogruCevap}"></input>
+    //     <hr>
+    //   `
+    // })
+
+    // document.querySelector(".modal-body").innerHTML = duzenlenilenSinavSorularHTML.join("")
+
   })
 }
 
