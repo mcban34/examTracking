@@ -5,6 +5,7 @@
 @import "ogrenci-login/ogrenci-login.css";
 @import "ogrenci-register/ogrenci-register.css";
 @import "quiz-detail/quiz-detail.css";
+@import "ogrenci-panel/ogrenci-panel.css";
 img {
   max-width: 100%;
 }

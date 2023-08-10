@@ -32,7 +32,7 @@ onAuthStateChanged(auth, (user) => {
         window.location.href = "ogrenci-login.html";
     }
 
-    document.querySelector(".ogrenciName").innerHTML = `Hoşgeldin! ${user.email}`
+    document.querySelector(".ogrenciName").innerHTML = `${user.email}`
     const db = getDatabase();
     const countRef = ref(db, "ogrenciler/" + user.uid);
     onValue(countRef, (snapshot) => {
