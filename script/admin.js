@@ -591,6 +591,7 @@ function editExam(examNameParams) {
     document.querySelector(".modalBodyContent").innerHTML = duzenlenilenSinavSorularHTML.join("")
 
     let modalBodyHeadExamTitle = `
+      <h5>Sınav Bilgileri</h5>
       <input class="examTitle" value="${duzenlenilenSinav[0].quizBilgi.name}"></input>
       <input class="examBody" value="${duzenlenilenSinav[0].quizBilgi.quizContentBody}"></input>
       <button class="editExamTitle">İçeriği Düzenle</button>
@@ -599,7 +600,7 @@ function editExam(examNameParams) {
     document.querySelector(".modalBodyHead").innerHTML = modalBodyHeadExamTitle
   })
 
-
+  //!sınavları içerikleri düzenlendi
   document.querySelector(".editExamTitle").addEventListener("click", function () {
     let elemetQuizTitle = document.querySelector(".modal-title").innerHTML
     let examTitle = document.querySelector(".examTitle").value
@@ -611,6 +612,18 @@ function editExam(examNameParams) {
     });
   })
 
+  //!doğrudan sınavı silme
+  document.querySelector(".deleteQuiz").addEventListener("click",function(){
+    let elemetQuizTitle = document.querySelector(".modal-title").innerHTML
+    const db = getDatabase();
+    const DeleteExam = ref(db, `sinavlar/${elemetQuizTitle}`);
+    remove(DeleteExam).then(() => {
+      alert("sınav başarıyla silindi!")
+      setTimeout(() => {
+        location.reload()
+      }, 500);
+    })
+  })
 
   //!sınavların admin tarafından yeniden düzenlenmesi
   let saveQuizExam = document.querySelectorAll(".saveQuizExam")
