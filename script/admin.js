@@ -3,6 +3,7 @@ import {
   getDatabase,
   set,
   ref,
+  update,
   onValue,
   get,
   push,
@@ -555,7 +556,7 @@ function editExam(examNameParams) {
     let data = Object.values(snapshot.val());
     // console.log(data);
     let duzenlenilenSinav = data.filter(value => examNameParams == value.quizBilgi.name)
-    // console.log("tıklanılan Veri : ", duzenlenilenSinav);
+    console.log("tıklanılan Veri : ", duzenlenilenSinav[0].quizBilgi);
 
     //*modalın başlığı getirildi
     const duzenlenilenSinavTitle = duzenlenilenSinav[0].quizBilgi.name
@@ -564,13 +565,11 @@ function editExam(examNameParams) {
 
     // //*modal body
     let duzenlenilenSinavSorular = Object.values(duzenlenilenSinav[0].sorular)
-    console.log("tıklanılan sorular", duzenlenilenSinavSorular);
+    // console.log("tıklanılan sorular", duzenlenilenSinavSorular);
 
     const duzenlenilenSinavSorularHTML = duzenlenilenSinavSorular.map((element, index) => {
       return `
-        <h3>${index + 1}. Soru</h3>
-
-        <p><b>Soru</b></p>
+        <h5>${index + 1}. Soru</h5>
         <div class="quizDüzenleDiv" data-id="${index}">
           <input class="modalBodySoru mt-2" value="${element.soru}"></input>
 
@@ -589,10 +588,28 @@ function editExam(examNameParams) {
       `
     })
 
-    document.querySelector(".modal-body").innerHTML = duzenlenilenSinavSorularHTML.join("")
+    document.querySelector(".modalBodyContent").innerHTML = duzenlenilenSinavSorularHTML.join("")
 
+    let modalBodyHeadExamTitle = `
+      <input class="examTitle" value="${duzenlenilenSinav[0].quizBilgi.name}"></input>
+      <input class="examBody" value="${duzenlenilenSinav[0].quizBilgi.quizContentBody}"></input>
+      <button class="editExamTitle">İçeriği Düzenle</button>
+      <hr>
+    `
+    document.querySelector(".modalBodyHead").innerHTML = modalBodyHeadExamTitle
   })
 
+
+  document.querySelector(".editExamTitle").addEventListener("click", function () {
+    let elemetQuizTitle = document.querySelector(".modal-title").innerHTML
+    let examTitle = document.querySelector(".examTitle").value
+    let examBody = document.querySelector(".examBody").value
+    const db = getDatabase();
+    update(ref(db, `sinavlar/${elemetQuizTitle}/quizBilgi`), {
+      name: examTitle,
+      quizContentBody:examBody
+    });
+  })
 
 
   //!sınavların admin tarafından yeniden düzenlenmesi
