@@ -632,12 +632,14 @@ function editExam(examNameParams) {
   //!admin soruyu silebilir
   let deleteQuizExams = document.querySelectorAll(".deleteQuizExam")
   deleteQuizExams.forEach(element => {
-      element.addEventListener("click",function(){
-        let elementDataId = element.getAttribute("data-id")
-        let dataQuizId = document.querySelectorAll(".quizDüzenleDiv")
-        let elemetQuizTitle = document.querySelector(".modal-title").innerHTML
-        for(let i=0;i<dataQuizId.length;i++){
-          if(i==elementDataId){
+    element.addEventListener("click", function () {
+      let elementDataId = element.getAttribute("data-id")
+      let dataQuizId = document.querySelectorAll(".quizDüzenleDiv")
+      let elemetQuizTitle = document.querySelector(".modal-title").innerHTML
+      let silmeIstegi = confirm("Soruyu Silmek İster misiniz ? ")
+      if (silmeIstegi) {
+        for (let i = 0; i < dataQuizId.length; i++) {
+          if (i == elementDataId) {
             let rstSoruId
             const db = getDatabase();
             const countRefSinavlar = ref(db, `sinavlar/${elemetQuizTitle}/sorular`);
@@ -650,11 +652,12 @@ function editExam(examNameParams) {
               alert("soru başarıyla silindi!")
               setTimeout(() => {
                 location.reload()
-              }, 1500);
+              }, 500);
             })
           }
         }
-      })
+      }
+    })
   });
 
 
