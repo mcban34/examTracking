@@ -647,8 +647,10 @@ function editExam(examNameParams) {
             })
             const DeletecountRefSinavlar = ref(db, `sinavlar/${elemetQuizTitle}/sorular/${rstSoruId[i]}`);
             remove(DeletecountRefSinavlar).then(() => {
-              location.reload()
-              console.log("silme işlemi başarı ile tamamlandı!");
+              alert("soru başarıyla silindi!")
+              setTimeout(() => {
+                location.reload()
+              }, 1500);
             })
           }
         }
