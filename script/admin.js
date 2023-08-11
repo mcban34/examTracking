@@ -520,6 +520,7 @@ function fetchSinavlar() {
         <div class="col-4">
           <div class="sinavDuzenleCard">
             <h4>${value.quizBilgi.name}</h4>
+            <p>${value.quizBilgi.quizContentBody}</p>
             <button class="editBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${value.quizBilgi.name}">Düzenle</button>
           </div>
         </div>
