@@ -562,73 +562,144 @@ function editExam(examNameParams) {
 
     // //*modal body
     let duzenlenilenSinavSorular = Object.values(duzenlenilenSinav[0].sorular)
-    // console.log("tıklanılan sorular", duzenlenilenSinavSorular);
+    console.log("tıklanılan sorular", duzenlenilenSinavSorular);
 
 
-    const duzenlenilenSinavSorularHTML = duzenlenilenSinavSorular.map((element, index) => {
-      return `
-          <option class="sınavBasliklarOptions">${element.soru}</option>        
-      `
-    })
-
-    document.querySelector(".testla").innerHTML = duzenlenilenSinavSorularHTML.join("")
-
-
-
-    var selectElement = document.querySelector(".testla");
-    let  sınavBasliklarOptions = document.querySelectorAll(".sınavBasliklarOptions")
-
-    sınavBasliklarOptions.forEach((element,index) => {      
-          var selectedOption = selectElement.options[index];
-          var maxLength = 40; // Maksimum karakter uzunluğunu belirleyin
-      
-          if (selectedOption.text.length > maxLength) {
-            selectedOption.text = selectedOption.text.substring(0, maxLength);
-          }
-    });
-
-
-      document.querySelector(".getExam").addEventListener("click",function(){
-        let secilenSoru = duzenlenilenSinavSorular.find(function(soru){
-          return soru.soru.substring(0,40) === selectElement.value
-        })
-        console.log("seçilen soru",secilenSoru);
-      })   
-      // console.log(selectElement.value);
-      // console.log("test",duzenlenilenSinavSorular);
-
-
-
-      // console.log(duzenlenilenSinavSorular[0].soru.substring(0,5));
-      // console.log(selectElement.value)
-
-
-
-      // const test = duzenlenilenSinavSorular.filter(value => value.soru.includes())
-      // console.log(test);
-
-    // const duzenlenilenSinavSorularHTML = duzenlenilenSinavSorular.map((element,index) => {
+    // const duzenlenilenSinavSorularHTML = duzenlenilenSinavSorular.map((element, index) => {
     //   return `
-    //     <h3>${index+1}. Soru</h3>
-
-    //     <p><b>Soru</b></p>
-    //     <input class="modalBodySoru mt-2" value="${element.soru}"></input>
-
-    //     <p class="mt-3"><b>Cevaplar</b></p>
-    //     <input class="modalBodyCevap" value="${element.cevaplar[0]}"></input>
-    //     <input class="modalBodyCevap" value="${element.cevaplar[1]}"></input>
-    //     <input class="modalBodyCevap" value="${element.cevaplar[2]}"></input>
-    //     <input class="modalBodyCevap" value="${element.cevaplar[3]}"></input>
-
-    //     <p class="mt-3"><b>Doğru Cevap</b></p>
-    //     <input class="modalBodyDogruCevap" value="${element.dogruCevap}"></input>
-    //     <hr>
+    //       <option class="sınavBasliklarOptions">${element.soru}</option>        
     //   `
     // })
 
-    // document.querySelector(".modal-body").innerHTML = duzenlenilenSinavSorularHTML.join("")
+    // document.querySelector(".testla").innerHTML = duzenlenilenSinavSorularHTML.join("")
+
+
+
+    // var selectElement = document.querySelector(".testla");
+    // let sınavBasliklarOptions = document.querySelectorAll(".sınavBasliklarOptions")
+
+    // sınavBasliklarOptions.forEach((element, index) => {
+    //   var selectedOption = selectElement.options[index];
+    //   var maxLength = 40; // Maksimum karakter uzunluğunu belirleyin
+
+    //   if (selectedOption.text.length > maxLength) {
+    //     selectedOption.text = selectedOption.text.substring(0, maxLength);
+    //   }
+    // });
+
+
+    // document.querySelector(".getExam").addEventListener("click", function () {
+    //   let secilenSoru = duzenlenilenSinavSorular.find(function (soru) {
+    //     return soru.soru.substring(0, 40) === selectElement.value
+    //   })
+    //   console.log("seçilen soru", secilenSoru);
+    // })
+
+
+    // console.log(selectElement.value);
+    // console.log("test",duzenlenilenSinavSorular);
+
+
+
+    // console.log(duzenlenilenSinavSorular[0].soru.substring(0,5));
+    // console.log(selectElement.value)
+
+
+
+    // const test = duzenlenilenSinavSorular.filter(value => value.soru.includes())
+    // console.log(test);
+
+    const duzenlenilenSinavSorularHTML = duzenlenilenSinavSorular.map((element, index) => {
+      return `
+        <h3>${index + 1}. Soru</h3>
+
+        <p><b>Soru</b></p>
+        <div class="quizDüzenleDiv" data-id="${index}">
+          <input class="modalBodySoru mt-2" value="${element.soru}"></input>
+
+          <p class="mt-3"><b>Cevaplar</b></p>
+          <input class="modalBodyCevap" value="${element.cevaplar[0]}"></input>
+          <input class="modalBodyCevap" value="${element.cevaplar[1]}"></input>
+          <input class="modalBodyCevap" value="${element.cevaplar[2]}"></input>
+          <input class="modalBodyCevap" value="${element.cevaplar[3]}"></input>
+
+          <p class="mt-3"><b>Doğru Cevap</b></p>
+          <input class="modalBodyDogruCevap" value="${element.dogruCevap}"></input>
+          <button data-id="${index}" class="saveQuizExam">Kaydet</button>
+        </div>
+        <hr>
+      `
+    })
+
+    document.querySelector(".modal-body").innerHTML = duzenlenilenSinavSorularHTML.join("")
 
   })
+
+
+  let saveQuizExam = document.querySelectorAll(".saveQuizExam")
+  saveQuizExam.forEach(element => {
+    element.addEventListener("click", function () {
+      let elementDataId = element.getAttribute("data-id")
+      let elemetQuizTitle = document.querySelector(".modal-title").innerHTML
+
+      let dataQuizId = document.querySelectorAll(".quizDüzenleDiv")
+      for (let i = 0; i < dataQuizId.length; i++) {
+        if (elementDataId == i) {
+          let sorular = dataQuizId[i].querySelectorAll(".modalBodyCevap")
+          let soruBaslik = dataQuizId[i].querySelector(".modalBodySoru").value
+          let dogruCevap = dataQuizId[i].querySelector(".modalBodyDogruCevap").value
+          let rstSoruId
+          const db = getDatabase();
+          const countRefSinavlar = ref(db, `sinavlar/${elemetQuizTitle}/sorular`);
+          onValue(countRefSinavlar, (snapshot) => {
+            //*toplam ogrenciler listelendi
+            let data = Object.keys(snapshot.val());
+            rstSoruId = data
+          })
+          console.log(rstSoruId[0]);
+
+
+          const queryRef = ref(db, `sinavlar/`);
+          get(queryRef).then(() => {
+            set(ref(db, `sinavlar/${elemetQuizTitle}/sorular/${rstSoruId[i]}`), {
+              soru: soruBaslik,
+              cevaplar : [sorular[0].value,sorular[1].value,sorular[2].value,sorular[3].value],
+              dogruCevap : dogruCevap
+            });
+          });
+
+        }
+      }
+
+      // console.log(elementDataId,elemetQuizTitle);
+
+      // const db = getDatabase();
+      // const countRefOgrenciler = ref(db, "sinavlar/");
+      // onValue(countRefOgrenciler, (snapshot) => {
+      //   //*toplam ogrenciler listelendi
+      //   let data = Object.values(snapshot.val());
+      //   // console.log("sinavlar : ",data);
+      //   let guncellenmekIstenenVeriler = data.filter(value => value.quizBilgi.name == elemetQuizTitle)
+      //   guncellenmekIstenenVeriler = Object.values(guncellenmekIstenenVeriler[0].sorular)
+      //   // console.log(guncellenmekIstenenVeriler); 
+
+
+
+      //   const test = []
+      //   for (let i = 0; i < guncellenmekIstenenVeriler.length; i++) {
+
+
+      //     if (i == elementDataId) {
+      //       let dataQuizId = document.querySelectorAll(".quizDüzenleDiv")
+      //       let sorular =  dataQuizId[i].querySelectorAll(".modalBodyCevap").value
+      //       // dataQuizId = dataQuizId[i].getAttribute("data-id");
+      //       console.log(sorular);
+      //       test.push(guncellenmekIstenenVeriler[i])
+      //     }
+      //   }
+      // })
+    })
+  });
 }
 
 fetchSinavlar()
