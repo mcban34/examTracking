@@ -5,7 +5,8 @@ import {
   ref,
   onValue,
   get,
-  push
+  push,
+  remove
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
 
 import {
@@ -582,6 +583,7 @@ function editExam(examNameParams) {
           <p class="mt-3"><b>Doğru Cevap</b></p>
           <input class="modalBodyDogruCevap" value="${element.dogruCevap}"></input>
           <button data-id="${index}" class="saveQuizExam">Kaydet</button>
+          <button data-id="${index}" class="deleteQuizExam">Soruyu Sil</button>
         </div>
         <hr>
       `
@@ -626,6 +628,34 @@ function editExam(examNameParams) {
       }
     })
   });
+
+  //!admin soruyu silebilir
+  let deleteQuizExams = document.querySelectorAll(".deleteQuizExam")
+  deleteQuizExams.forEach(element => {
+      element.addEventListener("click",function(){
+        let elementDataId = element.getAttribute("data-id")
+        let dataQuizId = document.querySelectorAll(".quizDüzenleDiv")
+        let elemetQuizTitle = document.querySelector(".modal-title").innerHTML
+        for(let i=0;i<dataQuizId.length;i++){
+          if(i==elementDataId){
+            let rstSoruId
+            const db = getDatabase();
+            const countRefSinavlar = ref(db, `sinavlar/${elemetQuizTitle}/sorular`);
+            onValue(countRefSinavlar, (snapshot) => {
+              let data = Object.keys(snapshot.val());
+              rstSoruId = data
+            })
+            const DeletecountRefSinavlar = ref(db, `sinavlar/${elemetQuizTitle}/sorular/${rstSoruId[i]}`);
+            remove(DeletecountRefSinavlar).then(() => {
+              location.reload()
+              console.log("silme işlemi başarı ile tamamlandı!");
+            })
+          }
+        }
+      })
+  });
+
+
 }
 
 fetchSinavlar()
