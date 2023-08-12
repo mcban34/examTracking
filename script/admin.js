@@ -581,8 +581,8 @@ function editExam(examNameParams) {
 
           <p class="mt-3"><b>Doğru Cevap</b></p>
           <input class="modalBodyDogruCevap" value="${element.dogruCevap}"></input>
-          <button data-id="${index}" class="saveQuizExam">Kaydet</button>
-          <button data-id="${index}" class="deleteQuizExam">Soruyu Sil</button>
+          <button data-id="${index}" class="saveQuizExam"><i class="bi bi-file-earmark-check"></i>Kaydet</button>
+          <button data-id="${index}" class="deleteQuizExam"><i class="bi bi-trash3"></i>Soruyu Sil</button>
         </div>
         <hr>
       `
@@ -595,7 +595,7 @@ function editExam(examNameParams) {
       <input class="examTitle" value="${duzenlenilenSinav[0].quizBilgi.name}"></input>
       <input class="examBody" value="${duzenlenilenSinav[0].quizBilgi.quizContentBody}"></input>
       <button class="editExamTitle">İçeriği Düzenle</button>
-      <hr>
+      <hr class="modalHeadHr">
     `
     document.querySelector(".modalBodyHead").innerHTML = modalBodyHeadExamTitle
   })

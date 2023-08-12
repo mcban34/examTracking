@@ -264,3 +264,59 @@ $btnOrange : #FF7D56;
         padding: .5rem 1rem;
     }
 }
+
+
+.modal{
+    hr{
+        border: 2px solid black;
+    }
+    .deleteQuiz{
+        background-color: #ee3f3f;
+        color: white;
+        font-weight: bold;
+        margin-left: 1rem;
+        border: none;
+        padding: .5rem 2rem;
+    }
+    .modalBodyHead{
+        .examTitle,.examBody{
+            width: 100%;
+            margin-top: .5rem;
+            height: 2.5rem;
+        }
+        .editExamTitle{
+            background-color: #1d6f42;
+            color: white;
+            border: none;
+            margin-top: .5rem;
+            width: 100%;
+            padding: .5rem 0;
+        }
+    }
+    .modalBodyContent{
+        .quizDüzenleDiv{
+            .modalBodySoru,.modalBodyDogruCevap{
+                width: 100%;
+                height: 2.5rem;
+            }
+            .modalBodyCevap{
+                width: 49%;
+                margin-top: .5rem;
+            }
+            .saveQuizExam{
+                background-color: #1d6f42;
+                color: white;
+                border: none;
+                margin-top: .5rem;
+                padding: .5rem 1rem;
+            }
+            .deleteQuizExam{
+                background-color: #ee3f3f;
+                color: white;
+                border: none;
+                margin-top: .5rem;
+                padding: .5rem 1rem;
+            }
+        }
+    }
+}
