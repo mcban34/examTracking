@@ -519,10 +519,10 @@ function fetchSinavlar() {
     // console.log(data);
     const sinavlarYazdir = data.map(value => {
       return `
-        <div class="col-4">
+        <div class="col-lg-4 mt-3">
           <div class="sinavDuzenleCard">
             <h4>${value.quizBilgi.name}</h4>
-            <p>${value.quizBilgi.quizContentBody}</p>
+            <p class="my-2">${value.quizBilgi.quizContentBody}</p>
             <button class="editBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${value.quizBilgi.name}">Düzenle</button>
           </div>
         </div>
