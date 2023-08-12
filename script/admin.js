@@ -448,7 +448,17 @@ document.querySelector(".createGroup").addEventListener("click", function () {
 
 //!çıkış
 document.querySelector(".quit").addEventListener("click", function () {
-  alert("test")
+  signOut(auth)
+    .then(() => {
+      console.log("çıkış yapıldı");
+    })
+    .catch(() => {
+      console.log("çıkış yapılamadı!");
+    });
+});
+
+//!mobile çıkış
+document.querySelector(".quitBtnMobile").addEventListener("click", function () {
   signOut(auth)
     .then(() => {
       console.log("çıkış yapıldı");
