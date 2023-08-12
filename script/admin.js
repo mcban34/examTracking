@@ -52,8 +52,12 @@ document.querySelector(".dersBasligiOlustur").addEventListener("click", function
   const newDersRef = push(ref(db, "dersler/"));
   set(newDersRef, {
     dersBaslik: dersBasligi
-  });
-
+  })
+  .then(() => {
+    alert("Sınav Başlığı Kaydedildi")
+    location.reload()
+  })
+  .catch(() => alert("Sınav Başlığı Kaydedilemedi!"))
 })
 
 let panelsBtn = document.querySelectorAll(".panel")
