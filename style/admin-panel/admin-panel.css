@@ -126,6 +126,17 @@
   padding: 0.5rem 2rem;
   color: white;
 }
+.admin-panel .panelContent #panel7 .sinavlar .sinavDuzenleCard .editBtn {
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  background-color: #FF7D56;
+  border: none;
+  padding: 0.5rem 0;
+}
+.admin-panel .panelContent #panel7 .sinavlar .sinavDuzenleCard p {
+  color: #7e7e7e;
+}
 @media screen and (max-width: 800px) {
   .admin-panel .panelContent {
     width: 100%;

@@ -156,6 +156,24 @@ $btnOrange : #FF7D56;
             }
         }
 
+        #panel7{
+            .sinavlar{
+                .sinavDuzenleCard{
+                    .editBtn{
+                        width: 100%;
+                        color: white;
+                        font-weight: bold;
+                        background-color: $btnOrange;
+                        border: none;
+                        padding: .5rem 0;
+                    }
+                    p{
+                        color: #7e7e7e;
+                    }
+                }
+            }
+        }
+
         @media screen and (max-width:800px) {
             width: 100%;
             height: 92vh;
