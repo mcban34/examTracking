@@ -204,7 +204,7 @@
 }
 .mobileSideBar .panel i {
   color: white;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
 }
 .mobileSideBar button {
   border: none;
@@ -213,7 +213,7 @@
   .mobileSideBar {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
   }
 }
 
