@@ -53,11 +53,11 @@ document.querySelector(".dersBasligiOlustur").addEventListener("click", function
   set(newDersRef, {
     dersBaslik: dersBasligi
   })
-  .then(() => {
-    alert("Sınav Başlığı Kaydedildi")
-    location.reload()
-  })
-  .catch(() => alert("Sınav Başlığı Kaydedilemedi!"))
+    .then(() => {
+      alert("Sınav Başlığı Kaydedildi")
+      location.reload()
+    })
+    .catch(() => alert("Sınav Başlığı Kaydedilemedi!"))
 })
 
 let panelsBtn = document.querySelectorAll(".panel")
@@ -623,15 +623,15 @@ function editExam(examNameParams) {
     const db = getDatabase();
     update(ref(db, `sinavlar/${elemetQuizTitle}/quizBilgi`), {
       name: examTitle,
-      quizContentBody:examBody
+      quizContentBody: examBody
     });
   })
 
   //!doğrudan sınavı silme
-  document.querySelector(".deleteQuiz").addEventListener("click",function(){
+  document.querySelector(".deleteQuiz").addEventListener("click", function () {
     let elemetQuizTitle = document.querySelector(".modal-title").innerHTML
     let silmeIstegi = confirm("Sınavı Silmek İster misiniz ? ")
-    if(silmeIstegi){
+    if (silmeIstegi) {
       const db = getDatabase();
       const DeleteExam = ref(db, `sinavlar/${elemetQuizTitle}`);
       remove(DeleteExam).then(() => {
@@ -709,6 +709,62 @@ function editExam(examNameParams) {
   });
 
 
+
 }
 
 fetchSinavlar()
+
+
+
+//!ders başlığı düzenlenmesi
+document.addEventListener("DOMContentLoaded", async function () {
+  const tableBody = document.querySelector(".derlerTbody");
+  const db = getDatabase();
+  const countRefDersler = await ref(db, "dersler/");
+
+  onValue(countRefDersler, (snapshot) => {
+    tableBody.innerHTML = "";
+    const data = snapshot.val();
+
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        const row = tableBody.insertRow();
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+
+        cell1.className = "dersName";
+        cell1.innerHTML = data[key].dersBaslik;
+        cell2.innerHTML = `<button class="dersDuzenle" data-id="${key}">Düzenle</button>`;
+      }
+    }
+
+    tableBody.addEventListener("click", async (event) => {
+      if (event.target.classList.contains("dersDuzenle")) {
+        const dersId = event.target.getAttribute("data-id");
+        const dersNameCell = event.target.closest("tr").querySelector(".dersName");
+        if (!dersNameCell.querySelector(".newDers")) {
+          const inputElement = document.createElement("input");
+          inputElement.className = "newDers";
+          dersNameCell.innerHTML = "";
+          dersNameCell.appendChild(inputElement);
+
+          inputElement.value = data[dersId].dersBaslik;
+        }
+
+        event.target.innerHTML = "Tamamla!";
+        event.target.classList.add("okDersDuzenle");
+
+        event.target.addEventListener("click", async function () {
+          const newDersInput = dersNameCell.querySelector(".newDers");
+          const updatedDers = newDersInput.value;
+
+          const dersRef = ref(db, `dersler/${dersId}`);
+          await update(dersRef, { dersBaslik: updatedDers });
+        });
+      }
+    });
+  });
+});
+
+
+
