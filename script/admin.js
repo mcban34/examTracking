@@ -615,14 +615,17 @@ function editExam(examNameParams) {
   //!doğrudan sınavı silme
   document.querySelector(".deleteQuiz").addEventListener("click",function(){
     let elemetQuizTitle = document.querySelector(".modal-title").innerHTML
-    const db = getDatabase();
-    const DeleteExam = ref(db, `sinavlar/${elemetQuizTitle}`);
-    remove(DeleteExam).then(() => {
-      alert("sınav başarıyla silindi!")
-      setTimeout(() => {
-        location.reload()
-      }, 500);
-    })
+    let silmeIstegi = confirm("Sınavı Silmek İster misiniz ? ")
+    if(silmeIstegi){
+      const db = getDatabase();
+      const DeleteExam = ref(db, `sinavlar/${elemetQuizTitle}`);
+      remove(DeleteExam).then(() => {
+        alert("sınav başarıyla silindi!")
+        setTimeout(() => {
+          location.reload()
+        }, 500);
+      })
+    }
   })
 
   //!sınavların admin tarafından yeniden düzenlenmesi
