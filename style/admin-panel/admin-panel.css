@@ -139,9 +139,10 @@
 .admin-panel .panelContent #panel7 .sinavlar .sinavDuzenleCard p {
   color: #7e7e7e;
 }
-.admin-panel .panelContent #panel7 .panel7Title {
+.admin-panel .panelContent #panel7 .panel7Title span {
   background-color: #552BC8;
   color: white;
+  padding: 0.5rem 2.5rem;
 }
 @media screen and (max-width: 800px) {
   .admin-panel .panelContent {

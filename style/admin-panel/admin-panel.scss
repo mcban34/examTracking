@@ -174,8 +174,11 @@ $btnOrange : #FF7D56;
                 }
             }
             .panel7Title{
-                background-color: $lightPurple;
-                color: white;
+                span{
+                    background-color: $lightPurple;
+                    color: white;
+                    padding: .5rem 2.5rem;
+                }
             }
         }
 
