@@ -731,10 +731,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         const row = tableBody.insertRow();
         const cell1 = row.insertCell(0);
         const cell2 = row.insertCell(1);
+        const cell3 = row.insertCell(2); // Yeni hücre
 
         cell1.className = "dersName";
         cell1.innerHTML = data[key].dersBaslik;
         cell2.innerHTML = `<button class="dersDuzenle" data-id="${key}">Düzenle</button>`;
+        cell3.innerHTML = `<button class="dersSil" data-id="${key}">Sil</button>`; // Sil düğmesi eklendi
       }
     }
 
@@ -762,6 +764,15 @@ document.addEventListener("DOMContentLoaded", async function () {
           await update(dersRef, { dersBaslik: updatedDers });
         });
       }
+
+      //!ders başlığı silinmesi
+      if (event.target.classList.contains("dersSil")) {
+        const dersId = event.target.getAttribute("data-id");
+        const dersRef = ref(db, `dersler/${dersId}`);
+        await remove(dersRef);
+        event.target.closest("tr").remove();
+      }
+
     });
   });
 });
