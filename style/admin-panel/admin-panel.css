@@ -140,9 +140,34 @@
   color: #7e7e7e;
 }
 .admin-panel .panelContent #panel7 .panel7Title span {
-  background-color: #552BC8;
+  border-bottom: 2px solid #2D1687;
+}
+.admin-panel .panelContent #panel7 .dersBasliklari .derlerTbody .sinavBaslikRow {
+  border: 1px solid #2D1687;
+  font-weight: bold;
+  transition: 0.34s;
+}
+.admin-panel .panelContent #panel7 .dersBasliklari .derlerTbody .sinavBaslikRow:hover {
+  background-color: rgb(228, 228, 228);
+}
+.admin-panel .panelContent #panel7 .dersBasliklari .derlerTbody td {
+  text-align: center;
+  padding: 1rem 0;
+  border-right: 1px solid #2D1687;
+}
+.admin-panel .panelContent #panel7 .dersBasliklari .derlerTbody td .dersDuzenle {
+  background-color: #2D1687;
+  padding: 0.5rem 2rem;
   color: white;
-  padding: 0.5rem 2.5rem;
+  border: none;
+}
+.admin-panel .panelContent #panel7 .dersBasliklari .derlerTbody td .okDersDuzenle {
+  background-color: #1d6f42;
+}
+.admin-panel .panelContent #panel7 .dersBasliklari .derlerTbody td .dersSil {
+  background-color: #ee3f3f;
+  border: none;
+  color: white;
 }
 @media screen and (max-width: 800px) {
   .admin-panel .panelContent {

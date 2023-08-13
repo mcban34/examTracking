@@ -729,6 +729,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     for (const key in data) {
       if (data.hasOwnProperty(key)) {
         const row = tableBody.insertRow();
+        row.className="sinavBaslikRow"
         const cell1 = row.insertCell(0);
         const cell2 = row.insertCell(1);
         const cell3 = row.insertCell(2); // Yeni hücre
@@ -736,7 +737,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         cell1.className = "dersName";
         cell1.innerHTML = data[key].dersBaslik;
         cell2.innerHTML = `<button class="dersDuzenle" data-id="${key}">Düzenle</button>`;
-        cell3.innerHTML = `<button class="dersSil" data-id="${key}">Sil</button>`; // Sil düğmesi eklendi
+        cell3.innerHTML = `<button class="dersSil" data-id="${key}"><i class="bi bi-trash-fill dersSil"></i></button>`; // Sil düğmesi eklendi
       }
     }
 

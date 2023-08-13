@@ -175,9 +175,38 @@ $btnOrange : #FF7D56;
             }
             .panel7Title{
                 span{
-                    background-color: $lightPurple;
-                    color: white;
-                    padding: .5rem 2.5rem;
+                    border-bottom: 2px solid $darkPurple;
+                }
+            }
+            .dersBasliklari{
+                .derlerTbody{
+                    .sinavBaslikRow{
+                        border: 1px solid $darkPurple;
+                        font-weight: bold;
+                        transition: .34s;
+                        &:hover{
+                            background-color: rgb(228, 228, 228);
+                        }
+                    }
+                    td{
+                        text-align: center;
+                        padding: 1rem 0;
+                        border-right: 1px solid $darkPurple;
+                        .dersDuzenle{
+                            background-color: $darkPurple;
+                            padding: .5rem 2rem;
+                            color: white;
+                            border: none;
+                        }
+                        .okDersDuzenle{
+                            background-color: #1d6f42;
+                        }
+                        .dersSil{
+                            background-color: #ee3f3f;
+                            border: none;
+                            color: white;
+                        }
+                    }
                 }
             }
         }
