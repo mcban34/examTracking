@@ -727,10 +727,10 @@ fetchSinavlar()
 
 
 //!ders başlığı düzenlenmesi
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", function () {
   const tableBody = document.querySelector(".derlerTbody");
   const db = getDatabase();
-  const countRefDersler = await ref(db, "dersler/");
+  const countRefDersler = ref(db, "dersler/");
 
   onValue(countRefDersler, (snapshot) => {
     tableBody.innerHTML = "";
@@ -747,11 +747,11 @@ document.addEventListener("DOMContentLoaded", async function () {
         cell1.className = "dersName";
         cell1.innerHTML = data[key].dersBaslik;
         cell2.innerHTML = `<button class="dersDuzenle" data-id="${key}">Düzenle</button>`;
-        cell3.innerHTML = `<button class="dersSil" data-id="${key}"><i class="bi bi-trash-fill dersSil"></i></button>`; // Sil düğmesi eklendi
+        cell3.innerHTML = `<button class="dersSil" data-id="${key}"><i data-id="${key}" class="bi bi-trash-fill dersSil"></i></button>`; // Sil düğmesi eklendi
       }
     }
 
-    tableBody.addEventListener("click", async (event) => {
+    tableBody.addEventListener("click", (event) => {
       if (event.target.classList.contains("dersDuzenle")) {
         const dersId = event.target.getAttribute("data-id");
         const dersNameCell = event.target.closest("tr").querySelector(".dersName");
@@ -767,12 +767,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         event.target.innerHTML = "Tamamla!";
         event.target.classList.add("okDersDuzenle");
 
-        event.target.addEventListener("click", async function () {
+        event.target.addEventListener("click", function () {
           const newDersInput = dersNameCell.querySelector(".newDers");
           const updatedDers = newDersInput.value;
 
           const dersRef = ref(db, `dersler/${dersId}`);
-          await update(dersRef, { dersBaslik: updatedDers });
+          update(dersRef, { dersBaslik: updatedDers });
         });
       }
 
@@ -780,10 +780,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (event.target.classList.contains("dersSil")) {
         const dersId = event.target.getAttribute("data-id");
         const dersRef = ref(db, `dersler/${dersId}`);
-        await remove(dersRef);
+        remove(dersRef);
         event.target.closest("tr").remove();
       }
-
     });
   });
 });
