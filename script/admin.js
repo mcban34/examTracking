@@ -569,50 +569,60 @@ function editExam(examNameParams) {
   onValue(countRefSiniflar, (snapshot) => {
 
     let data = Object.values(snapshot.val());
-    // console.log(data);
+
     let duzenlenilenSinav = data.filter(value => examNameParams == value.quizBilgi.name)
-    console.log("tıklanılan Veri : ", duzenlenilenSinav[0].quizBilgi);
+    console.log("tıklanılan Veri : ", duzenlenilenSinav);
 
     //*modalın başlığı getirildi
     const duzenlenilenSinavTitle = duzenlenilenSinav[0].quizBilgi.name
     const modalTitle = document.querySelector(".modal-title")
     modalTitle.innerHTML = duzenlenilenSinavTitle
 
-    // //*modal body
-    let duzenlenilenSinavSorular = Object.values(duzenlenilenSinav[0].sorular)
-    // console.log("tıklanılan sorular", duzenlenilenSinavSorular);
-
-    const duzenlenilenSinavSorularHTML = duzenlenilenSinavSorular.map((element, index) => {
-      return `
-        <h5>${index + 1}. Soru</h5>
-        <div class="quizDüzenleDiv" data-id="${index}">
-          <input class="modalBodySoru mt-2" value="${element.soru}"></input>
-
-          <p class="mt-3"><b>Cevaplar</b></p>
-          <input class="modalBodyCevap" value="${element.cevaplar[0]}"></input>
-          <input class="modalBodyCevap" value="${element.cevaplar[1]}"></input>
-          <input class="modalBodyCevap" value="${element.cevaplar[2]}"></input>
-          <input class="modalBodyCevap" value="${element.cevaplar[3]}"></input>
-
-          <p class="mt-3"><b>Doğru Cevap</b></p>
-          <input class="modalBodyDogruCevap" value="${element.dogruCevap}"></input>
-          <button data-id="${index}" class="saveQuizExam"><i class="bi bi-file-earmark-check"></i>Kaydet</button>
-          <button data-id="${index}" class="deleteQuizExam"><i class="bi bi-trash3"></i>Soruyu Sil</button>
-        </div>
-        <hr>
-      `
-    })
-
-    document.querySelector(".modalBodyContent").innerHTML = duzenlenilenSinavSorularHTML.join("")
-
+    //*modal head düzenlendi
     let modalBodyHeadExamTitle = `
-      <h5>Sınav Bilgileri</h5>
-      <input class="examTitle" value="${duzenlenilenSinav[0].quizBilgi.name}"></input>
-      <input class="examBody" value="${duzenlenilenSinav[0].quizBilgi.quizContentBody}"></input>
-      <button class="editExamTitle">İçeriği Düzenle</button>
-      <hr class="modalHeadHr">
+    <h5>Sınav Bilgileri</h5>
+    <input class="examTitle" value="${duzenlenilenSinav[0].quizBilgi.name}"></input>
+    <input class="examBody" value="${duzenlenilenSinav[0].quizBilgi.quizContentBody}"></input>
+    <button class="editExamTitle">İçeriği Düzenle</button>
+    <hr class="modalHeadHr">
     `
     document.querySelector(".modalBodyHead").innerHTML = modalBodyHeadExamTitle
+
+    // //*modal body
+    //!düzenlenmek istenilen sınavın içerisinde eğerki bir sınav yoksa
+    //!if ile kontrol sağlayıp modalbodyi gizliyorum
+    let duzenlenilenSinavSorular
+    if ("sorular" in duzenlenilenSinav[0]) {
+      duzenlenilenSinavSorular = Object.values(duzenlenilenSinav[0].sorular)
+
+      const duzenlenilenSinavSorularHTML = duzenlenilenSinavSorular.map((element, index) => {
+        return `
+              <h5>${index + 1}. Soru</h5>
+              <div class="quizDüzenleDiv" data-id="${index}">
+                <input class="modalBodySoru mt-2" value="${element.soru}"></input>
+      
+                <p class="mt-3"><b>Cevaplar</b></p>
+                <input class="modalBodyCevap" value="${element.cevaplar[0]}"></input>
+                <input class="modalBodyCevap" value="${element.cevaplar[1]}"></input>
+                <input class="modalBodyCevap" value="${element.cevaplar[2]}"></input>
+                <input class="modalBodyCevap" value="${element.cevaplar[3]}"></input>
+      
+                <p class="mt-3"><b>Doğru Cevap</b></p>
+                <input class="modalBodyDogruCevap" value="${element.dogruCevap}"></input>
+                <button data-id="${index}" class="saveQuizExam"><i class="bi bi-file-earmark-check"></i>Kaydet</button>
+                <button data-id="${index}" class="deleteQuizExam"><i class="bi bi-trash3"></i>Soruyu Sil</button>
+              </div>
+              <hr>
+            `
+      })
+      document.querySelector(".modalBodyContent").innerHTML = duzenlenilenSinavSorularHTML.join("")
+
+      document.querySelector(".modalBodyContent").classList.remove("nullExam")
+
+    }
+    else {
+      document.querySelector(".modalBodyContent").classList.add("nullExam")
+    }
   })
 
   //!sınavları içerikleri düzenlendi
@@ -729,7 +739,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     for (const key in data) {
       if (data.hasOwnProperty(key)) {
         const row = tableBody.insertRow();
-        row.className="sinavBaslikRow"
+        row.className = "sinavBaslikRow"
         const cell1 = row.insertCell(0);
         const cell2 = row.insertCell(1);
         const cell3 = row.insertCell(2); // Yeni hücre
