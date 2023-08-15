@@ -2,9 +2,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebas
 import {
   getDatabase,
   set,
-  ref,
   update,
   onValue,
+  ref,
   get,
   push,
   remove
@@ -15,6 +15,10 @@ import {
   onAuthStateChanged,
   signOut,
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+
+import {
+  getStorage, uploadBytes, getDownloadURL, ref as sRef
+} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAmwJkuxoy2JEUbHzSAL7SQnuGOjWQ71FQ",
@@ -445,11 +449,11 @@ document.querySelector(".createGroup").addEventListener("click", function () {
       Grupname: grupName,
     },
   })
-  .then(() =>{
-    alert("Sınıf Başarıyla Oluşturuldu!")
-    location.reload()
-  })
-  .catch(() => alert("Sınıf Oluşturulamadı! Yeniden Deneyiniz..."))
+    .then(() => {
+      alert("Sınıf Başarıyla Oluşturuldu!")
+      location.reload()
+    })
+    .catch(() => alert("Sınıf Oluşturulamadı! Yeniden Deneyiniz..."))
 
 })
 
@@ -792,5 +796,54 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+const storage = getStorage()
+const storageRef = sRef(storage)
+
+const fileInput = document.getElementById("file-input");
+
+fileInput.addEventListener("change", (event) => {
+  const selectedFile = event.target.files[0]; // Seçilen dosyanın referansını alın
+
+  if (selectedFile) {
+    // Firebase Storage'a yükleme işlemi burada gerçekleştirilebilir
+    const imagesRef = sRef(storage, 'images')
+    const sparkyRef = sRef(storage, `images/${selectedFile.name}`)
+
+    uploadBytes(sparkyRef, selectedFile).then((snapshot) => {
+      console.log("test tamam");
+    })
+
+    const bytes = new Uint8Array([0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x20, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x21]);
+    uploadBytes(storageRef, bytes).then((snapshot) => {
+      console.log('Uploaded an array!');
+    });
+
+    const message = 'This is my message.';
+    uploadString(storageRef, message).then((snapshot) => {
+      console.log('Uploaded a raw string!');
+    });
+
+    // Base64 formatted string
+    const message2 = '5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
+    uploadString(storageRef, message2, 'base64').then((snapshot) => {
+      console.log('Uploaded a base64 string!');
+    });
+
+    // Base64url formatted string
+    const message3 = '5b6p5Y-344GX44G-44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
+    uploadString(storageRef, message3, 'base64url').then((snapshot) => {
+      console.log('Uploaded a base64url string!');
+    });
+
+    // Data URL string
+    const message4 = 'data:text/plain;base64,5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
+    uploadString(storageRef, message4, 'data_url').then((snapshot) => {
+      console.log('Uploaded a data_url string!');
+    });
+  }
+});
+
+uploadBytes()
+uploadString()
 
 
