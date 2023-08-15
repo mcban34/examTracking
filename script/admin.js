@@ -444,7 +444,12 @@ document.querySelector(".createGroup").addEventListener("click", function () {
     grup: {
       Grupname: grupName,
     },
-  });
+  })
+  .then(() =>{
+    alert("Sınıf Başarıyla Oluşturuldu!")
+    location.reload()
+  })
+  .catch(() => alert("Sınıf Oluşturulamadı! Yeniden Deneyiniz..."))
 
 })
 
