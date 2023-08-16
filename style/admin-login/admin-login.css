@@ -1,0 +1,20 @@
+.adminLoginSec {
+  background: linear-gradient(#2D1687, #552BC8);
+}
+.adminLoginSec .loginAdmin {
+  background-color: white;
+  padding: 2rem;
+}
+.adminLoginSec .loginAdmin input {
+  width: 100%;
+  height: 2.5rem;
+  margin-top: 1rem;
+}
+.adminLoginSec .loginAdmin button {
+  background-color: #FF7D56;
+  color: white;
+  width: 100%;
+  height: 2.5rem;
+  margin-top: 1rem;
+  border: none;
+}/*# sourceMappingURL=admin-login.css.map */
