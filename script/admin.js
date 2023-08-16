@@ -17,7 +17,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 
 import {
-  getStorage, uploadBytes, getDownloadURL, ref as sRef
+  getStorage, uploadBytes, getDownloadURL, ref as sRef, listAll
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 
 const firebaseConfig = {
@@ -813,37 +813,80 @@ fileInput.addEventListener("change", (event) => {
       console.log("test tamam");
     })
 
-    const bytes = new Uint8Array([0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x20, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x21]);
-    uploadBytes(storageRef, bytes).then((snapshot) => {
-      console.log('Uploaded an array!');
-    });
 
-    const message = 'This is my message.';
-    uploadString(storageRef, message).then((snapshot) => {
-      console.log('Uploaded a raw string!');
-    });
+    // listAll(sparkyRef)
+    //   .then((res) => {
+    //     res.forEach((folderRef) => {
+    //       // All the prefixes under listRef.
+    //       // You may call listAll() recursively on them.
+    //       console.log(res);
+    //     });
+    //     res.forEach((itemRef) => {
+    //       // All the items under listRef.
+    //     });
+    //   }).catch((error) => {
+    //     // Uh-oh, an error occurred!
+    //   });
 
-    // Base64 formatted string
-    const message2 = '5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
-    uploadString(storageRef, message2, 'base64').then((snapshot) => {
-      console.log('Uploaded a base64 string!');
-    });
+    // const bytes = new Uint8Array([0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x20, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x21]);
+    // uploadBytes(storageRef, bytes).then((snapshot) => {
+    //   console.log('Uploaded an array!');
+    // });
 
-    // Base64url formatted string
-    const message3 = '5b6p5Y-344GX44G-44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
-    uploadString(storageRef, message3, 'base64url').then((snapshot) => {
-      console.log('Uploaded a base64url string!');
-    });
+    // const message = 'This is my message.';
+    // uploadString(storageRef, message).then((snapshot) => {
+    //   console.log('Uploaded a raw string!');
+    // });
 
-    // Data URL string
-    const message4 = 'data:text/plain;base64,5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
-    uploadString(storageRef, message4, 'data_url').then((snapshot) => {
-      console.log('Uploaded a data_url string!');
-    });
+    // // Base64 formatted string
+    // const message2 = '5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
+    // uploadString(storageRef, message2, 'base64').then((snapshot) => {
+    //   console.log('Uploaded a base64 string!');
+    // });
+
+    // // Base64url formatted string
+    // const message3 = '5b6p5Y-344GX44G-44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
+    // uploadString(storageRef, message3, 'base64url').then((snapshot) => {
+    //   console.log('Uploaded a base64url string!');
+    // });
+
+    // // Data URL string
+    // const message4 = 'data:text/plain;base64,5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
+    // uploadString(storageRef, message4, 'data_url').then((snapshot) => {
+    //   console.log('Uploaded a data_url string!');
+    // });
+
   }
 });
 
-uploadBytes()
-uploadString()
+// uploadBytes()
+// uploadString()
 
 
+document.addEventListener("DOMContentLoaded", async function () {
+  const storage = getStorage();
+
+  // Create a reference under which you want to list
+  const listRef = await sRef(storage, 'images');
+
+  // Find all the prefixes and items.
+  listAll(listRef)
+    .then((res) => {
+      res.prefixes.forEach((folderRef) => {
+        // All the prefixes under listRef.
+        // You may call listAll() recursively on them.
+        console.log("gelen veriler la!",folderRef);
+      });
+      res.items.forEach((itemRef) => {
+        // All the items under listRef.
+        console.log(itemRef);
+        console.log(itemRef._location.path_);
+        let newImg = document.createElement("img")
+        newImg.src = itemRef.bucket + "/" + itemRef._location.path_
+        document.querySelector(".testImages").append(newImg)
+      });
+    }).catch((error) => {
+      console.log(error);
+      // Uh-oh, an error occurred!
+    });
+})
