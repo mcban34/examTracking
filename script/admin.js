@@ -864,29 +864,66 @@ fileInput.addEventListener("change", (event) => {
 
 
 document.addEventListener("DOMContentLoaded", async function () {
+  // const storage = getStorage();
+
+  // // Create a reference under which you want to list
+  // const listRef = await sRef(storage, 'images');
+  // const test = "https://sinavtakip-24a93-default-rtdb.firebaseio.com"
+  // // Find all the prefixes and items.
+  // listAll(listRef)
+  //   .then((res) => {
+  //     res.prefixes.forEach((folderRef) => {
+  //       // All the prefixes under listRef.
+  //       // You may call listAll() recursively on them.
+  //       console.log("gelen veriler la!",folderRef);
+  //     });
+  //     res.items.forEach((itemRef) => {
+  //       // All the items under listRef.
+  //       console.log(itemRef);
+  //       // console.log(itemRef._location.path_);
+  //       // let newImg = document.createElement("img")
+  //       // newImg.src = test + "/" + itemRef._location.path_
+  //       // document.querySelector(".testImages").append(newImg)
+  //     });
+  //   }).catch((error) => {
+  //     console.log(error);
+  //     // Uh-oh, an error occurred!
+  //     console.log(error);
+  //   });
+  let urlFetch = "https://firebasestorage.googleapis.com/v0/b/sinavtakip-24a93.appspot.com/o/images%2F6342523.jpg"
+  fetch(urlFetch)
+    .then(res => res.json())
+    .then(value => {
+
+      // urlFetch +="?alt=media&token="+value.downloadTokens
+      // console.log(urlFetch);
+    })
+
   const storage = getStorage();
 
   // Create a reference under which you want to list
   const listRef = await sRef(storage, 'images');
-
   // Find all the prefixes and items.
   listAll(listRef)
     .then((res) => {
       res.prefixes.forEach((folderRef) => {
         // All the prefixes under listRef.
         // You may call listAll() recursively on them.
-        console.log("gelen veriler la!",folderRef);
+        console.log("gelen veriler la!", folderRef);
       });
       res.items.forEach((itemRef) => {
         // All the items under listRef.
-        console.log(itemRef);
-        console.log(itemRef._location.path_);
-        let newImg = document.createElement("img")
-        newImg.src = itemRef.bucket + "/" + itemRef._location.path_
-        document.querySelector(".testImages").append(newImg)
+        let dataImgSrc = itemRef._location.path.split("images/");
+        let imageUrl = `https://firebasestorage.googleapis.com/v0/b/sinavtakip-24a93.appspot.com/o/images%2F${dataImgSrc[1]}?alt=media`
+        let image = document.createElement("img")
+        image.src=imageUrl
+        document.querySelector(".testImages").append(image)
       });
     }).catch((error) => {
       console.log(error);
       // Uh-oh, an error occurred!
+      console.log(error);
     });
+    // https://firebasestorage.googleapis.com/v0/b/sinavtakip-24a93.appspot.com/o/images%2Fresim?alt=media
+    // https://firebasestorage.googleapis.com/v0/b/sinavtakip-24a93.appspot.com/o/images%resim?alt=media
 })
