@@ -145,15 +145,17 @@ document.querySelector(".quizNext").addEventListener("click", function () {
     //*soru başlığını oluşturdum
     document.querySelector(".soru").innerHTML = gelenSoru.soru;
 
+      const şıklar = ["A","B","C","D"]
+
     //*her butonun içerisine veri tabanından gelen şıkları yerleştirdim
     let cevapButtons = document.querySelectorAll(".cevapButton");
     for (let i = 0; i < cevapButtons.length; i++) {
-      cevapButtons[i].innerHTML = gelenSoru.cevaplar[i];
+      cevapButtons[i].innerHTML =  `${şıklar[i]})`+ " " +gelenSoru.cevaplar[i];
     }
   }
   yeniSoru();
 
-
+ 
   //!sıradaki soruyu aldım
   document.querySelector(".nextQuestion").addEventListener("click", function () {
     yeniSoru();

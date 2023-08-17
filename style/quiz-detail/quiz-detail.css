@@ -83,8 +83,7 @@ h1, h2, h3, h4, h5, h6, p {
   padding: 2rem;
 }
 .quiz .quizContent .answers .cevapButton {
-  width: 47%;
-  height: 3rem;
+  width: 100%;
   margin: 0.5rem 0.5rem;
   color: #2B444E;
   font-weight: 700;
@@ -92,6 +91,7 @@ h1, h2, h3, h4, h5, h6, p {
   border: none;
   border: 2px solid #2D1687;
   transition: 0.34s;
+  padding: 1rem 0;
 }
 .quiz .quizContent .answers .cevapButton:hover {
   background-color: #2D1687;

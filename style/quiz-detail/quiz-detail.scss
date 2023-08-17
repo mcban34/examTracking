@@ -88,8 +88,7 @@ h1,h2,h3,h4,h5,h6,p{
         padding: 2rem;
         .answers{
             .cevapButton{
-                width: 47%;
-                height: 3rem;
+                width: 100%;
                 margin: .5rem .5rem;
                 color: $dark;
                 font-weight: 700;
@@ -97,6 +96,7 @@ h1,h2,h3,h4,h5,h6,p{
                 border: none;
                 border: 2px solid $darkPurple;
                 transition: .34s;
+                padding: 1rem 0;
                 &:hover{
                     background-color: $darkPurple;
                     color: white;
