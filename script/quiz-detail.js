@@ -13,6 +13,10 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 
+import {
+  getStorage, uploadBytes, getDownloadURL, ref as sRef, listAll
+} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAmwJkuxoy2JEUbHzSAL7SQnuGOjWQ71FQ",
@@ -49,6 +53,7 @@ onValue(countRef, (snapshot) => {
 
   //*quiz detayında gelen o quize ait bütün soruları obje haline çevirdim
   quizs = Object.values(quizDetail.sorular);
+  console.log("bütün sorular", quizs);
 });
 
 //!fonksiyon rastgele bir soru fırlatır
@@ -87,7 +92,7 @@ function quizTimer() {
       const saniyeStr = saniye < 10 ? "0" + saniye : saniye;
       timerDiv.textContent = dakikaStr + ":" + saniyeStr;
     }
-  }, 10);
+  }, 2000);
 }
 
 //!sınava başla butonu
@@ -100,7 +105,7 @@ document.querySelector(".quizNext").addEventListener("click", function () {
 
   let gelenSoru;
   //!yeni soru üretmesi için fonksiyon yazdım
-  function yeniSoru() {
+  async function yeniSoru() {
     //*rastgele sorular bittiğinde
     if (quizs.length == 0) {
       document.querySelector(".quizContent").style.display = "none";
@@ -113,8 +118,28 @@ document.querySelector(".quizNext").addEventListener("click", function () {
       return;
     }
     gelenSoru = rstGetQuiz();
-    console.log(gelenSoru);
+    console.log("gelensoru", gelenSoru.quizIdKey);
     console.log(quizs);
+
+    //*soruya karşlılık gelen resim çekildi
+    const storage = getStorage();
+
+    const listRef = await sRef(storage, 'images');
+
+    listAll(listRef)
+      .then((res) => {
+        res.prefixes.forEach((folderRef) => {
+          console.log("gelen veriler la!", folderRef);
+        });
+        res.items.forEach((itemRef) => {
+          console.log(itemRef);
+          imageUrl = `https://firebasestorage.googleapis.com/v0/b/sinavtakip-24a93.appspot.com/o/images%2F${gelenSoru.quizIdKey}?alt=media`
+          let sinavResimi = document.querySelector(".sinavResimi")
+          sinavResimi.src = imageUrl
+        });
+      }).catch((error) => {
+        console.log(error);
+      });
 
     //*soru başlığını oluşturdum
     document.querySelector(".soru").innerHTML = gelenSoru.soru;

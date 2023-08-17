@@ -386,6 +386,13 @@ function datatableVerileriGoster(veriListesi) {
 
 
 
+let quizId = "";
+//?her quizin bir birinden farklı olması için 8 karakterli id ürettim
+for (let i = 0; i < 8; i++) {
+  let rstQuizId = Math.floor(Math.random() * 10);
+  quizId += rstQuizId;
+}
+
 //!yeni bir quiz yaratılıyor
 document.querySelector(".createQuizBtn").addEventListener("click", function () {
   let soru = document.querySelector(".soru").value;
@@ -399,21 +406,33 @@ document.querySelector(".createQuizBtn").addEventListener("click", function () {
 
   const queryRef = ref(db, `sinavlar/${filterQuizs}`);
   get(queryRef).then(() => {
-    //?her quizin bir birinden farklı olması için 8 karakterli id ürettim
-    let quizId = "";
-    for (let i = 0; i < 8; i++) {
-      let rstQuizId = Math.floor(Math.random() * 10);
-      quizId += rstQuizId;
-    }
-
     set(ref(db, `sinavlar/${filterQuizs}/sorular/${quizId}`), {
       soru: soru,
       dogruCevap: dogruCevap,
       cevaplar: [cevap1, cevap2, cevap3, cevap4],
+      quizIdKey: quizId
     });
   });
   location.reload();
 });
+
+
+const storage = getStorage()
+const storageRef = sRef(storage)
+
+const fileInput = document.getElementById("file-input");
+
+fileInput.addEventListener("change", (event) => {
+  const selectedFile = event.target.files[0];
+  if (selectedFile) {
+    const sparkyRef = sRef(storage, `images/${quizId}`)
+    uploadBytes(sparkyRef, selectedFile).then((snapshot) => {
+      console.log("test tamam");
+    })
+  }
+});
+
+
 
 //!yeni bir quiz başlığı yaratıyoruz
 document
@@ -796,134 +815,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-const storage = getStorage()
-const storageRef = sRef(storage)
-
-const fileInput = document.getElementById("file-input");
-
-fileInput.addEventListener("change", (event) => {
-  const selectedFile = event.target.files[0]; // Seçilen dosyanın referansını alın
-
-  if (selectedFile) {
-    // Firebase Storage'a yükleme işlemi burada gerçekleştirilebilir
-    const imagesRef = sRef(storage, 'images')
-    const sparkyRef = sRef(storage, `images/${selectedFile.name}`)
-
-    uploadBytes(sparkyRef, selectedFile).then((snapshot) => {
-      console.log("test tamam");
-    })
-
-
-    // listAll(sparkyRef)
-    //   .then((res) => {
-    //     res.forEach((folderRef) => {
-    //       // All the prefixes under listRef.
-    //       // You may call listAll() recursively on them.
-    //       console.log(res);
-    //     });
-    //     res.forEach((itemRef) => {
-    //       // All the items under listRef.
-    //     });
-    //   }).catch((error) => {
-    //     // Uh-oh, an error occurred!
-    //   });
-
-    // const bytes = new Uint8Array([0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x20, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x21]);
-    // uploadBytes(storageRef, bytes).then((snapshot) => {
-    //   console.log('Uploaded an array!');
-    // });
-
-    // const message = 'This is my message.';
-    // uploadString(storageRef, message).then((snapshot) => {
-    //   console.log('Uploaded a raw string!');
-    // });
-
-    // // Base64 formatted string
-    // const message2 = '5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
-    // uploadString(storageRef, message2, 'base64').then((snapshot) => {
-    //   console.log('Uploaded a base64 string!');
-    // });
-
-    // // Base64url formatted string
-    // const message3 = '5b6p5Y-344GX44G-44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
-    // uploadString(storageRef, message3, 'base64url').then((snapshot) => {
-    //   console.log('Uploaded a base64url string!');
-    // });
-
-    // // Data URL string
-    // const message4 = 'data:text/plain;base64,5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
-    // uploadString(storageRef, message4, 'data_url').then((snapshot) => {
-    //   console.log('Uploaded a data_url string!');
-    // });
-
-  }
-});
-
-// uploadBytes()
-// uploadString()
 
 
 document.addEventListener("DOMContentLoaded", async function () {
-  // const storage = getStorage();
-
-  // // Create a reference under which you want to list
-  // const listRef = await sRef(storage, 'images');
-  // const test = "https://sinavtakip-24a93-default-rtdb.firebaseio.com"
-  // // Find all the prefixes and items.
-  // listAll(listRef)
-  //   .then((res) => {
-  //     res.prefixes.forEach((folderRef) => {
-  //       // All the prefixes under listRef.
-  //       // You may call listAll() recursively on them.
-  //       console.log("gelen veriler la!",folderRef);
-  //     });
-  //     res.items.forEach((itemRef) => {
-  //       // All the items under listRef.
-  //       console.log(itemRef);
-  //       // console.log(itemRef._location.path_);
-  //       // let newImg = document.createElement("img")
-  //       // newImg.src = test + "/" + itemRef._location.path_
-  //       // document.querySelector(".testImages").append(newImg)
-  //     });
-  //   }).catch((error) => {
-  //     console.log(error);
-  //     // Uh-oh, an error occurred!
-  //     console.log(error);
-  //   });
-  let urlFetch = "https://firebasestorage.googleapis.com/v0/b/sinavtakip-24a93.appspot.com/o/images%2F6342523.jpg"
-  fetch(urlFetch)
-    .then(res => res.json())
-    .then(value => {
-
-      // urlFetch +="?alt=media&token="+value.downloadTokens
-      // console.log(urlFetch);
-    })
-
-  const storage = getStorage();
-
-  // Create a reference under which you want to list
-  const listRef = await sRef(storage, 'images');
-  // Find all the prefixes and items.
-  listAll(listRef)
-    .then((res) => {
-      res.prefixes.forEach((folderRef) => {
-        // All the prefixes under listRef.
-        // You may call listAll() recursively on them.
-        console.log("gelen veriler la!", folderRef);
-      });
-      res.items.forEach((itemRef) => {
-        // All the items under listRef.
-        let dataImgSrc = itemRef._location.path.split("images/");
-        let imageUrl = `https://firebasestorage.googleapis.com/v0/b/sinavtakip-24a93.appspot.com/o/images%2F${dataImgSrc[1]}?alt=media`
-        let image = document.createElement("img")
-        image.src=imageUrl
-        document.querySelector(".testImages").append(image)
-      });
-    }).catch((error) => {
-      console.log(error);
-      // Uh-oh, an error occurred!
-      console.log(error);
-    });
-    // https://firebasestorage.googleapis.com/v0/b/sinavtakip-24a93.appspot.com/o/images%2Fresim?alt=media
-    // https://firebasestorage.googleapis.com/v0/b/sinavtakip-24a93.appspot.com/o/images%resim?alt=media
+  
 })
