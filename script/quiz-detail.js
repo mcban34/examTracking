@@ -230,5 +230,22 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("Kullanıcı oturum açmamış.");
     }
   });
+
+  //*sınava başlarken öğrenci kuralları okusun diye 5 saniye beklettim
+  let sinavaBaslaBtn = document.querySelector(".quizNext")
+  sinavaBaslaBtn.disabled = true
+  
+  let buttonSecond = 5
+  const sinavaBaslaBtnTime = setInterval(() => {
+    sinavaBaslaBtn.innerHTML=`${buttonSecond} Saniye Bekle!`
+    buttonSecond--
+    if(buttonSecond==0){
+      clearInterval(sinavaBaslaBtnTime)
+      sinavaBaslaBtn.innerHTML=`Sınava Başla`
+      sinavaBaslaBtn.disabled = false      
+    }
+  }, 1000);
+
+
 });
 
