@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
   let buttonSecond = 5
   const sinavaBaslaBtnTime = setInterval(() => {
-    sinavaBaslaBtn.innerHTML=`${buttonSecond} Saniye Bekle!`
+    sinavaBaslaBtn.innerHTML=`İnternet Bağlantısı Kontrol Ediliyor...`
     buttonSecond--
     if(buttonSecond==0){
       clearInterval(sinavaBaslaBtnTime)
