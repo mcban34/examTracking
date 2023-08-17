@@ -126,6 +126,7 @@ document.querySelector(".quizNext").addEventListener("click", function () {
 
     const listRef = await sRef(storage, 'images');
 
+    let imageUrl
     listAll(listRef)
       .then((res) => {
         res.prefixes.forEach((folderRef) => {
