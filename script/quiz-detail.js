@@ -92,7 +92,7 @@ function quizTimer() {
       const saniyeStr = saniye < 10 ? "0" + saniye : saniye;
       timerDiv.textContent = dakikaStr + ":" + saniyeStr;
     }
-  }, 2000);
+  }, 1000);
 }
 
 //!sınava başla butonu
