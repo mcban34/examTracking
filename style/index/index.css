@@ -7,7 +7,7 @@ header p {
   margin-bottom: 2rem;
 }
 header .hemenBasla {
-  background-color: red;
+  background-color: #FF7D56;
   color: white;
   text-decoration: none;
   padding: 1rem 3rem;
@@ -30,8 +30,17 @@ header .navBtn:hover {
   color: white;
   border-color: #FF7D56;
 }
+@media screen and (max-width: 991px) {
+  header .navBtn {
+    margin-top: 1rem;
+    text-align: center;
+  }
+}
 header .headerContent {
   padding: 1rem 0 4rem 0;
+}
+header .quit {
+  background-color: rgb(253, 58, 58);
 }
 
 .quizs {

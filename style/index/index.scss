@@ -11,7 +11,7 @@ header{
         margin-bottom: 2rem;
     }
     .hemenBasla{
-        background-color: red;
+        background-color: $btnOrange;
         color: white;
         text-decoration: none; 
         padding: 1rem 3rem;
@@ -33,9 +33,16 @@ header{
             color: white;
             border-color: $btnOrange;
         }
+        @media screen and (max-width:991px) {
+            margin-top: 1rem;
+            text-align: center;
+        }
     }
     .headerContent{
         padding: 1rem 0 4rem 0;
+    }
+    .quit{
+        background-color: rgb(253, 58, 58);
     }
 }
 
