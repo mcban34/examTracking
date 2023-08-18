@@ -223,8 +223,13 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(data);
         if (data.quizBilgi.cozulduMu == true) {
           document.body.innerHTML = `
-            <h2>Çözülmüş Quiz!</h2>
-            <a href="index.html">Ana Sayfa</a>
+            <div class="cozulmusQuiz">
+              <div class="cozulmusQuizContent">
+                <img src="img/cancel.png" width="100">
+                <h2 class="cozulmusQuizTitle my-3">Opppss! Bu Sınavı Daha Önce Çözmüşsün!</h2>
+                <p class="">Diğer Sınavlarına Göz Atmak İçin <a class="backToHome" href="index.html">Ana Sayfa</a></p>
+              </div>
+            </div>
           `;
         }
       });
