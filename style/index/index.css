@@ -1,8 +1,8 @@
 header {
   background: linear-gradient(45deg, #2D1687, #552BC8);
   color: white;
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 41%, 50% 130%, 0 41%);
-          clip-path: polygon(0 0, 100% 0, 100% 41%, 50% 130%, 0 41%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 130%, 0 75%);
+          clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 130%, 0 75%);
 }
 header p {
   margin-top: 1rem;
