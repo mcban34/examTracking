@@ -101,6 +101,12 @@ h1,h2,h3,h4,h5,h6,p{
                     background-color: $darkPurple;
                     color: white;
                 }
+                @media screen and (max-width:778px) {
+                    &:hover{
+                        background-color: initial;
+                        color: initial;
+                    }
+                }
             }   
         }
         .nextQuestion{
