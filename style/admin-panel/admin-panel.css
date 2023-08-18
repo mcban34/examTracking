@@ -172,7 +172,7 @@
 @media screen and (max-width: 800px) {
   .admin-panel .panelContent {
     width: 100%;
-    height: 92vh;
+    height: 85vh;
     padding: 0.5rem;
   }
   .admin-panel .panelContent .filterGrupBtn,
