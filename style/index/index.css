@@ -19,11 +19,16 @@ header .navbar-brand {
   color: white;
 }
 header .navBtn {
-  background-color: #FF7D56;
+  border: 1px solid white;
   color: white;
   font-weight: bold;
   padding: 1rem 2rem !important;
   border-radius: 2rem;
+}
+header .navBtn:hover {
+  background-color: #FF7D56;
+  color: white;
+  border-color: #FF7D56;
 }
 header .headerContent {
   padding: 1rem 0 4rem 0;
