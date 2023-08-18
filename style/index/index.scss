@@ -6,7 +6,8 @@ $btnOrange : #FF7D56;
 header{
     background:linear-gradient(45deg, $darkPurple,$lightPurple);
     color: white;
-    clip-path: polygon(0 0, 100% 0, 100% 41%, 50% 130%, 0 41%);    p{
+    clip-path: polygon(0 0, 100% 0, 100% 41%, 50% 130%, 0 41%);    
+    p{
         margin-top: 1rem;
         margin-bottom: 2rem;
     }
@@ -51,6 +52,10 @@ header{
             padding: 1rem 0 7rem 0;
         }
     }
+}
+
+.panelNav{
+    clip-path: none;
 }
 
 .quizs {

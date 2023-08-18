@@ -183,6 +183,8 @@ const getQuizs = () => {
       document.querySelector(".ogrenciKayit").style.display = "none"
       document.querySelector(".headerContent").style.display = "none"
       document.querySelector(".ogrenciPanel").style.display = "block"
+      document.querySelector(".headerImg").style.display="none"
+      document.querySelector("header").classList.add("panelNav")
     } else {
       // User is signed out
       // ...

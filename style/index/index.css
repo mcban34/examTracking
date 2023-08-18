@@ -54,6 +54,11 @@ header .quit {
   }
 }
 
+.panelNav {
+  -webkit-clip-path: none;
+          clip-path: none;
+}
+
 .quizs .quizsFilterButtons .quizsFilterButton {
   background: transparent;
   border: none;
