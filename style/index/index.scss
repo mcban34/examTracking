@@ -6,8 +6,7 @@ $btnOrange : #FF7D56;
 header{
     background:linear-gradient(45deg, $darkPurple,$lightPurple);
     color: white;
-    clip-path: polygon(0 0, 100% 0%, 100% 75%, 0% 100%);
-    p{
+    clip-path: polygon(0 0, 100% 0, 100% 41%, 50% 130%, 0 41%);    p{
         margin-top: 1rem;
         margin-bottom: 2rem;
     }
@@ -47,6 +46,7 @@ header{
         background-color: rgb(253, 58, 58);
     }
     @media screen and (max-width:991px) {
+        clip-path: none;
         .headerContent{
             padding: 1rem 0 7rem 0;
         }

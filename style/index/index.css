@@ -1,8 +1,8 @@
 header {
   background: linear-gradient(45deg, #2D1687, #552BC8);
   color: white;
-  -webkit-clip-path: polygon(0 0, 100% 0%, 100% 75%, 0% 100%);
-          clip-path: polygon(0 0, 100% 0%, 100% 75%, 0% 100%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 41%, 50% 130%, 0 41%);
+          clip-path: polygon(0 0, 100% 0, 100% 41%, 50% 130%, 0 41%);
 }
 header p {
   margin-top: 1rem;
@@ -45,6 +45,10 @@ header .quit {
   background-color: rgb(253, 58, 58);
 }
 @media screen and (max-width: 991px) {
+  header {
+    -webkit-clip-path: none;
+            clip-path: none;
+  }
   header .headerContent {
     padding: 1rem 0 7rem 0;
   }
