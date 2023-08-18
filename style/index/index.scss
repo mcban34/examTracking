@@ -6,10 +6,12 @@ $btnOrange : #FF7D56;
 header{
     background:linear-gradient(45deg, $darkPurple,$lightPurple);
     color: white;
+    clip-path: polygon(0 0, 100% 0%, 100% 75%, 0% 100%);
     p{
         margin-top: 1rem;
         margin-bottom: 2rem;
     }
+
     .hemenBasla{
         background-color: $btnOrange;
         color: white;
@@ -39,10 +41,15 @@ header{
         }
     }
     .headerContent{
-        padding: 1rem 0 7rem 0;
+        padding: 1rem 0 10rem 0;
     }
     .quit{
         background-color: rgb(253, 58, 58);
+    }
+    @media screen and (max-width:991px) {
+        .headerContent{
+            padding: 1rem 0 7rem 0;
+        }
     }
 }
 
@@ -114,7 +121,7 @@ header{
 }
 
 .headerImg{
-    transform: translateY(-15%);
+    transform: translateY(-20%);
     img{
         border-radius: 1rem;
         box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
