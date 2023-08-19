@@ -1,9 +1,7 @@
-body {
-  background-color: #f4f5ff;
-}
-
 header {
-  background: linear-gradient(45deg, #2D1687, #552BC8);
+  background-image: url("../../img/banner-img.jpg");
+  background-position: center;
+  background-size: cover;
   color: white;
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 130%, 0 75%);
           clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 130%, 0 75%);
