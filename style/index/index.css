@@ -1,11 +1,12 @@
-@charset "UTF-8";
 header {
   background-image: url("../../img/banner-img.jpg");
   background-position: bottom;
   background-size: cover;
   color: white;
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 130%, 0 75%);
-          clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 130%, 0 75%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 130%, 0 90%);
+          clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 130%, 0 90%);
+  border-bottom-left-radius: 30%;
+  border-bottom-right-radius: 30%;
 }
 header p {
   margin-top: 1rem;
@@ -42,7 +43,7 @@ header .navBtn:hover {
   }
 }
 header .headerContent {
-  padding: 3rem 0 10rem 0;
+  padding: 3rem 0 8rem 0;
 }
 header .quit {
   background-color: rgb(253, 58, 58);
@@ -53,7 +54,7 @@ header .quit {
             clip-path: none;
   }
   header .headerContent {
-    padding: 1rem 0 7rem 0;
+    padding: 1rem 0 12rem 0;
   }
 }
 
@@ -128,40 +129,59 @@ header .quit {
   color: #552BC8;
 }
 
-.headerImg {
-  transform: translateY(-20%);
+.headerImgParent {
+  position: relative;
+  overflow: hidden;
+  transform: translateY(-25%);
 }
-.headerImg img {
+.headerImgParent .headerImg img {
   border-radius: 1rem;
   box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-  animation: move 3s linear infinite;
-  position: relative;
-  animation: headerImgAnimation 5s linear infinite; /* "move" adlı animasyonu 3 saniyede bir sürekli olarak uygula */
-  transition: 1s;
 }
 @media screen and (max-width: 768px) {
-  .headerImg {
+  .headerImgParent .headerImg {
     display: none;
   }
 }
-@keyframes headerImgAnimation {
+.headerImgParent .rocketLeft {
+  position: absolute;
+  top: 30%;
+  left: -60px;
+  animation: headerPanelLeftAnimation 7s linear infinite;
+}
+.headerImgParent .rocketRight {
+  position: absolute;
+  transform: scaleX(-1);
+  top: 30%;
+  right: -60px;
+  animation: headerPanelRightAnimation 9s linear infinite;
+}
+@keyframes headerPanelLeftAnimation {
   0% {
-    left: 0;
+    top: 30%;
+    left: -60px;
   }
-  20% {
-    left: 20px;
-  }
-  40% {
-    left: 10px;
-  }
-  60% {
-    left: 15px;
-  }
-  80% {
-    left: 10px;
+  50% {
+    top: 5%;
+    left: -20px;
   }
   100% {
-    left: 0;
+    top: 30%;
+    left: -60px;
+  }
+}
+@keyframes headerPanelRightAnimation {
+  0% {
+    top: 30%;
+    right: -60px;
+  }
+  50% {
+    top: 5%;
+    right: -20px;
+  }
+  100% {
+    top: 30%;
+    right: -60px;
   }
 }
 

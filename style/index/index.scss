@@ -9,7 +9,9 @@ header{
     background-position: bottom;
     background-size: cover;
     color: white;
-    clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 130%, 0 75%);    
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 130%, 0 90%);
+    border-bottom-left-radius: 30%;    
+    border-bottom-right-radius: 30%;    
     p{
         margin-top: 1rem;
         margin-bottom: 2rem;
@@ -44,7 +46,7 @@ header{
         }
     }
     .headerContent{
-        padding: 3rem 0 10rem 0;
+        padding: 3rem 0 8rem 0;
     }
     .quit{
         background-color: rgb(253, 58, 58);
@@ -52,7 +54,7 @@ header{
     @media screen and (max-width:991px) {
         clip-path: none;
         .headerContent{
-            padding: 1rem 0 7rem 0;
+            padding: 1rem 0 12rem 0;
         }
     }
 }
@@ -132,41 +134,60 @@ header{
     }
 }
 
-.headerImg{
-    transform: translateY(-20%);
-    img{
-        border-radius: 1rem;
-        box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-        animation: move 3s linear infinite;
-        position: relative;
-        animation: headerImgAnimation 5s linear infinite; /* "move" adlı animasyonu 3 saniyede bir sürekli olarak uygula */
-        transition: 1s;
+.headerImgParent{
+    position: relative;
+    overflow: hidden;
+    transform: translateY(-25%);
+    .headerImg{
+        img{
+            border-radius: 1rem;
+            box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+        }
+        @media screen and (max-width:768px) {
+            display: none;
+        }
     }
-    @media screen and (max-width:768px) {
-        display: none;
+    .rocketLeft{
+        position: absolute;
+        top: 30%;
+        left: -60px;
+        animation: headerPanelLeftAnimation 7s linear infinite;
     }
-
-    @keyframes headerImgAnimation {
-        
+    .rocketRight{
+        position: absolute;
+        transform: scaleX(-1);
+        top: 30%;
+        right: -60px;
+        animation: headerPanelRightAnimation 9s linear infinite;
+    }
+    @keyframes headerPanelLeftAnimation {
         0%{
-            left: 0;
+            top:30%;
+            left: -60px;
         }
-        20%{
-            left: 20px;
-        }
-        40%{
-            left: 10px;
-        }
-        60%{
-            left: 15px;
-        }
-        80%{
-            left: 10px;
+        50%{
+            top: 5%;
+            left: -20px;
         }
         100%{
-            left: 0;
+            top:30%;
+            left: -60px;
         }
-    }
+      }
+    @keyframes headerPanelRightAnimation {
+        0%{
+            top: 30%;
+            right: -60px;
+        }
+        50%{
+            top: 5%;
+            right: -20px;
+        }
+        100%{
+            top:30%;
+            right: -60px;
+        }
+      }
 }
 
 .feature{
