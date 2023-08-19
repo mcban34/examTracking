@@ -1,3 +1,7 @@
+body {
+  background-color: #f4f5ff;
+}
+
 header {
   background: linear-gradient(45deg, #2D1687, #552BC8);
   color: white;
@@ -132,4 +136,49 @@ header .quit {
   .headerImg {
     display: none;
   }
+}
+
+.feature {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+.feature .featureCard {
+  position: relative;
+  text-align: center;
+  color: #2B444E;
+}
+.feature .featureCard h5 {
+  padding: 0.5rem 0;
+}
+.feature .featureCard p {
+  color: rgb(156, 156, 156);
+}
+.feature .featureCard .featureIcon {
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -100%);
+}
+.feature .featureCard .feature1 {
+  background: -webkit-linear-gradient(0deg, #e2906e 0, #e83a99 100%);
+  box-shadow: 2.419px 9.703px 12.48px 0.52px rgba(232, 58, 153, 0.5);
+}
+.feature .featureCard .feature2 {
+  background: -webkit-linear-gradient(0deg, #f6d365 0, #fda085 100%);
+  box-shadow: 2.419px 9.703px 18.24px 0.76px rgba(253, 160, 133, 0.5);
+}
+.feature .featureCard .feature3 {
+  background: -webkit-linear-gradient(0deg, #95b4ff 0, #7397ff 100%);
+  box-shadow: 2.419px 9.703px 12.48px 0.52px rgba(115, 151, 255, 0.5);
+}
+.feature .featureCard .feature4 {
+  background: -webkit-linear-gradient(0deg, #9df3a7 0, #57d464 100%);
+  box-shadow: 2.419px 9.703px 12.48px 0.52px rgba(87, 212, 100, 0.5);
 }/*# sourceMappingURL=index.css.map */
