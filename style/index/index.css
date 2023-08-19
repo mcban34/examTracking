@@ -63,6 +63,10 @@ header .quit {
           clip-path: none;
 }
 
+.panelDisabled {
+  display: none;
+}
+
 .quizs .quizsFilterButtons .quizsFilterButton {
   background: transparent;
   border: none;
