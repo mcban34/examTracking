@@ -6,7 +6,7 @@ $btnOrange : #FF7D56;
 
 header{
     background-image: url("../../img/banner-img.jpg");
-    background-position: center;
+    background-position: bottom;
     background-size: cover;
     color: white;
     clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 130%, 0 75%);    
@@ -44,7 +44,7 @@ header{
         }
     }
     .headerContent{
-        padding: 1rem 0 10rem 0;
+        padding: 3rem 0 10rem 0;
     }
     .quit{
         background-color: rgb(253, 58, 58);
@@ -137,9 +137,35 @@ header{
     img{
         border-radius: 1rem;
         box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+        animation: move 3s linear infinite;
+        position: relative;
+        animation: headerImgAnimation 5s linear infinite; /* "move" adlı animasyonu 3 saniyede bir sürekli olarak uygula */
+        transition: 1s;
     }
     @media screen and (max-width:768px) {
         display: none;
+    }
+
+    @keyframes headerImgAnimation {
+        
+        0%{
+            left: 0;
+        }
+        20%{
+            left: 20px;
+        }
+        40%{
+            left: 10px;
+        }
+        60%{
+            left: 15px;
+        }
+        80%{
+            left: 10px;
+        }
+        100%{
+            left: 0;
+        }
     }
 }
 
