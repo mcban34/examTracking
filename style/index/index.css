@@ -3,10 +3,8 @@ header {
   background-position: bottom;
   background-size: cover;
   color: white;
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 130%, 0 90%);
-          clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 130%, 0 90%);
-  border-bottom-left-radius: 30%;
-  border-bottom-right-radius: 30%;
+  border-bottom-left-radius: 40%;
+  border-bottom-right-radius: 40%;
 }
 header p {
   margin-top: 1rem;
@@ -52,9 +50,11 @@ header .quit {
   header {
     -webkit-clip-path: none;
             clip-path: none;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
   }
   header .headerContent {
-    padding: 1rem 0 12rem 0;
+    padding: 1rem 0 5rem 0;
   }
 }
 
@@ -130,31 +130,27 @@ header .quit {
 }
 
 .headerImgParent {
+  padding-bottom: 7.5rem;
   position: relative;
   overflow: hidden;
-  transform: translateY(-25%);
+  transform: translateY(-15%);
 }
 .headerImgParent .headerImg img {
   border-radius: 1rem;
   box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
-@media screen and (max-width: 768px) {
-  .headerImgParent .headerImg {
-    display: none;
-  }
-}
 .headerImgParent .rocketLeft {
   position: absolute;
   top: 30%;
   left: -60px;
-  animation: headerPanelLeftAnimation 7s linear infinite;
+  animation: headerPanelLeftAnimation 5s linear infinite;
 }
 .headerImgParent .rocketRight {
   position: absolute;
   transform: scaleX(-1);
   top: 30%;
   right: -60px;
-  animation: headerPanelRightAnimation 9s linear infinite;
+  animation: headerPanelRightAnimation 7s linear infinite;
 }
 @keyframes headerPanelLeftAnimation {
   0% {
@@ -162,7 +158,7 @@ header .quit {
     left: -60px;
   }
   50% {
-    top: 5%;
+    top: 20%;
     left: -20px;
   }
   100% {
@@ -176,7 +172,7 @@ header .quit {
     right: -60px;
   }
   50% {
-    top: 5%;
+    top: 20%;
     right: -20px;
   }
   100% {
@@ -184,9 +180,21 @@ header .quit {
     right: -60px;
   }
 }
+@media screen and (max-width: 768px) {
+  .headerImgParent {
+    padding-bottom: 5rem;
+  }
+  .headerImgParent .headerImg {
+    display: none;
+  }
+}
+@media screen and (max-width: 991px) {
+  .headerImgParent .rocketLeft, .headerImgParent .rocketRight {
+    display: none;
+  }
+}
 
 .feature {
-  margin-top: 5rem;
   margin-bottom: 5rem;
 }
 .feature .featureCard {
