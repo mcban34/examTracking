@@ -181,4 +181,9 @@ header .quit {
 .feature .featureCard .feature4 {
   background: -webkit-linear-gradient(0deg, #9df3a7 0, #57d464 100%);
   box-shadow: 2.419px 9.703px 12.48px 0.52px rgba(87, 212, 100, 0.5);
+}
+@media screen and (max-width: 768px) {
+  .feature .featureCard {
+    margin-top: 6rem;
+  }
 }/*# sourceMappingURL=index.css.map */
