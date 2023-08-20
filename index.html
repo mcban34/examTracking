@@ -9,6 +9,13 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
   <link rel="stylesheet" href="style/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -24,7 +31,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link navBtn ogrenciGiris me-2" aria-current="page" href="ogrenci-login.html">Öğrenci Giriş</a>
+              <a class="nav-link navBtn ogrenciGiris me-2" aria-current="page" href="ogrenci-login.html">Öğrenci
+                Giriş</a>
             </li>
             <li class="nav-item">
               <a class="nav-link navBtn ogrenciKayit" aria-current="page" href="ogrenci-register.html">Öğrenci Kayıt</a>
@@ -90,7 +98,8 @@
               <i class="bi bi-window-stack"></i>
             </div>
             <h5>Kişisel Sınav Takibi</h5>
-            <p>Öğrencilere kendi panelleri üzerinden sınavlarını takip etme imkanı sunarak, hangi sınavlara girdiklerini, sonuçlarını ve ilerlemelerini kolayca görüntülemelerini sağlayın.</p>
+            <p>Öğrencilere kendi panelleri üzerinden sınavlarını takip etme imkanı sunarak, hangi sınavlara
+              girdiklerini, sonuçlarını ve ilerlemelerini kolayca görüntülemelerini sağlayın.</p>
           </div>
         </div>
         <div class="col-md-4">
@@ -99,7 +108,9 @@
               <i class="bi bi-gear"></i>
             </div>
             <h5>Kolay Sınav Yönetimi</h5>
-            <p>Süper admin olarak, sınavları kolayca ekleyebilme, düzenleyebilme ve çıkarabilme yeteneği sağlayın. Bu özellik, sınav yönetiminin hızlı ve etkili bir şekilde yapılmasını sağlayarak, yönetici iş yükünü azaltır</p>
+            <p>Süper admin olarak, sınavları kolayca ekleyebilme, düzenleyebilme ve çıkarabilme yeteneği sağlayın. Bu
+              özellik, sınav yönetiminin hızlı ve etkili bir şekilde yapılmasını sağlayarak, yönetici iş yükünü azaltır
+            </p>
           </div>
         </div>
         <div class="col-md-4">
@@ -108,17 +119,50 @@
               <i class="bi bi-graph-up-arrow"></i>
             </div>
             <h5>Anlık Sonuçlar ve İstatistikler</h5>
-            <p>Öğrencilere sınavlarını bitirdikten hemen sonra anlık olarak sonuçlarını ve detaylı istatistikleri sunun. Bu, öğrencilerin performanslarını değerlendirmelerine ve gelecek çalışmalarını planlamalarına yardımcı olur.</p>
+            <p>Öğrencilere sınavlarını bitirdikten hemen sonra anlık olarak sonuçlarını ve detaylı istatistikleri sunun.
+              Bu, öğrencilerin performanslarını değerlendirmelerine ve gelecek çalışmalarını planlamalarına yardımcı
+              olur.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <section class="test">
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <a href="#sifir">sıfır</a>
+          <a href="#bir">bir</a>
+          <a href="#iki">iki</a>
+        </div>
+        <div class="col-8" style="position: relative;">
+          <div class="owl-carousel">
+            <div data-hash="sifir" class="owlİtem">
+              <img src="img/test.PNG" alt="">
+            </div>
+            <div data-hash="bir" class="owlİtem">
+              <img src="img/test2.PNG" alt="">
+            </div>
+            <div data-hash="iki" class="owlİtem">
+              <img src="img/test3.PNG" alt="">
+            </div>
+          </div>
+          <img src="img/18.png" class="desktopPngBg" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
 
-
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+    integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="module" src="script/App.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -251,3 +251,24 @@ header{
         }
     }
 }
+
+
+.test{
+    background-image: url("../../img/banner-img.jpg");
+    background-position: top;
+    background-size: cover;
+    padding: 3rem 0 8rem 0;
+    margin-top: 7rem;
+    .owlİtem{
+        img{
+            width: 670px !important;
+            height: 450px;
+            transform: translate(15.5%,8.5%);
+            
+        }
+    }
+    .desktopPngBg{
+        position: absolute;
+        top: 0;
+    }
+}

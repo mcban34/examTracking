@@ -101,7 +101,7 @@ const getQuizs = () => {
 
           filterBtn.addEventListener("click", function () {
             // console.log(filterBtn.innerHTML);
-           
+
           })
         }
         let quizsFilterButton = document.querySelectorAll(".quizsFilterButton");
@@ -126,7 +126,7 @@ const getQuizs = () => {
                 quizsFilterButton[j].classList.remove("activeQuizFilterButton");
               }
             }
-            
+
             i.classList.add("activeQuizFilterButton");
             displayQuizzes(filteredQuizzes);
           });
@@ -183,7 +183,7 @@ const getQuizs = () => {
       document.querySelector(".ogrenciKayit").style.display = "none"
       document.querySelector(".headerContent").style.display = "none"
       document.querySelector(".ogrenciPanel").style.display = "block"
-      document.querySelector(".headerImg").style.display="none"
+      document.querySelector(".headerImg").style.display = "none"
       document.querySelector("header").classList.add("panelNav")
       let panelNone = document.querySelectorAll(".panelNone")
       panelNone.forEach(element => {
@@ -211,4 +211,17 @@ document.querySelector(".quit").addEventListener("click", function () {
     .catch(() => {
       console.log("çıkış yapılamadı!");
     });
+});
+
+
+$(document).ready(function () {
+  $('.owl-carousel').owlCarousel({
+    items: 1,
+    loop: false,
+    center: true,
+    margin: 10,
+    URLhashListener: true,
+    autoplayHoverPause: true,
+    startPosition: 'URLHash'
+  });
 });
