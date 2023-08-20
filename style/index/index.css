@@ -244,33 +244,36 @@ header .quit {
 }
 
 .desktopScreen {
-  background-image: url("../../img/banner2-img.jpg");
-  background-position: top;
+  background-image: url("../../img/banner3-img.jpg");
+  background-position: right;
   background-size: cover;
   padding: 4rem 0 6rem 0;
   margin-top: 7rem;
 }
 .desktopScreen .desktopScreenListButtons {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 .desktopScreen .desktopScreenListButtons li {
-  margin-top: 2rem;
-  transition: padding 0.34s;
+  margin-top: 2.5rem;
 }
 .desktopScreen .desktopScreenListButtons li .owlBtn {
   color: white;
   text-decoration: none;
-  padding: 1rem 2rem;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  transition: padding-left 0.34s;
 }
 .desktopScreen .desktopScreenListButtons li .owlBtn .bi-arrow-right-circle-fill {
   display: none;
   margin-left: 0.5rem;
 }
 .desktopScreen .desktopScreenListButtons li .owlActive {
+  padding: 1rem 2rem;
   background-color: #FF7D56;
   border-radius: 10px;
   font-weight: bold;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .desktopScreen .owl-carousel {
   width: 670px;

@@ -222,7 +222,8 @@ $(document).ready(function () {
     margin: 10,
     URLhashListener: true,
     autoplayHoverPause: true,
-    startPosition: 'URLHash'
+    startPosition: 'URLHash',
+    mouseDrag: false,
   });
 });
 
