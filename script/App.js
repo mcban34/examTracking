@@ -227,14 +227,16 @@ $(document).ready(function () {
 });
 
 let owlİtem = document.querySelectorAll(".owlBtn")
-
-
+let biarrowrightcirclefill = document.querySelectorAll(".bi-arrow-right-circle-fill")
+biarrowrightcirclefill[0].style.display="inline-block";
 
 owlİtem.forEach(element => {
   element.addEventListener("click", () => {
     owlİtem.forEach(element => {
       element.classList.remove("owlActive")
+      element.querySelector(".bi-arrow-right-circle-fill").style.display = "none"
     });
+    element.querySelector(".bi-arrow-right-circle-fill").style.display = "inline-block"
     element.classList.add("owlActive")
   })
 });

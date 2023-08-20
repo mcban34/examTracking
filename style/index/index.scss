@@ -9,7 +9,6 @@ header{
     background-position: bottom;
     background-size: cover;
     color: white;
-    // clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 130%, 0 90%);
     border-bottom-left-radius: 40%;    
     border-bottom-right-radius: 40%;    
     p{
@@ -253,12 +252,34 @@ header{
 }
 
 
-.test{
+.desktopScreen{
     background-image: url("../../img/banner2-img.jpg");
     background-position: top;
     background-size: cover;
     padding: 4rem 0 6rem 0;
     margin-top: 7rem;
+    .desktopScreenListButtons{
+        list-style: none;
+        li{
+            margin-top: 2rem;
+            transition: padding .34s;
+            .owlBtn{
+                color: white;
+                text-decoration: none;
+                padding: 1rem 2rem;
+                font-size: 1.3rem;
+                .bi-arrow-right-circle-fill{
+                    display: none;
+                    margin-left: .5rem;
+                }
+            }
+            .owlActive{
+                background-color: $btnOrange;
+                border-radius: 10px;
+                font-weight: bold;
+            }
+        }
+    }
     .owl-carousel{
         width: 670px;
         transform: translate(15%,0);
@@ -274,7 +295,5 @@ header{
         position: absolute;
         top: 0;
     }
-    .owlActive{
-        background-color: white;
-    }
+
 }
