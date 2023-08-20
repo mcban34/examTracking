@@ -373,3 +373,30 @@ header{
         }
     }
 }
+
+.soruCevap{
+    .accordion-item{
+        // border: 2px solid white;
+        margin-top: 1rem;
+        .accordion-header{
+            border-bottom: 2px solid white;
+            .accordion-button{
+                background-color: $lightPurple;
+                border-top-right-radius: 5px;
+                border-top-left-radius: 5px;
+                color: white;
+                font-weight: bold;
+                &:focus{
+                    box-shadow: none;
+                }
+                &::after{
+                    background-image: url("../../img/down.png");
+                }
+            }
+        }
+        .accordion-body{
+            background-color: $darkPurple;
+            color: white;
+        }
+    }
+}

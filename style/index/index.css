@@ -350,4 +350,28 @@ header .quit {
     width: 100%;
     display: none;
   }
+}
+
+.soruCevap .accordion-item {
+  margin-top: 1rem;
+}
+.soruCevap .accordion-item .accordion-header {
+  border-bottom: 2px solid white;
+}
+.soruCevap .accordion-item .accordion-header .accordion-button {
+  background-color: #552BC8;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+.soruCevap .accordion-item .accordion-header .accordion-button:focus {
+  box-shadow: none;
+}
+.soruCevap .accordion-item .accordion-header .accordion-button::after {
+  background-image: url("../../img/down.png");
+}
+.soruCevap .accordion-item .accordion-body {
+  background-color: #2D1687;
+  color: white;
 }/*# sourceMappingURL=index.css.map */
