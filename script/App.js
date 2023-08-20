@@ -225,3 +225,16 @@ $(document).ready(function () {
     startPosition: 'URLHash'
   });
 });
+
+let owlİtem = document.querySelectorAll(".owlBtn")
+
+
+
+owlİtem.forEach(element => {
+  element.addEventListener("click", () => {
+    owlİtem.forEach(element => {
+      element.classList.remove("owlActive")
+    });
+    element.classList.add("owlActive")
+  })
+});
