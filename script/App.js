@@ -185,7 +185,10 @@ const getQuizs = () => {
       document.querySelector(".ogrenciPanel").style.display = "block"
       document.querySelector(".headerImg").style.display="none"
       document.querySelector("header").classList.add("panelNav")
-      document.querySelector(".panelNone").classList.add("panelDisabled")
+      let panelNone = document.querySelectorAll(".panelNone")
+      panelNone.forEach(element => {
+        element.classList.add("panelDisabled")
+      });
     } else {
       // User is signed out
       // ...

@@ -31,7 +31,7 @@ onAuthStateChanged(auth, (user) => {
     if (!user) {
         window.location.href = "ogrenci-login.html";
     }
-
+    document.querySelector("header").classList.add("panelNav")
     document.querySelector(".ogrenciName").innerHTML = `${user.email}`
     const db = getDatabase();
     const countRef = ref(db, "ogrenciler/" + user.uid);
