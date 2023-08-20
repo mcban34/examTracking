@@ -221,7 +221,6 @@ $(document).ready(function () {
     center: true,
     margin: 10,
     URLhashListener: true,
-    autoplayHoverPause: true,
     startPosition: 'URLHash',
     mouseDrag: false,
   });

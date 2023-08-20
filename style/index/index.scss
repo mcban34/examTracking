@@ -298,5 +298,78 @@ header{
         position: absolute;
         top: 0;
     }
+    @media screen and (min-width:1200px) and (max-width:1399px) {
+        .owl-carousel{
+            width: 580px;
+            .owlİtem{
+                img{
+                    height: 390px;
+                }
+            }
+        }
+    }
+    @media screen and (min-width:992px) and (max-width:1199px) {
+        padding: 4rem 0 3rem 0;
+        .desktopScreenListButtons{
+            li{
+                .owlBtn{
+                    font-size: 1rem;
+                }
+            }
+        }
+        .owl-carousel{
+            width: 488px;
+            transform: translate(15.5%,-1%);
+            .owlİtem{
+                img{
+                    height: 330px;
+                }
+            }
+        }
+    }
 
+    @media screen and (min-width:768px) and (max-width:991px){
+        .owl-carousel{
+            width: 550px;
+            transform: translate(15.5%,-1%);
+            .owlİtem{
+                img{
+                    width: 550px;
+                    height: 370px;
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width:576px) and (max-width:767px) {
+        .owl-carousel{
+            width: 370px;
+            transform: translate(15.5%,-1%);
+            .owlİtem{
+                img{
+                    width: 550px;
+                    height: 255px;
+                }
+            }
+        }
+        .desktopPngBg{
+            width: 90%;
+        }
+    }
+    
+    @media screen and (max-width:575px){
+        padding: 4rem 0 3rem 0;
+        background-position: bottom;
+        .owl-carousel{
+            width: 100%;
+            transform: translate(0%,0%);
+            img{
+                height: 100% !important;
+            }
+        }
+        .desktopPngBg{
+            width: 100%;
+            display: none;
+        }
+    }
 }

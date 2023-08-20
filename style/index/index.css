@@ -287,4 +287,67 @@ header .quit {
 .desktopScreen .desktopPngBg {
   position: absolute;
   top: 0;
+}
+@media screen and (min-width: 1200px) and (max-width: 1399px) {
+  .desktopScreen .owl-carousel {
+    width: 580px;
+  }
+  .desktopScreen .owl-carousel .owlİtem img {
+    height: 390px;
+  }
+}
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .desktopScreen {
+    padding: 4rem 0 3rem 0;
+  }
+  .desktopScreen .desktopScreenListButtons li .owlBtn {
+    font-size: 1rem;
+  }
+  .desktopScreen .owl-carousel {
+    width: 488px;
+    transform: translate(15.5%, -1%);
+  }
+  .desktopScreen .owl-carousel .owlİtem img {
+    height: 330px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .desktopScreen .owl-carousel {
+    width: 550px;
+    transform: translate(15.5%, -1%);
+  }
+  .desktopScreen .owl-carousel .owlİtem img {
+    width: 550px;
+    height: 370px;
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .desktopScreen .owl-carousel {
+    width: 370px;
+    transform: translate(15.5%, -1%);
+  }
+  .desktopScreen .owl-carousel .owlİtem img {
+    width: 550px;
+    height: 255px;
+  }
+  .desktopScreen .desktopPngBg {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 575px) {
+  .desktopScreen {
+    padding: 4rem 0 3rem 0;
+    background-position: bottom;
+  }
+  .desktopScreen .owl-carousel {
+    width: 100%;
+    transform: translate(0%, 0%);
+  }
+  .desktopScreen .owl-carousel img {
+    height: 100% !important;
+  }
+  .desktopScreen .desktopPngBg {
+    width: 100%;
+    display: none;
+  }
 }/*# sourceMappingURL=index.css.map */
